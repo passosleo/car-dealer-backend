@@ -5,7 +5,7 @@ import fastifyMultipart from '@fastify/multipart';
 import { sendResponse } from './infra/http/middlewares/response-sender-middleware';
 import { authRoutes } from './infra/http/routes/auth-routes';
 
-function buildApp() {
+export default function buildApp() {
   const app = Fastify();
 
   app.addHook('onRequest', sendResponse);
@@ -40,12 +40,7 @@ function buildApp() {
   app.register(fastifyMultipart);
   app.register(authRoutes);
 
-  return app;
-}
-
-if (require.main === module) {
   const port = Number(process.env.PORT) || 4000;
-  const app = buildApp();
 
   app.listen({ port, host: '0.0.0.0' }, (err, address) => {
     if (err) {
