@@ -14,7 +14,6 @@ export class AuthenticateUserUseCase {
   ) {}
 
   public async execute(data: AuthenticateUserRequestDTO): Promise<AuthenticateUserResponseDTO> {
-    throw new HttpException(HttpStatus.NOT_FOUND, 'User not found');
     const usersExists = await this.userRepository.findByEmail(data.email);
     if (!usersExists) throw new HttpException(HttpStatus.NOT_FOUND, 'User not found');
     const passwordMatch = await this.hashService.compare(data.password, usersExists.password);
