@@ -5,7 +5,7 @@ import fastifyMultipart from '@fastify/multipart';
 import { sendResponse } from './infra/http/middlewares/response-sender-middleware';
 import { authRoutes } from './infra/http/routes/auth-routes';
 
-export function buildApp() {
+function buildApp() {
   const app = Fastify();
 
   app.addHook('onRequest', sendResponse);
