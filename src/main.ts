@@ -5,7 +5,7 @@ import fastifyMultipart from '@fastify/multipart';
 import { sendResponse } from './infra/http/middlewares/response-sender-middleware';
 import { authRoutes } from './infra/http/routes/auth-routes';
 
-export default function buildApp() {
+function main() {
   const app = Fastify();
 
   app.addHook('onRequest', sendResponse);
@@ -51,3 +51,5 @@ export default function buildApp() {
     console.info(`Swagger documentation available at ${address}/swagger-ui`);
   });
 }
+
+main();
