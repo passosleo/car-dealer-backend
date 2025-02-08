@@ -5,6 +5,7 @@ import fastifyMultipart from '@fastify/multipart';
 import { sendResponse } from './infra/http/middlewares/response-sender-middleware';
 import { authRoutes } from './infra/http/routes/auth-routes';
 import fastifyRateLimit from '@fastify/rate-limit';
+import fastifyCors from '@fastify/cors';
 
 function main() {
   const app = Fastify();
