@@ -23,7 +23,9 @@
   "author": "Leonardo Passos",
   "license": "ISC",
   "dependencies": {
+    "@fastify/cors": "^10.0.2",
     "@fastify/multipart": "^8.3.0",
+    "@fastify/rate-limit": "^10.2.2",
     "@fastify/swagger": "^8.15.0",
     "@fastify/swagger-ui": "^4.1.0",
     "@prisma/client": "^5.18.0",
