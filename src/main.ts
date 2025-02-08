@@ -15,7 +15,7 @@ function main() {
   // CORS
   app.register(fastifyCors, {
     origin: ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
@@ -26,12 +26,12 @@ function main() {
     timeWindow: '1 minute',
     keyGenerator: (req) => req.ip,
     ban: 3,
-    errorResponseBuilder: (req, context) => {
+    errorResponseBuilder: (_, context) => {
       return {
         statusCode: 429,
         message: 'Too Many Requests',
         data: {
-          error: 'Rate limit exceeded',
+          error: `You have exceeded the limit of ${context.max} requests. Please try again in ${context.after} seconds.`,
         },
       };
     },
