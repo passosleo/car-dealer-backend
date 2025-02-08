@@ -1,15 +1,19 @@
-import Fastify from 'fastify';
+import fastify from 'fastify';
+import fastifyCors from '@fastify/cors';
+import fastifyHelmet from '@fastify/helmet';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
 import fastifyMultipart from '@fastify/multipart';
+import fastifyRateLimit from '@fastify/rate-limit';
 import { sendResponse } from './infra/http/middlewares/response-sender-middleware';
 import { authRoutes } from './infra/http/routes/auth-routes';
-import fastifyRateLimit from '@fastify/rate-limit';
-import fastifyCors from '@fastify/cors';
-import fastifyHelmet from '@fastify/helmet';
+import { jsonSchemaTransform, serializerCompiler, validatorCompiler, ZodTypeProvider } from 'fastify-type-provider-zod';
 
 function main() {
-  const app = Fastify();
+  const app = fastify().withTypeProvider<ZodTypeProvider>();
+
+  app.setValidatorCompiler(validatorCompiler);
+  app.setSerializerCompiler(serializerCompiler);
 
   app.addHook('onRequest', sendResponse);
 
@@ -55,10 +59,8 @@ function main() {
 
   app.register(fastifySwagger, {
     openapi: {
-      openapi: '3.0.0',
       info: {
         title: 'Car Dealer API',
-        description: 'Documentation for the Car Dealer API',
         version: '1.0.0',
       },
       components: {
@@ -71,13 +73,15 @@ function main() {
         },
       },
     },
+    transform: jsonSchemaTransform,
   });
 
   app.register(fastifySwaggerUI, {
-    theme: {
-      title: 'Car Dealer API',
-    },
-    routePrefix: '/swagger-ui',
+    routePrefix: '/docs',
+  });
+
+  app.get('/', async (_, res) => {
+    res.redirect('/docs');
   });
 
   app.register(fastifyMultipart);
@@ -91,7 +95,6 @@ function main() {
       process.exit(1);
     }
     console.info(`Server listening at ${address}`);
-    console.info(`Swagger documentation available at ${address}/swagger-ui`);
   });
 }
 

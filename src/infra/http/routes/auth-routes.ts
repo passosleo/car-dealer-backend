@@ -1,64 +1,49 @@
-import { FastifyInstance } from 'fastify';
+import { z } from 'zod';
+import { FastifyTypedInstance } from '../../types/fastify';
 import { AuthenticateUserController } from '../controllers/auth/authenticate-user-controller';
 
-export async function authRoutes(app: FastifyInstance) {
+export async function authRoutes(app: FastifyTypedInstance) {
   app.post(
     '/api/v1/auth/token',
     {
       schema: {
         tags: ['Authentication'],
         summary: 'Authenticate user',
-        body: {
-          type: 'object',
-          properties: {
-            email: { type: 'string' },
-            password: { type: 'string' },
-          },
-        },
+        body: z.object({
+          email: z.string().email(),
+          password: z.string().min(8),
+        }),
         response: {
-          200: {
-            description: 'OK',
-            type: 'object',
-            properties: {
-              statusCode: { type: 'number', example: 200 },
-              message: { type: 'string', example: 'OK' },
-              data: {
-                type: 'object',
-                properties: {
-                  type: { type: 'string', example: 'Bearer' },
-                  token: { type: 'string', example: 'token' },
-                  refreshToken: { type: 'string', example: 'refresh-token' },
-                  expiresIn: { type: 'number', example: 3600 },
-                },
-              },
-            },
-          },
-          404: {
-            description: 'Not Found',
-            type: 'object',
-            properties: {
-              statusCode: { type: 'number', example: 404 },
-              message: { type: 'string', example: 'Not Found' },
-              data: {},
-            },
-          },
-          401: {
-            description: 'Unauthorized',
-            type: 'object',
-            properties: {
-              statusCode: { type: 'number', example: 401 },
-              message: { type: 'string', example: 'Unauthorized' },
-              data: {},
-            },
-          },
-          500: {
-            description: 'Internal Server Error',
-            type: 'object',
-            properties: {
-              statusCode: { type: 'number', example: 500 },
-              message: { type: 'string', example: 'Internal Server Error' },
-            },
-          },
+          200: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              type: z.string(),
+              token: z.string(),
+              refreshToken: z.string(),
+              expiresIn: z.number(),
+            }),
+          }),
+          400: z.object({
+            statusCode: z.number(),
+            code: z.string(),
+            error: z.string(),
+            message: z.string(),
+          }),
+          404: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({}),
+          }),
+          401: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({}),
+          }),
+          500: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+          }),
         },
       },
     },
