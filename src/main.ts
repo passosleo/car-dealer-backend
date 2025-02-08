@@ -5,20 +5,19 @@ import fastifyMultipart from '@fastify/multipart';
 import { sendResponse } from './infra/http/middlewares/response-sender-middleware';
 import { authRoutes } from './infra/http/routes/auth-routes';
 import fastifyRateLimit from '@fastify/rate-limit';
-import fastifyCors from '@fastify/cors';
 
 function main() {
   const app = Fastify();
 
   app.addHook('onRequest', sendResponse);
 
-  // CORS
-  app.register(fastifyCors, {
-    origin: ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  });
+  // // CORS
+  // app.register(fastifyCors, {
+  //   origin: ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'],
+  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  //   allowedHeaders: ['Content-Type', 'Authorization'],
+  //   credentials: true,
+  // });
 
   // Rate Limiting
   app.register(fastifyRateLimit, {
