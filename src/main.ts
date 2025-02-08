@@ -11,13 +11,13 @@ function main() {
 
   app.addHook('onRequest', sendResponse);
 
-  // // CORS
-  // app.register(fastifyCors, {
-  //   origin: ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'],
-  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  //   allowedHeaders: ['Content-Type', 'Authorization'],
-  //   credentials: true,
-  // });
+  // CORS
+  app.register(fastifyCors, {
+    origin: ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  });
 
   // Rate Limiting
   app.register(fastifyRateLimit, {
