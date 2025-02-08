@@ -6,6 +6,7 @@ import { sendResponse } from './infra/http/middlewares/response-sender-middlewar
 import { authRoutes } from './infra/http/routes/auth-routes';
 import fastifyRateLimit from '@fastify/rate-limit';
 import fastifyCors from '@fastify/cors';
+import fastifyHelmet from '@fastify/helmet';
 
 function main() {
   const app = Fastify();
@@ -35,6 +36,21 @@ function main() {
         },
       };
     },
+  });
+
+  // Security Headers
+  app.register(fastifyHelmet, {
+    xFrameOptions: {
+      action: 'deny',
+    },
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+    },
+    referrerPolicy: {
+      policy: 'no-referrer',
+    },
+    hidePoweredBy: true,
   });
 
   app.register(fastifySwagger, {
