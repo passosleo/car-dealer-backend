@@ -26,19 +26,24 @@ export async function authRoutes(app: FastifyTypedInstance) {
           }),
           400: z.object({
             statusCode: z.number(),
-            code: z.string(),
-            error: z.string(),
             message: z.string(),
+            data: z.object({
+              error: z.array(z.any()),
+            }),
           }),
           404: z.object({
             statusCode: z.number(),
             message: z.string(),
-            data: z.object({}),
+            data: z.object({
+              error: z.string(),
+            }),
           }),
           401: z.object({
             statusCode: z.number(),
             message: z.string(),
-            data: z.object({}),
+            data: z.object({
+              error: z.string(),
+            }),
           }),
           500: z.object({
             statusCode: z.number(),

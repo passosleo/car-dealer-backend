@@ -7,7 +7,16 @@ import fastifyMultipart from '@fastify/multipart';
 import fastifyRateLimit from '@fastify/rate-limit';
 import { sendResponse } from './infra/http/middlewares/response-sender-middleware';
 import { authRoutes } from './infra/http/routes/auth-routes';
-import { jsonSchemaTransform, serializerCompiler, validatorCompiler, ZodTypeProvider } from 'fastify-type-provider-zod';
+import {
+  hasZodFastifySchemaValidationErrors,
+  isResponseSerializationError,
+  jsonSchemaTransform,
+  serializerCompiler,
+  validatorCompiler,
+  ZodTypeProvider,
+} from 'fastify-type-provider-zod';
+import { HttpException } from './infra/http/response/http-exception';
+import { HttpStatus } from './infra/http/response/http-status';
 
 function main() {
   const app = fastify().withTypeProvider<ZodTypeProvider>();
@@ -16,6 +25,37 @@ function main() {
   app.setSerializerCompiler(serializerCompiler);
 
   app.addHook('onRequest', sendResponse);
+
+  // Error Handler
+  app.setErrorHandler((err, req, reply) => {
+    if (hasZodFastifySchemaValidationErrors(err)) {
+      return reply.code(400).send({
+        statusCode: 400,
+        message: 'Bad Request',
+        data: {
+          error: err.validation,
+        },
+      });
+    }
+
+    if (isResponseSerializationError(err)) {
+      return reply.code(500).send({
+        statusCode: 500,
+        message: 'Internal Server Error',
+        data: {
+          error: err.validation,
+        },
+      });
+    }
+
+    if (err instanceof HttpException) {
+      return reply.sendResponse(err.statusCode, {
+        error: err.message,
+      });
+    }
+
+    return reply.sendResponse(HttpStatus.INTERNAL_SERVER_ERROR);
+  });
 
   // CORS
   app.register(fastifyCors, {
