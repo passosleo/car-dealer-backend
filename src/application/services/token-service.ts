@@ -1,6 +1,6 @@
 export interface ITokenService {
-  generateToken<T>(payload: T): string;
-  verifyToken<T>(token: string): T;
-  generateRefreshToken<T>(payload: T): string;
-  verifyRefreshToken<T>(token: string): T;
+  generateToken<T extends object>(payload: T): string;
+  verifyToken<T extends object>(token: string): T;
+  generateRefreshToken<T extends object>(payload: T): string;
+  verifyRefreshToken<T extends object>(token: string): T;
 }

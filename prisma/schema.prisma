@@ -26,5 +26,5 @@ model User {
   updatedBy         String?   @map("updated_by")
   active            Boolean   @default(true)
 
-  @@map("users")
+  @@map("tb_users")
 }

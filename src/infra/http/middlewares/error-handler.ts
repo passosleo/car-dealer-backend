@@ -25,6 +25,14 @@ export function setupErrorHandler(app: FastifyInstance) {
       return reply.sendResponse(err.statusCode, { error: err.message });
     }
 
+    console.error({
+      method: req.method,
+      url: req.url,
+      message: err.message,
+      stack: err.stack,
+      raw: JSON.stringify(err),
+    });
+
     return reply.sendResponse(HttpStatus.INTERNAL_SERVER_ERROR);
   });
 }
