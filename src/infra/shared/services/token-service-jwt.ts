@@ -8,7 +8,7 @@ export class TokenServiceJWT implements ITokenService {
   private readonly config = envConfig.auth;
 
   public generateToken<T extends object>(payload: T): string {
-    return jwt.sign(payload, this.config.secret, { expiresIn: Number(this.config.expiresIn) });
+    return jwt.sign(payload, this.config.secret, { expiresIn: this.config.expiresIn });
   }
 
   public verifyToken<T extends object>(token: string): T {
@@ -20,7 +20,7 @@ export class TokenServiceJWT implements ITokenService {
   }
 
   public generateRefreshToken<T extends object>(payload: T): string {
-    return jwt.sign(payload, this.config.refreshSecret, { expiresIn: Number(this.config.refreshExpiresIn) });
+    return jwt.sign(payload, this.config.refreshSecret, { expiresIn: this.config.refreshExpiresIn });
   }
 
   public verifyRefreshToken<T>(token: string): T {
