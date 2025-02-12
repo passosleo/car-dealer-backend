@@ -14,17 +14,31 @@ datasource db {
 }
 
 model User {
-  userId            String    @id @default(uuid()) @map("user_id")
-  firstName         String    @map("first_name")
-  lastName          String    @map("last_name")
-  email             String    @unique
-  password          String
-  passwordChangedAt DateTime? @map("password_changed_at")
-  createdAt         DateTime  @default(now()) @map("created_at")
-  createdBy         String    @map("created_by")
-  updatedAt         DateTime? @map("updated_at")
-  updatedBy         String?   @map("updated_by")
-  active            Boolean   @default(true)
+  userId                   String                     @id @default(uuid()) @map("user_id")
+  firstName                String                     @map("first_name")
+  lastName                 String                     @map("last_name")
+  email                    String                     @unique
+  password                 String
+  passwordChangedAt        DateTime?                  @map("password_changed_at")
+  createdAt                DateTime                   @default(now()) @map("created_at")
+  createdBy                String                     @map("created_by")
+  updatedAt                DateTime?                  @updatedAt() @map("updated_at")
+  updatedBy                String?                    @map("updated_by")
+  active                   Boolean                    @default(true)
+  UserPasswordResetAttempt UserPasswordResetAttempt[]
 
   @@map("tb_users")
+}
+
+model UserPasswordResetAttempt {
+  attemptId       String    @id @default(uuid()) @map("attempt_id")
+  userId          String    @map("user_id")
+  user            User      @relation(fields: [userId], references: [userId])
+  attempt_count   Int       @default(0) @map("attempt_count")
+  last_attempt_at DateTime  @map("last_attempt_at")
+  blocked_until   DateTime? @map("blocked_until")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime? @updatedAt() @map("updated_at")
+
+  @@map("tb_users_password_reset_attempts")
 }
