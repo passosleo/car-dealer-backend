@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { HashServiceBcrypt } from '../src/infra/services/hash-service-bcrypt';
+import { HashServiceBcrypt } from '../src/infra/shared/services/hash-service-bcrypt';
 
 const prisma = new PrismaClient();
 

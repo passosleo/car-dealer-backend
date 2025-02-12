@@ -5,7 +5,7 @@ import { RefreshSessionController } from '../controllers/auth/refresh-session-co
 
 export async function authRoutes(app: FastifyTypedInstance) {
   app.post(
-    '/api/v1/auth/token',
+    '/api/v1/admin/auth/token',
     {
       schema: {
         tags: ['Authentication'],
@@ -56,7 +56,7 @@ export async function authRoutes(app: FastifyTypedInstance) {
     CreateSessionController.handle,
   ),
     app.post(
-      '/api/v1/auth/refresh-token',
+      '/api/v1/admin/auth/refresh-token',
       {
         schema: {
           tags: ['Authentication'],
