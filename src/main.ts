@@ -1,4 +1,4 @@
-import { createServer } from './infra/http/server';
+import { createServer } from './infra/shared/http/server';
 
 function bootstrap() {
   const app = createServer();
