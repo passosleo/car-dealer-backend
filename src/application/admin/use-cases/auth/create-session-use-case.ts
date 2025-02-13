@@ -5,7 +5,7 @@ import { ITokenService } from '../../../shared/services/token-service';
 import { IUserRepository } from '../../../../domain/admin/repositories/user-repository';
 import { HttpException } from '../../../../infra/shared/http/response/http-exception';
 import { HttpStatus } from '../../../../infra/shared/http/response/http-status';
-import { envConfig } from '../../../../infra/shared/http/config/env-config';
+import { CONFIG } from '../../../../infra/shared/config';
 
 export class CreateSessionUseCase {
   constructor(
@@ -25,7 +25,7 @@ export class CreateSessionUseCase {
       type: 'Bearer',
       token,
       refreshToken,
-      expiresIn: envConfig.auth.expiresIn,
+      expiresIn: CONFIG.auth.expiresIn,
     });
   }
 }

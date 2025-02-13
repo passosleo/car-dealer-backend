@@ -30,7 +30,7 @@ export function setupErrorHandler(app: FastifyInstance) {
       url: req.url,
       message: err.message,
       stack: err.stack,
-      raw: JSON.stringify(err),
+      raw: JSON.stringify(err, null, 2),
     });
 
     return reply.sendResponse(HttpStatus.INTERNAL_SERVER_ERROR);

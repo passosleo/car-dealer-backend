@@ -14,14 +14,14 @@ export function setupSecurity(app: FastifyInstance) {
   });
 
   app.register(fastifyRateLimit, {
-    max: 100,
+    max: 50,
     timeWindow: '1 minute',
     keyGenerator: (req) => req.ip,
     ban: 3,
     errorResponseBuilder: (_, context) =>
       new HttpException(
         HttpStatus.TOO_MANY_REQUESTS,
-        `You have exceeded the limit of ${context.max} requests. Please try again in ${context.after} seconds.`,
+        `You have exceeded the limit of ${context.max} requests. Please try again in ${context.after}.`,
       ),
   });
 

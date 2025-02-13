@@ -1,4 +1,8 @@
-export const envConfig = {
+export const CONFIG = {
+  app: {
+    port: process.env.PORT,
+    baseUrl: process.env.APP_BASE_URL || 'http://localhost:3000',
+  },
   auth: {
     secret: process.env.AUTH_SECRET || 'your_secret_key',
     expiresIn: Number(process.env.AUTH_EXPIRES_IN_SECONDS || 900),
@@ -10,5 +14,11 @@ export const envConfig = {
     port: process.env.MAIL_PORT || 2525,
     user: process.env.MAIL_USER || 'your_user',
     password: process.env.MAIL_PASSWORD || 'your_password',
+  },
+  encryption: {
+    secret: process.env.ENCRYPTION_SECRET || 'your_encryption_secret',
+  },
+  redirects: {
+    recoverPassword: process.env.REDIRECT_RECOVER_PASSWORD || 'http://localhost:3000/recover-password',
   },
 };

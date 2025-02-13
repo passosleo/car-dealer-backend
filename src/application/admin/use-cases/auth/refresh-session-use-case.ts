@@ -4,7 +4,7 @@ import { RefreshSessionRequestDTO } from '../../../../infra/admin/http/dtos/auth
 import { IUserRepository } from '../../../../domain/admin/repositories/user-repository';
 import { HttpStatus } from '../../../../infra/shared/http/response/http-status';
 import { HttpException } from '../../../../infra/shared/http/response/http-exception';
-import { envConfig } from '../../../../infra/shared/http/config/env-config';
+import { CONFIG } from '../../../../infra/shared/config';
 
 export class RefreshSessionUseCase {
   constructor(
@@ -22,7 +22,7 @@ export class RefreshSessionUseCase {
       type: 'Bearer',
       token,
       refreshToken,
-      expiresIn: envConfig.auth.expiresIn,
+      expiresIn: CONFIG.auth.expiresIn,
     });
   }
 }

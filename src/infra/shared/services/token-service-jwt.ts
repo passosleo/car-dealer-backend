@@ -2,10 +2,10 @@ import { ITokenService } from '../../../application/shared/services/token-servic
 import jwt from 'jsonwebtoken';
 import { HttpException } from '../http/response/http-exception';
 import { HttpStatus } from '../http/response/http-status';
-import { envConfig } from '../http/config/env-config';
+import { CONFIG } from '../config';
 
 export class TokenServiceJWT implements ITokenService {
-  private readonly config = envConfig.auth;
+  private readonly config = CONFIG.auth;
 
   public generateToken<T extends object>(payload: T): string {
     return jwt.sign(payload, this.config.secret, { expiresIn: this.config.expiresIn });
