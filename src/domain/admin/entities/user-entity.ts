@@ -42,4 +42,8 @@ export class User {
   public static create(data: CreateUserData): User {
     return new User(data);
   }
+
+  get fullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }

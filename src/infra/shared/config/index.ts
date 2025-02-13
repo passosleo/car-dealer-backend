@@ -10,10 +10,10 @@ export const CONFIG = {
     refreshExpiresIn: Number(process.env.AUTH_REFRESH_EXPIRES_IN_SECONDS || 604800),
   },
   mail: {
-    host: process.env.MAIL_HOST || 'smtp.mailtrap.io',
-    port: process.env.MAIL_PORT || 2525,
-    user: process.env.MAIL_USER || 'your_user',
-    password: process.env.MAIL_PASSWORD || 'your_password',
+    host: process.env.MAIL_HOST,
+    port: Number(process.env.MAIL_PORT),
+    user: process.env.MAIL_USER,
+    password: process.env.MAIL_PASSWORD,
   },
   encryption: {
     secret: process.env.ENCRYPTION_SECRET || 'your_encryption_secret',

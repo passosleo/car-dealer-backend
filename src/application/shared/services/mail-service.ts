@@ -1,16 +1,16 @@
 export interface SendMailData<T extends MailTemplate> {
   to: string;
   subject: string;
-  body?: string;
   template: T;
   data: MailTemplateData[T];
+  body?: string;
 }
 
 export type MailTemplate = 'welcome' | 'recover-password';
 
 export type MailTemplateData = {
   welcome: { email: string };
-  'recover-password': { fullName: string; resetLink: string };
+  'recover-password': { firstName: string; resetLink: string };
 };
 
 export interface IMailService {

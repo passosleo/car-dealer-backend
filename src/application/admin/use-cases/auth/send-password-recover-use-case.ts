@@ -20,7 +20,7 @@ export class SendRecoverPasswordUseCase {
 
   private readonly MAX_ATTEMPTS = 5;
   private readonly TIME_INTERVAL_SECONDS = 45;
-  private readonly TIME_BLOCKED_MINUTES = 10;
+  private readonly TIME_BLOCK_MINUTES = 10;
 
   public async execute(data: SendRecoverPasswordRequestDTO): Promise<void> {
     const user = await this.userRepository.findByEmail(data.email);
@@ -76,7 +76,7 @@ export class SendRecoverPasswordUseCase {
     const updatedAttemptCount = userPasswordRecoverAttempt.attemptCount + 1;
 
     if (updatedAttemptCount > this.MAX_ATTEMPTS) {
-      const blockTime = this.TIME_BLOCKED_MINUTES * 60000;
+      const blockTime = this.TIME_BLOCK_MINUTES * 60000;
       const blockedUntil = new Date(Date.now() + blockTime);
       await this.userPasswordRecoverAttemptRepository.update(userPasswordRecoverAttempt.attemptId, {
         attemptCount: updatedAttemptCount,
@@ -99,9 +99,7 @@ export class SendRecoverPasswordUseCase {
     return this.sendRecoveryEmail(user);
   }
 
-  private async sendRecoveryEmail(user: User) {
-    const { userId, firstName, lastName, email } = user;
-
+  private async sendRecoveryEmail({ userId, email, firstName }: User) {
     const recoverPasswordToken = this.encryptionService.encrypt({
       userId,
       expiresAt: DateHelper.calculateExpiration({ minutes: 10 }),
@@ -115,7 +113,7 @@ export class SendRecoverPasswordUseCase {
       to: email,
       subject: 'Password recovery',
       template: 'recover-password',
-      data: { fullName: `${firstName} ${lastName}`, resetLink },
+      data: { firstName, resetLink },
     });
   }
 }
