@@ -105,6 +105,8 @@ export class SendRecoverPasswordUseCase {
       expiresAt: DateHelper.calculateExpiration({ minutes: 10 }),
     });
 
+    console.log('SendRecoverPasswordUseCase ~ sendRecoveryEmail ~ recoverPasswordToken', recoverPasswordToken);
+
     const resetLink = `${CONFIG.app.baseUrl}${
       CONFIG.redirects.recoverPassword
     }?token=${encodeURIComponent(recoverPasswordToken)}`;
