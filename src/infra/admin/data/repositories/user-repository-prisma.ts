@@ -1,8 +1,7 @@
-import { User } from '../../../../domain/entities/user-entity';
-import { IUserRepository } from '../../../../domain/repositories/user-repository';
-import { ListUsersParams } from '../../../../domain/repositories/user-repository.types';
-import { Paginated } from '../../../types/generic';
+import { User } from '../../../../domain/admin/entities/user-entity';
+import { IUserRepository, ListUsersParams } from '../../../../domain/admin/repositories/user-repository';
 import { prisma } from '../../../shared/db';
+import { Paginated } from '../../../shared/types/generic';
 import { UserMapper } from '../mappers/user-mapper';
 
 export class UserRepositoryPrisma implements IUserRepository {

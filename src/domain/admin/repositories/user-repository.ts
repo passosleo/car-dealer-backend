@@ -1,6 +1,10 @@
-import { Paginated } from '../../infra/types/generic';
+import { Paginated } from '../../../infra/shared/types/generic';
 import { User } from '../entities/user-entity';
-import { ListUsersParams } from './user-repository.types';
+
+export type ListUsersParams = {
+  page?: number;
+  limit?: number;
+};
 
 export interface IUserRepository {
   create(data: User): Promise<User>;

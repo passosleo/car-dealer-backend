@@ -2,6 +2,8 @@ import { FastifyInstance } from 'fastify';
 import fastifyCors from '@fastify/cors';
 import fastifyHelmet from '@fastify/helmet';
 import fastifyRateLimit from '@fastify/rate-limit';
+import { HttpException } from '../response/http-exception';
+import { HttpStatus } from '../response/http-status';
 
 export function setupSecurity(app: FastifyInstance) {
   app.register(fastifyCors, {
@@ -16,13 +18,11 @@ export function setupSecurity(app: FastifyInstance) {
     timeWindow: '1 minute',
     keyGenerator: (req) => req.ip,
     ban: 3,
-    errorResponseBuilder: (_, context) => ({
-      statusCode: 429,
-      message: 'Too Many Requests',
-      data: {
-        error: `You have exceeded the limit of ${context.max} requests. Please try again in ${context.after} seconds.`,
-      },
-    }),
+    errorResponseBuilder: (_, context) =>
+      new HttpException(
+        HttpStatus.TOO_MANY_REQUESTS,
+        `You have exceeded the limit of ${context.max} requests. Please try again in ${context.after} seconds.`,
+      ),
   });
 
   app.register(fastifyHelmet, {

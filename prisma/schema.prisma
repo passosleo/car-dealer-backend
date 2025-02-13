@@ -14,31 +14,31 @@ datasource db {
 }
 
 model User {
-  userId                   String                     @id @default(uuid()) @map("user_id")
-  firstName                String                     @map("first_name")
-  lastName                 String                     @map("last_name")
-  email                    String                     @unique
-  password                 String
-  passwordChangedAt        DateTime?                  @map("password_changed_at")
-  createdAt                DateTime                   @default(now()) @map("created_at")
-  createdBy                String                     @map("created_by")
-  updatedAt                DateTime?                  @updatedAt() @map("updated_at")
-  updatedBy                String?                    @map("updated_by")
-  active                   Boolean                    @default(true)
-  UserPasswordResetAttempt UserPasswordResetAttempt[]
+  userId                     String                       @id @default(uuid()) @map("user_id")
+  firstName                  String                       @map("first_name")
+  lastName                   String                       @map("last_name")
+  email                      String                       @unique
+  password                   String
+  passwordChangedAt          DateTime?                    @map("password_changed_at") @db.Timestamp(0)
+  createdAt                  DateTime                     @default(now()) @map("created_at") @db.Timestamp(0)
+  createdBy                  String                       @map("created_by")
+  updatedAt                  DateTime?                    @updatedAt() @map("updated_at") @db.Timestamp(0)
+  updatedBy                  String?                      @map("updated_by")
+  active                     Boolean                      @default(true)
+  UserPasswordRecoverAttempt UserPasswordRecoverAttempt[]
 
   @@map("tb_users")
 }
 
-model UserPasswordResetAttempt {
-  attemptId       String    @id @default(uuid()) @map("attempt_id")
-  userId          String    @map("user_id")
-  user            User      @relation(fields: [userId], references: [userId])
-  attempt_count   Int       @default(0) @map("attempt_count")
-  last_attempt_at DateTime  @map("last_attempt_at")
-  blocked_until   DateTime? @map("blocked_until")
-  createdAt       DateTime  @default(now()) @map("created_at")
-  updatedAt       DateTime? @updatedAt() @map("updated_at")
+model UserPasswordRecoverAttempt {
+  attemptId     String    @id @default(uuid()) @map("attempt_id")
+  userId        String    @unique @map("user_id")
+  user          User      @relation(fields: [userId], references: [userId])
+  attemptCount  Int       @default(1) @map("attempt_count")
+  lastAttemptAt DateTime  @map("last_attempt_at") @db.Timestamp(0)
+  blockedUntil  DateTime? @map("blocked_until") @db.Timestamp(0)
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt     DateTime? @updatedAt() @map("updated_at") @db.Timestamp(0)
 
-  @@map("tb_users_password_reset_attempts")
+  @@map("tb_users_password_recover_attempts")
 }
