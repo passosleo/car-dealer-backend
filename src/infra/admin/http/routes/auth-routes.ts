@@ -4,6 +4,7 @@ import { CreateSessionController } from '../controllers/auth/create-session-cont
 import { RefreshSessionController } from '../controllers/auth/refresh-session-controller';
 import { SendRecoverPasswordController } from '../controllers/auth/send-recover-password-controller';
 import { ValidateRecoverPasswordRequestController } from '../controllers/auth/validate-recover-password-request-controller';
+import { RecoverPasswordController } from '../controllers/auth/recover-password-controller';
 
 export async function authRoutes(app: FastifyTypedInstance) {
   app.post(
@@ -121,6 +122,66 @@ export async function authRoutes(app: FastifyTypedInstance) {
       },
     },
     RefreshSessionController.handle,
+  );
+
+  app.post(
+    '/api/v1/admin/auth/recover-password',
+    {
+      schema: {
+        tags: ['Authentication'],
+        summary: 'Recover user password',
+        body: z.object({
+          newPassword: z.string().min(8),
+          token: z.string(),
+        }),
+        response: {
+          200: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+          }),
+          400: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.array(z.any()),
+            }),
+          }),
+          401: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          403: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          404: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          429: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          500: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+          }),
+        },
+      },
+    },
+    RecoverPasswordController.handle,
   );
 
   app.post(
