@@ -127,7 +127,7 @@ export async function authRoutes(app: FastifyTypedInstance) {
     {
       schema: {
         tags: ['Authentication'],
-        summary: 'Refresh a session',
+        summary: 'Send a recover password email',
         body: z.object({
           email: z.string().email(),
         }),
