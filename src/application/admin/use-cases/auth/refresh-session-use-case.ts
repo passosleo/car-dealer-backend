@@ -13,11 +13,11 @@ export class RefreshSessionUseCase {
   ) {}
 
   public async execute(data: RefreshSessionRequestDTO): Promise<SessionResponseDTO> {
-    const refreshTokenPayload = this.tokenService.verifyRefreshToken<{ userId: string }>(data.refreshToken);
-    const userExists = await this.userRepository.findById(refreshTokenPayload.userId);
+    const refreshTokenPayload = this.tokenService.verifyRefreshToken<{ id: string }>(data.refreshToken);
+    const userExists = await this.userRepository.findById(refreshTokenPayload.id);
     if (!userExists) throw new HttpException(HttpStatus.NOT_FOUND, 'User not found');
-    const token = this.tokenService.generateToken({ userId: userExists.userId });
-    const refreshToken = this.tokenService.generateRefreshToken({ userId: userExists.userId });
+    const token = this.tokenService.generateToken({ id: userExists.userId });
+    const refreshToken = this.tokenService.generateRefreshToken({ id: userExists.userId });
     return SessionResponseDTO.create({
       type: 'Bearer',
       token,

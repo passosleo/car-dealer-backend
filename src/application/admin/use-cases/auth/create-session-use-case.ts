@@ -19,8 +19,8 @@ export class CreateSessionUseCase {
     if (!usersExists) throw new HttpException(HttpStatus.NOT_FOUND, 'User not found');
     const passwordMatch = await this.hashService.compare(data.password, usersExists.password);
     if (!passwordMatch) throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid password');
-    const token = this.tokenService.generateToken({ userId: usersExists.userId });
-    const refreshToken = this.tokenService.generateRefreshToken({ userId: usersExists.userId });
+    const token = this.tokenService.generateToken({ id: usersExists.userId });
+    const refreshToken = this.tokenService.generateRefreshToken({ id: usersExists.userId });
     return SessionResponseDTO.create({
       type: 'Bearer',
       token,

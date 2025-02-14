@@ -5,6 +5,8 @@ import { RefreshSessionController } from '../controllers/auth/refresh-session-co
 import { SendRecoverPasswordController } from '../controllers/auth/send-recover-password-controller';
 import { ValidateRecoverPasswordRequestController } from '../controllers/auth/validate-recover-password-request-controller';
 import { RecoverPasswordController } from '../controllers/auth/recover-password-controller';
+import { GetUserInfoController } from '../controllers/auth/get-user-info-controller';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
 
 export async function authRoutes(app: FastifyTypedInstance) {
   app.post(
@@ -293,5 +295,66 @@ export async function authRoutes(app: FastifyTypedInstance) {
       },
     },
     ValidateRecoverPasswordRequestController.handle,
+  );
+
+  app.get(
+    '/api/v1/admin/auth/user-info',
+    {
+      preHandler: authorize(['admin']),
+      schema: {
+        tags: ['Authentication'],
+        summary: 'Get user info',
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        response: {
+          200: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              firstName: z.string(),
+              lastName: z.string(),
+              email: z.string().email(),
+              active: z.boolean(),
+            }),
+          }),
+          400: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.array(z.any()),
+            }),
+          }),
+          401: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          404: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          429: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          500: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+          }),
+        },
+      },
+    },
+    GetUserInfoController.handle,
   );
 }
