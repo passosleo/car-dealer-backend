@@ -37,6 +37,7 @@ model UserPasswordRecoverAttempt {
   attemptCount  Int       @default(1) @map("attempt_count")
   lastAttemptAt DateTime  @map("last_attempt_at") @db.Timestamp(0)
   blockedUntil  DateTime? @map("blocked_until") @db.Timestamp(0)
+  token         String    @unique
   createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamp(0)
   updatedAt     DateTime? @updatedAt() @map("updated_at") @db.Timestamp(0)
 

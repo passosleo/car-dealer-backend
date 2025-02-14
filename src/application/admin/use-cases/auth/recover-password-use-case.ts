@@ -19,16 +19,23 @@ export class RecoverPasswordUseCase {
       userId: string;
       expiresAt: Date;
     }>(data.token);
+
     if (expiresAt < new Date()) throw new HttpException(HttpStatus.UNAUTHORIZED, 'Token expired');
+
     const user = await this.userRepository.findById(userId);
-    if (!user) throw new HttpException(HttpStatus.NOT_FOUND, 'User not found');
-    const userPasswordRecoverAttempt = await this.userPasswordRecoverAttemptRepository.findByUserId(userId);
-    if (userPasswordRecoverAttempt) {
-      await this.userPasswordRecoverAttemptRepository.delete(userPasswordRecoverAttempt.attemptId);
-    } else {
-      throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid token'); //melhorar validação
+    if (!user) {
+      throw new HttpException(HttpStatus.NOT_FOUND, 'User not found');
     }
-    const passwordHashed = await this.hashService.hash(data.newPassword);
-    await this.userRepository.update(userId, { password: passwordHashed, passwordChangedAt: new Date() });
+
+    const userPasswordRecoverAttempt = await this.userPasswordRecoverAttemptRepository.findByUserId(userId);
+    if (userPasswordRecoverAttempt && data.token === userPasswordRecoverAttempt.token) {
+      const passwordHashed = await this.hashService.hash(data.newPassword);
+      await Promise.all([
+        this.userPasswordRecoverAttemptRepository.delete(userPasswordRecoverAttempt.attemptId),
+        this.userRepository.update(userId, { password: passwordHashed, passwordChangedAt: new Date() }),
+      ]);
+    } else {
+      throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid token');
+    }
   }
 }

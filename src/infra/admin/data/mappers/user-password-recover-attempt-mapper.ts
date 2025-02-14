@@ -13,6 +13,7 @@ export class UserPasswordRecoverAttemptMapper {
       attemptCount: domain.attemptCount,
       lastAttemptAt: domain.lastAttemptAt,
       blockedUntil: domain.blockedUntil,
+      token: domain.token,
       createdAt: domain.createdAt,
       updatedAt: domain.updatedAt,
     };

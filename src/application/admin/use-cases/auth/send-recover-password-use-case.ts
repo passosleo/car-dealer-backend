@@ -29,6 +29,11 @@ export class SendRecoverPasswordUseCase {
 
     const userPasswordRecoverAttempt = await this.userPasswordRecoverAttemptRepository.findByUserId(user.userId);
 
+    const recoverPasswordToken = this.encryptionService.encrypt({
+      userId: user.userId,
+      expiresAt: DateHelper.calculateExpiration({ minutes: 10 }),
+    });
+
     if (!userPasswordRecoverAttempt) {
       await this.userPasswordRecoverAttemptRepository.create(
         UserPasswordRecoverAttempt.create({
@@ -36,9 +41,10 @@ export class SendRecoverPasswordUseCase {
           attemptCount: 1,
           lastAttemptAt: new Date(),
           blockedUntil: null,
+          token: recoverPasswordToken,
         }),
       );
-      return this.sendRecoveryEmail(user);
+      return this.sendRecoveryEmail(recoverPasswordToken, user);
     }
 
     if (userPasswordRecoverAttempt.blockedUntil && new Date() < userPasswordRecoverAttempt.blockedUntil) {
@@ -57,8 +63,9 @@ export class SendRecoverPasswordUseCase {
         attemptCount: 1,
         lastAttemptAt: new Date(),
         blockedUntil: null,
+        token: recoverPasswordToken,
       });
-      return this.sendRecoveryEmail(user);
+      return this.sendRecoveryEmail(recoverPasswordToken, user);
     }
 
     const { seconds: secondsSinceLastAttempt } = DateHelper.dateDifference(
@@ -94,22 +101,14 @@ export class SendRecoverPasswordUseCase {
       attemptCount: updatedAttemptCount,
       lastAttemptAt: new Date(),
       blockedUntil: null,
+      token: recoverPasswordToken,
     });
 
-    return this.sendRecoveryEmail(user);
+    return this.sendRecoveryEmail(recoverPasswordToken, user);
   }
 
-  private async sendRecoveryEmail({ userId, email, firstName }: User) {
-    const recoverPasswordToken = this.encryptionService.encrypt({
-      userId,
-      expiresAt: DateHelper.calculateExpiration({ minutes: 10 }),
-    });
-
-    console.log('Recover Password Token: ', recoverPasswordToken);
-
-    const resetLink = `${CONFIG.app.baseUrl}${
-      CONFIG.redirects.recoverPassword
-    }?token=${encodeURIComponent(recoverPasswordToken)}`;
+  private async sendRecoveryEmail(token: string, { email, firstName }: User) {
+    const resetLink = `${CONFIG.app.baseUrl}${CONFIG.redirects.recoverPassword}?token=${encodeURIComponent(token)}`;
 
     await this.mailService.sendMail({
       to: email,

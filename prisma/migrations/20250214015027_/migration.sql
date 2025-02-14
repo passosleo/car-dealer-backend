@@ -22,6 +22,7 @@ CREATE TABLE "tb_users_password_recover_attempts" (
     "attempt_count" INTEGER NOT NULL DEFAULT 1,
     "last_attempt_at" TIMESTAMP(0) NOT NULL,
     "blocked_until" TIMESTAMP(0),
+    "token" TEXT NOT NULL,
     "created_at" TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(0),
 
@@ -33,6 +34,9 @@ CREATE UNIQUE INDEX "tb_users_email_key" ON "tb_users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "tb_users_password_recover_attempts_user_id_key" ON "tb_users_password_recover_attempts"("user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "tb_users_password_recover_attempts_token_key" ON "tb_users_password_recover_attempts"("token");
 
 -- AddForeignKey
 ALTER TABLE "tb_users_password_recover_attempts" ADD CONSTRAINT "tb_users_password_recover_attempts_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "tb_users"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
