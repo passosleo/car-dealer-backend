@@ -6,18 +6,18 @@ interface CreateUserPasswordRecoverAttemptData {
   blockedUntil?: Date | null;
   token: string;
   createdAt?: Date;
-  updatedAt?: Date | null;
+  updatedAt?: Date;
 }
 
 export class UserPasswordRecoverAttempt {
-  attemptId: string;
-  userId: string;
-  attemptCount: number;
-  lastAttemptAt: Date;
-  blockedUntil: Date | null;
-  token: string;
-  createdAt: Date;
-  updatedAt: Date | null;
+  public readonly attemptId: string;
+  public readonly userId: string;
+  public attemptCount: number;
+  public lastAttemptAt: Date;
+  public blockedUntil: Date | null;
+  public token: string;
+  public readonly createdAt: Date;
+  public updatedAt: Date;
 
   constructor(data: CreateUserPasswordRecoverAttemptData) {
     this.attemptId = data.attemptId!;
@@ -27,7 +27,7 @@ export class UserPasswordRecoverAttempt {
     this.blockedUntil = data.blockedUntil ?? null;
     this.token = data.token;
     this.createdAt = data.createdAt ?? new Date();
-    this.updatedAt = data.updatedAt ?? null;
+    this.updatedAt = data.updatedAt ?? new Date();
   }
 
   public static create(data: CreateUserPasswordRecoverAttemptData): UserPasswordRecoverAttempt {

@@ -6,6 +6,6 @@ export class GetUserInfoUseCase {
 
   public async execute(): Promise<GetUserInfoResponseDTO> {
     const authenticatedUser = this.authProvider.getAuthenticatedUser();
-    return GetUserInfoResponseDTO.create(authenticatedUser);
+    return GetUserInfoResponseDTO.fromUserAccountDTO(authenticatedUser);
   }
 }

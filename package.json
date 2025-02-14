@@ -10,7 +10,7 @@
     "build": "tsup src --out-dir dist",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "test": "jest --passWithNoTests --coverage",
-    "check": "npx tsc --noEmit",
+    "ts:check": "npx tsc --noEmit",
     "docker:build": "docker build -t car-dealer-backend:latest .",
     "docker:compose": "docker-compose -f docker-compose.yml --env-file .env.docker up --build"
   },

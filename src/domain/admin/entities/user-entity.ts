@@ -1,4 +1,6 @@
-interface CreateUserData {
+import { Profile } from './profile-entity';
+
+export interface CreateUserData {
   userId?: string;
   firstName: string;
   lastName: string;
@@ -6,26 +8,24 @@ interface CreateUserData {
   password: string;
   passwordChangedAt?: Date | null;
   createdAt?: Date;
-  createdBy: string;
-  updatedAt?: Date | null;
-  updatedBy?: string | null;
+  updatedAt?: Date;
   active?: boolean;
+  profile: Profile;
 }
 
 export class User {
-  userId: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  passwordChangedAt: Date | null;
-  createdAt: Date;
-  createdBy: string;
-  updatedAt: Date | null;
-  updatedBy: string | null;
-  active: boolean;
+  public readonly userId: string;
+  public firstName: string;
+  public lastName: string;
+  public email: string;
+  public password: string;
+  public passwordChangedAt: Date | null;
+  public readonly createdAt: Date;
+  public updatedAt: Date;
+  public active: boolean;
+  public profile: Profile;
 
-  constructor(data: CreateUserData) {
+  public constructor(data: CreateUserData) {
     this.userId = data.userId!;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
@@ -33,17 +33,12 @@ export class User {
     this.password = data.password;
     this.passwordChangedAt = data.passwordChangedAt ?? null;
     this.createdAt = data.createdAt ?? new Date();
-    this.createdBy = data.createdBy;
-    this.updatedAt = data.updatedAt ?? null;
-    this.updatedBy = data.updatedBy ?? null;
+    this.updatedAt = data.updatedAt ?? new Date();
     this.active = data.active ?? true;
+    this.profile = data.profile;
   }
 
   public static create(data: CreateUserData): User {
     return new User(data);
-  }
-
-  get fullName(): string {
-    return `${this.firstName} ${this.lastName}`;
   }
 }

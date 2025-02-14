@@ -1,6 +1,6 @@
 import { prisma } from '../../../shared/db';
 import { UserPasswordRecoverAttempt } from '../../../../domain/admin/entities/user-password-recover-attempt-entity';
-import { UserPasswordRecoverAttemptMapper } from '../mappers/user-password-recover-attempt-mapper';
+import { UserPasswordRecoverAttemptMapper } from '../mappers/user-password-recover-attempt-mapper-prisma';
 import { IUserPasswordRecoverAttemptRepository } from '../../../../domain/admin/repositories/user-password-recover-attempt-repository';
 
 export class UserPasswordRecoverAttemptRepositoryPrisma implements IUserPasswordRecoverAttemptRepository {

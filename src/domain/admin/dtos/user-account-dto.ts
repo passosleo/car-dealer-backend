@@ -1,3 +1,5 @@
+import { Profile } from '../entities/profile-entity';
+
 export class UserAccountDTO {
   constructor(
     public readonly userId: string,
@@ -6,10 +8,9 @@ export class UserAccountDTO {
     public readonly email: string,
     public readonly passwordChangedAt: Date | null,
     public readonly createdAt: Date,
-    public readonly createdBy: string,
-    public readonly updatedAt: Date | null,
-    public readonly updatedBy: string | null,
+    public readonly updatedAt: Date,
     public readonly active: boolean,
+    public readonly profile: Profile,
   ) {}
 
   public static create(data: UserAccountDTO) {
@@ -20,10 +21,9 @@ export class UserAccountDTO {
       data.email,
       data.passwordChangedAt,
       data.createdAt,
-      data.createdBy,
       data.updatedAt,
-      data.updatedBy,
       data.active,
+      data.profile,
     );
   }
 }

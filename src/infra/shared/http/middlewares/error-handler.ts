@@ -13,6 +13,14 @@ export function setupErrorHandler(app: FastifyInstance) {
       });
     }
 
+    console.error({
+      method: req.method,
+      url: req.url,
+      message: err.message,
+      stack: err.stack,
+      raw: JSON.stringify(err, null, 2),
+    });
+
     if (isResponseSerializationError(err)) {
       return reply.code(500).send({
         statusCode: 500,
@@ -24,14 +32,6 @@ export function setupErrorHandler(app: FastifyInstance) {
     if (err instanceof HttpException) {
       return reply.sendResponse(err.statusCode, { error: err.message });
     }
-
-    console.error({
-      method: req.method,
-      url: req.url,
-      message: err.message,
-      stack: err.stack,
-      raw: JSON.stringify(err, null, 2),
-    });
 
     return reply.sendResponse(HttpStatus.INTERNAL_SERVER_ERROR);
   });

@@ -6,7 +6,7 @@ export class UserPasswordRecoverAttemptMapper {
     return UserPasswordRecoverAttempt.create(entity);
   }
 
-  public static toEntity(domain: UserPasswordRecoverAttempt): UserPasswordRecoverAttemptEntity {
+  public static toPrisma(domain: UserPasswordRecoverAttempt): UserPasswordRecoverAttemptEntity {
     return {
       attemptId: domain.attemptId,
       userId: domain.userId,

@@ -310,16 +310,7 @@ export async function authRoutes(app: FastifyTypedInstance) {
           },
         ],
         response: {
-          200: z.object({
-            statusCode: z.number(),
-            message: z.string(),
-            data: z.object({
-              firstName: z.string(),
-              lastName: z.string(),
-              email: z.string().email(),
-              active: z.boolean(),
-            }),
-          }),
+          200: z.any(),
           400: z.object({
             statusCode: z.number(),
             message: z.string(),

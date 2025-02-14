@@ -21,11 +21,11 @@ model User {
   password                   String
   passwordChangedAt          DateTime?                    @map("password_changed_at") @db.Timestamp(0)
   createdAt                  DateTime                     @default(now()) @map("created_at") @db.Timestamp(0)
-  createdBy                  String                       @map("created_by")
-  updatedAt                  DateTime?                    @updatedAt() @map("updated_at") @db.Timestamp(0)
-  updatedBy                  String?                      @map("updated_by")
+  updatedAt                  DateTime                     @updatedAt() @map("updated_at") @db.Timestamp(0)
   active                     Boolean                      @default(true)
-  UserPasswordRecoverAttempt UserPasswordRecoverAttempt[]
+  profileId                  String                       @map("profile_id")
+  profile                    Profile                      @relation(fields: [profileId], references: [profileId], onDelete: Restrict)
+  userPasswordRecoverAttempt UserPasswordRecoverAttempt[]
 
   @@map("tb_users")
 }
@@ -33,13 +33,47 @@ model User {
 model UserPasswordRecoverAttempt {
   attemptId     String    @id @default(uuid()) @map("attempt_id")
   userId        String    @unique @map("user_id")
-  user          User      @relation(fields: [userId], references: [userId])
+  user          User      @relation(fields: [userId], references: [userId], onDelete: Cascade)
   attemptCount  Int       @default(1) @map("attempt_count")
   lastAttemptAt DateTime  @map("last_attempt_at") @db.Timestamp(0)
   blockedUntil  DateTime? @map("blocked_until") @db.Timestamp(0)
   token         String    @unique
   createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt     DateTime? @updatedAt() @map("updated_at") @db.Timestamp(0)
+  updatedAt     DateTime  @updatedAt() @map("updated_at") @db.Timestamp(0)
 
   @@map("tb_users_password_recover_attempts")
+}
+
+model Role {
+  roleId       String         @id @default(uuid()) @map("role_id")
+  name         String         @unique
+  label        String
+  description  String?
+  createdAt    DateTime       @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt    DateTime       @updatedAt() @map("updated_at") @db.Timestamp(0)
+  profileRoles ProfileRoles[]
+
+  @@map("tb_roles")
+}
+
+model Profile {
+  profileId    String         @id @default(uuid()) @map("profile_id")
+  name         String         @unique
+  createdAt    DateTime       @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt    DateTime       @updatedAt() @map("updated_at") @db.Timestamp(0)
+  profileRoles ProfileRoles[]
+  user         User[]
+
+  @@map("tb_profiles")
+}
+
+model ProfileRoles {
+  profileRoleId String   @id @default(uuid()) @map("profile_role_id")
+  profileId     String   @map("profile_id")
+  profile       Profile  @relation(fields: [profileId], references: [profileId], onDelete: Cascade)
+  roleId        String   @map("role_id")
+  role          Role     @relation(fields: [roleId], references: [roleId], onDelete: Cascade)
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamp(0)
+
+  @@map("tb_profiles_roles")
 }
