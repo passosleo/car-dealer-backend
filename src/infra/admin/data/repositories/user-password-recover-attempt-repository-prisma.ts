@@ -5,14 +5,16 @@ import { IUserPasswordRecoverAttemptRepository } from '../../../../domain/admin/
 
 export class UserPasswordRecoverAttemptRepositoryPrisma implements IUserPasswordRecoverAttemptRepository {
   public async create(data: UserPasswordRecoverAttempt): Promise<UserPasswordRecoverAttempt> {
-    const attempt = await prisma.userPasswordRecoverAttempt.create({ data });
+    const attempt = await prisma.userPasswordRecoverAttempt.create({
+      data: UserPasswordRecoverAttemptMapper.toPrisma(data),
+    });
     return UserPasswordRecoverAttemptMapper.toDomain(attempt);
   }
 
   public async update(id: string, data: Partial<UserPasswordRecoverAttempt>): Promise<UserPasswordRecoverAttempt> {
     const attempt = await prisma.userPasswordRecoverAttempt.update({
       where: { attemptId: id },
-      data,
+      data: UserPasswordRecoverAttemptMapper.toPartialPrisma(data),
     });
     return UserPasswordRecoverAttemptMapper.toDomain(attempt);
   }

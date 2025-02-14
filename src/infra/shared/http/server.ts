@@ -6,6 +6,7 @@ import { setupSwagger } from './config/swagger-config';
 import { setupSecurity } from './config/security-config';
 import { serializerCompiler, validatorCompiler, ZodTypeProvider } from 'fastify-type-provider-zod';
 import { authRoutes } from '../../admin/http/routes/auth-routes';
+import { roleRoutes } from '../../admin/http/routes/role-routes';
 
 export function createServer() {
   const app = fastify().withTypeProvider<ZodTypeProvider>();
@@ -22,6 +23,7 @@ export function createServer() {
 
   app.register(fastifyMultipart);
   app.register(authRoutes);
+  app.register(roleRoutes);
 
   return app;
 }

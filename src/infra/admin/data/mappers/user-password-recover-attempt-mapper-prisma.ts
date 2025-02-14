@@ -2,20 +2,33 @@ import { UserPasswordRecoverAttempt as UserPasswordRecoverAttemptEntity } from '
 import { UserPasswordRecoverAttempt } from '../../../../domain/admin/entities/user-password-recover-attempt-entity';
 
 export class UserPasswordRecoverAttemptMapper {
-  public static toDomain(entity: UserPasswordRecoverAttemptEntity): UserPasswordRecoverAttempt {
-    return UserPasswordRecoverAttempt.create(entity);
+  public static toDomain(data: UserPasswordRecoverAttemptEntity): UserPasswordRecoverAttempt {
+    return UserPasswordRecoverAttempt.create(data);
   }
 
-  public static toPrisma(domain: UserPasswordRecoverAttempt): UserPasswordRecoverAttemptEntity {
+  public static toPrisma(data: UserPasswordRecoverAttempt): UserPasswordRecoverAttemptEntity {
     return {
-      attemptId: domain.attemptId,
-      userId: domain.userId,
-      attemptCount: domain.attemptCount,
-      lastAttemptAt: domain.lastAttemptAt,
-      blockedUntil: domain.blockedUntil,
-      token: domain.token,
-      createdAt: domain.createdAt,
-      updatedAt: domain.updatedAt,
+      attemptId: data.attemptId,
+      userId: data.userId,
+      attemptCount: data.attemptCount,
+      lastAttemptAt: data.lastAttemptAt,
+      blockedUntil: data.blockedUntil,
+      token: data.token,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+    };
+  }
+
+  public static toPartialPrisma(data: Partial<UserPasswordRecoverAttempt>): Partial<UserPasswordRecoverAttemptEntity> {
+    return {
+      attemptId: data.attemptId,
+      userId: data.userId,
+      attemptCount: data.attemptCount,
+      lastAttemptAt: data.lastAttemptAt,
+      blockedUntil: data.blockedUntil,
+      token: data.token,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
     };
   }
 }
