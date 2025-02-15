@@ -12,6 +12,7 @@ export class HttpStatus {
   public static readonly FORBIDDEN = new HttpStatus(403, 'Forbidden');
   public static readonly NOT_FOUND = new HttpStatus(404, 'Not Found');
   public static readonly CONFLICT = new HttpStatus(409, 'Conflict');
+  public static readonly UNPROCESSABLE_ENTITY = new HttpStatus(422, 'Unprocessable Entity');
   public static readonly TOO_MANY_REQUESTS = new HttpStatus(429, 'Too Many Requests');
   public static readonly INTERNAL_SERVER_ERROR = new HttpStatus(500, 'Internal Server Error');
   public static readonly BAD_GATEWAY = new HttpStatus(502, 'Bad Gateway');

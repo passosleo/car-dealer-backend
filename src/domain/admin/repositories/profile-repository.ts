@@ -6,11 +6,10 @@ export type ListProfilesParams = {
   limit?: number;
 };
 
-export interface IUserRepository {
+export interface IProfileRepository {
   create(data: Profile): Promise<Profile>;
   update(id: string, data: Partial<Profile>): Promise<Profile>;
   delete(id: string): Promise<void>;
   findById(id: string): Promise<Profile | null>;
-  findByEmail(email: string): Promise<Profile | null>;
   list(data: ListProfilesParams): Promise<Paginated<Profile>>;
 }

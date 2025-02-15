@@ -26,6 +26,11 @@ export class RoleRepositoryPrisma implements IRoleRepository {
     return role ? RoleMapperPrisma.toDomain(role) : null;
   }
 
+  public async findByIds(ids: string[]): Promise<Role[]> {
+    const roles = await prisma.role.findMany({ where: { roleId: { in: ids } } });
+    return roles.map(RoleMapperPrisma.toDomain);
+  }
+
   public async findByName(name: string): Promise<Role | null> {
     const role = await prisma.role.findUnique({ where: { name } });
     return role ? RoleMapperPrisma.toDomain(role) : null;

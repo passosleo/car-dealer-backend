@@ -5,6 +5,7 @@ export interface IRoleRepository {
   update(id: string, data: Partial<Role>): Promise<Role>;
   delete(id: string): Promise<void>;
   findById(id: string): Promise<Role | null>;
+  findByIds(ids: string[]): Promise<Role[]>;
   findByName(name: string): Promise<Role | null>;
   list(): Promise<Role[]>;
 }

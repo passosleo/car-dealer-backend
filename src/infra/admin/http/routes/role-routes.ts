@@ -1,14 +1,20 @@
 import { z } from 'zod';
 import { FastifyTypedInstance } from '../../../shared/types/fastify';
-import { ListRolesController } from '../controllers/role/list-roles-controller';
+import { ListRolesController } from '../controllers/roles/list-roles-controller';
 
 export async function roleRoutes(app: FastifyTypedInstance) {
   app.get(
     '/api/v1/admin/role',
     {
+      // preHandler: authorize(['admin']),
       schema: {
         tags: ['Roles'],
         summary: 'List all roles',
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
         response: {
           200: z.object({
             statusCode: z.number(),
