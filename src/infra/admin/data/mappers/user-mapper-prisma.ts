@@ -4,7 +4,7 @@ import { Role as RolePrisma } from '@prisma/client';
 import { ProfileRoles as ProfileRolesPrisma } from '@prisma/client';
 import { User } from '../../../../domain/admin/entities/user-entity';
 
-type UserPrismaQuery = UserPrisma & {
+type UserFromPrisma = UserPrisma & {
   profile: ProfilePrisma & {
     profileRoles: (ProfileRolesPrisma & {
       role: RolePrisma;
@@ -13,7 +13,7 @@ type UserPrismaQuery = UserPrisma & {
 };
 
 export class UserMapperPrisma {
-  public static toDomain({ profile, ...data }: UserPrismaQuery): User {
+  public static toDomain({ profile, ...data }: UserFromPrisma): User {
     return User.create({
       ...data,
       profile: {

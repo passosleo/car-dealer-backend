@@ -3,25 +3,25 @@ import { ProfileRoles as ProfileRolesPrisma } from '@prisma/client';
 import { Role as RolePrisma } from '@prisma/client';
 import { Profile } from '../../../../domain/admin/entities/profile-entity';
 
-type ProfilePrismaQuery = ProfilePrisma & {
+type ProfileFromPrisma = ProfilePrisma & {
   profileRoles: (ProfileRolesPrisma & {
     role: RolePrisma;
   })[];
 };
 
-type ProfilePrismaPersist = ProfilePrisma & {
+type ProfileToPrisma = ProfilePrisma & {
   roles: RolePrisma[];
 };
 
 export class ProfileMapperPrisma {
-  public static toDomain({ profileRoles, ...data }: ProfilePrismaQuery): Profile {
+  public static toDomain({ profileRoles, ...data }: ProfileFromPrisma): Profile {
     return Profile.create({
       ...data,
       roles: profileRoles.map((profileRole) => profileRole.role),
     });
   }
 
-  public static toPrisma(data: Profile): ProfilePrismaPersist {
+  public static toPrisma(data: Profile): ProfileToPrisma {
     return {
       profileId: data.profileId,
       name: data.name,
@@ -31,7 +31,7 @@ export class ProfileMapperPrisma {
     };
   }
 
-  public static toPartialPrisma(data: Partial<Profile>): Partial<ProfilePrismaPersist> {
+  public static toPartialPrisma(data: Partial<Profile>): Partial<ProfileToPrisma> {
     return {
       profileId: data.profileId,
       name: data.name,
