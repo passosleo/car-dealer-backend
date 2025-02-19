@@ -1,32 +1,33 @@
-import { Profile } from '../../../../domain/admin/entities/profile-entity';
 import { IProfileRepository } from '../../../../domain/admin/repositories/profile-repository';
 import { IRoleRepository } from '../../../../domain/admin/repositories/role-repository';
-import { CreateProfileRequestDTO } from '../../../../infra/admin/http/dtos/profiles/create-profile-request-dto';
-import { CreateProfileResponseDTO } from '../../../../infra/admin/http/dtos/profiles/create-profile-response-dto';
+import { UpdateProfileRequestDTO } from '../../../../infra/admin/http/dtos/profiles/update-profile-request-dto';
+import { UpdateProfileResponseDTO } from '../../../../infra/admin/http/dtos/profiles/update-profile-response-dto';
 import { HttpException } from '../../../../infra/shared/http/response/http-exception';
 import { HttpStatus } from '../../../../infra/shared/http/response/http-status';
 
-export class CreateProfileUseCase {
+export class UpdateProfileUseCase {
   constructor(
     private readonly profileRepository: IProfileRepository,
     private readonly roleRepository: IRoleRepository,
   ) {}
 
-  public async execute(data: CreateProfileRequestDTO): Promise<CreateProfileResponseDTO> {
+  public async execute(profileId: string, data: UpdateProfileRequestDTO): Promise<UpdateProfileResponseDTO> {
     if (data.roles.length === 0) {
       throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'At least one role is required');
+    }
+    const profile = await this.profileRepository.findById(profileId);
+    if (!profile) {
+      throw new HttpException(HttpStatus.NOT_FOUND, 'Profile not found');
     }
     const roles = await this.roleRepository.findByIds(data.roles.map((role) => role.roleId));
     const allRolesAreValid = roles.length === data.roles.length;
     if (!allRolesAreValid) {
       throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'Some roles are invalid');
     }
-    const profile = await this.profileRepository.create(
-      Profile.create({
-        name: data.name,
-        roles,
-      }),
-    );
-    return CreateProfileResponseDTO.create(profile);
+    const updatedProfile = await this.profileRepository.update(profileId, {
+      name: data.name,
+      roles,
+    });
+    return UpdateProfileResponseDTO.create(updatedProfile);
   }
 }
