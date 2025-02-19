@@ -5,12 +5,13 @@ import { UpdateProfileController } from '../controllers/profiles/update-profile-
 import { DeleteProfileController } from '../controllers/profiles/delete-profile-controller';
 import { GetProfileByIdController } from '../controllers/profiles/get-profile-by-id-controller';
 import { ListProfilesController } from '../controllers/profiles/list-profiles-controller';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
 
 export async function profileRoutes(app: FastifyTypedInstance) {
   app.get(
     '/api/v1/admin/profile',
     {
-      // preHandler: authorize(['admin']),
+      preHandler: authorize(['MANAGE_PROFILES']),
       schema: {
         tags: ['Profiles'],
         summary: 'List profiles',
@@ -104,7 +105,7 @@ export async function profileRoutes(app: FastifyTypedInstance) {
   app.get(
     '/api/v1/admin/profile/:profileId',
     {
-      // preHandler: authorize(['admin']),
+      preHandler: authorize(['MANAGE_PROFILES']),
       schema: {
         tags: ['Profiles'],
         summary: 'Get a profile by id',
@@ -177,7 +178,7 @@ export async function profileRoutes(app: FastifyTypedInstance) {
   app.post(
     '/api/v1/admin/profile',
     {
-      // preHandler: authorize(['admin']),
+      preHandler: authorize(['MANAGE_PROFILES']),
       schema: {
         tags: ['Profiles'],
         summary: 'Create a new profile',
@@ -257,7 +258,7 @@ export async function profileRoutes(app: FastifyTypedInstance) {
   app.put(
     '/api/v1/admin/profile/:profileId',
     {
-      // preHandler: authorize(['admin']),
+      preHandler: authorize(['MANAGE_PROFILES']),
       schema: {
         tags: ['Profiles'],
         summary: 'Update a profile',
@@ -340,7 +341,7 @@ export async function profileRoutes(app: FastifyTypedInstance) {
   app.delete(
     '/api/v1/admin/profile/:profileId',
     {
-      // preHandler: authorize(['admin']),
+      preHandler: authorize(['MANAGE_PROFILES']),
       schema: {
         tags: ['Profiles'],
         summary: 'Delete a profile',

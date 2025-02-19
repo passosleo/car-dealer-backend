@@ -9,7 +9,6 @@ const tokenService = new TokenServiceJWT();
 const userRepository = new UserRepositoryPrisma();
 
 export function authorize(allowedRoles: string[] = []) {
-  console.log('authorize ~ allowedRoles', allowedRoles);
   return async (req: FastifyRequest, res: FastifyReply) => {
     const authHeader = req.headers.authorization;
 
@@ -26,6 +25,12 @@ export function authorize(allowedRoles: string[] = []) {
       throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid token');
     }
 
-    req.user = UserAccountDTO.create(user);
+    const userAccount = UserAccountDTO.create(user);
+
+    if (!userAccount.profile.roles.some((role) => allowedRoles.includes(role.name))) {
+      throw new HttpException(HttpStatus.FORBIDDEN, 'User does not have permission to access this resource');
+    }
+
+    req.user = userAccount;
   };
 }
