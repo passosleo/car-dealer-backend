@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { FastifyTypedInstance } from '../../../shared/types/fastify';
 import { CreateProfileController } from '../controllers/profiles/create-profile-controller';
 import { UpdateProfileController } from '../controllers/profiles/update-profile-controller';
+import { DeleteProfileController } from '../controllers/profiles/delete-profile-controller';
 
 export async function profileRoutes(app: FastifyTypedInstance) {
   app.post(
@@ -90,7 +91,7 @@ export async function profileRoutes(app: FastifyTypedInstance) {
       // preHandler: authorize(['admin']),
       schema: {
         tags: ['Profiles'],
-        summary: 'Create a new profile',
+        summary: 'Update a profile',
         security: [
           {
             bearerAuth: [],
@@ -166,5 +167,59 @@ export async function profileRoutes(app: FastifyTypedInstance) {
       },
     },
     UpdateProfileController.handle,
+  );
+  app.delete(
+    '/api/v1/admin/profile/:profileId',
+    {
+      // preHandler: authorize(['admin']),
+      schema: {
+        tags: ['Profiles'],
+        summary: 'Delete a profile',
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        params: z.object({
+          profileId: z.string().uuid(),
+        }),
+        response: {
+          204: z.void(),
+          400: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.array(z.any()),
+            }),
+          }),
+          401: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          422: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          429: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          500: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+          }),
+        },
+      },
+    },
+    DeleteProfileController.handle,
   );
 }
