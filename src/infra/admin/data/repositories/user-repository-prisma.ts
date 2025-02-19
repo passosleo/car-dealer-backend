@@ -68,7 +68,7 @@ export class UserRepositoryPrisma implements IUserRepository {
       total,
       page,
       limit,
-      data: data.map(UserMapperPrisma.toDomain),
+      items: data.map(UserMapperPrisma.toDomain),
     };
   }
 }

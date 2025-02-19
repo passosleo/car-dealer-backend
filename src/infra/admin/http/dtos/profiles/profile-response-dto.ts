@@ -1,4 +1,4 @@
-export class GetProfileByIdResponseDTO {
+export class ProfileResponseDTO {
   constructor(
     public readonly profileId: string,
     public readonly name: string,
@@ -14,7 +14,7 @@ export class GetProfileByIdResponseDTO {
     }[],
   ) {}
 
-  public static create(data: GetProfileByIdResponseDTO): GetProfileByIdResponseDTO {
-    return new GetProfileByIdResponseDTO(data.profileId, data.name, data.createdAt, data.updatedAt, data.roles);
+  public static create(data: ProfileResponseDTO): ProfileResponseDTO {
+    return new ProfileResponseDTO(data.profileId, data.name, data.createdAt, data.updatedAt, data.roles);
   }
 }

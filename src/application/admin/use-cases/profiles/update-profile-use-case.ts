@@ -1,7 +1,7 @@
 import { IProfileRepository } from '../../../../domain/admin/repositories/profile-repository';
 import { IRoleRepository } from '../../../../domain/admin/repositories/role-repository';
+import { ProfileResponseDTO } from '../../../../infra/admin/http/dtos/profiles/profile-response-dto';
 import { UpdateProfileRequestDTO } from '../../../../infra/admin/http/dtos/profiles/update-profile-request-dto';
-import { UpdateProfileResponseDTO } from '../../../../infra/admin/http/dtos/profiles/update-profile-response-dto';
 import { HttpException } from '../../../../infra/shared/http/response/http-exception';
 import { HttpStatus } from '../../../../infra/shared/http/response/http-status';
 
@@ -11,7 +11,7 @@ export class UpdateProfileUseCase {
     private readonly roleRepository: IRoleRepository,
   ) {}
 
-  public async execute(profileId: string, data: UpdateProfileRequestDTO): Promise<UpdateProfileResponseDTO> {
+  public async execute(profileId: string, data: UpdateProfileRequestDTO): Promise<ProfileResponseDTO> {
     if (data.roles.length === 0) {
       throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'At least one role is required');
     }
@@ -28,6 +28,6 @@ export class UpdateProfileUseCase {
       name: data.name,
       roles,
     });
-    return UpdateProfileResponseDTO.create(updatedProfile);
+    return ProfileResponseDTO.create(updatedProfile);
   }
 }

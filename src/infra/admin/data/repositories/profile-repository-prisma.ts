@@ -72,10 +72,21 @@ export class ProfileRepositoryPrisma implements IProfileRepository {
     return profile.map(ProfileMapperPrisma.toDomain);
   }
 
-  public async list({ page = 1, limit = 10 }: ListProfilesParams): Promise<Paginated<Profile>> {
+  public async list({ page = 1, limit = 10, ...params }: ListProfilesParams): Promise<Paginated<Profile>> {
     const [total, data] = await Promise.all([
       prisma.profile.count(),
       prisma.profile.findMany({
+        where: {
+          name: { contains: params.name },
+          createdAt: {
+            gte: params.createdAtStart,
+            lte: params.createdAtEnd,
+          },
+          updatedAt: {
+            gte: params.updatedAtStart,
+            lte: params.updatedAtEnd,
+          },
+        },
         skip: (page - 1) * limit,
         take: limit,
         include: this.includeFields,
@@ -86,7 +97,7 @@ export class ProfileRepositoryPrisma implements IProfileRepository {
       total,
       page,
       limit,
-      data: data.map(ProfileMapperPrisma.toDomain),
+      items: data.map(ProfileMapperPrisma.toDomain),
     };
   }
 }
