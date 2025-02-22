@@ -8,6 +8,7 @@ import { serializerCompiler, validatorCompiler, ZodTypeProvider } from 'fastify-
 import { authRoutes } from '../../admin/http/routes/auth-routes';
 import { roleRoutes } from '../../admin/http/routes/role-routes';
 import { profileRoutes } from '../../admin/http/routes/profile-routes';
+import { brandRoutes } from '../../admin/http/routes/brand-routes';
 
 export function createServer() {
   const app = fastify().withTypeProvider<ZodTypeProvider>();
@@ -26,6 +27,7 @@ export function createServer() {
   app.register(authRoutes);
   app.register(roleRoutes);
   app.register(profileRoutes);
+  app.register(brandRoutes);
 
   return app;
 }

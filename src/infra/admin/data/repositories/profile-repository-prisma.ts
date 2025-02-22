@@ -3,6 +3,7 @@ import { Profile } from '../../../../domain/admin/entities/profile-entity';
 import { ProfileMapperPrisma } from '../mappers/profile-mapper-prisma';
 import { IProfileRepository, ListProfilesParams } from '../../../../domain/admin/repositories/profile-repository';
 import { Paginated } from '../../../shared/types/generic';
+import { Prisma } from '@prisma/client';
 
 export class ProfileRepositoryPrisma implements IProfileRepository {
   private readonly includeFields = {
@@ -73,20 +74,24 @@ export class ProfileRepositoryPrisma implements IProfileRepository {
   }
 
   public async list({ page = 1, limit = 10, ...params }: ListProfilesParams): Promise<Paginated<Profile>> {
+    const where: Prisma.ProfileWhereInput = {
+      name: { contains: params.name },
+      createdAt: {
+        gte: params.createdAtStart,
+        lte: params.createdAtEnd,
+      },
+      updatedAt: {
+        gte: params.updatedAtStart,
+        lte: params.updatedAtEnd,
+      },
+    };
+
     const [total, data] = await Promise.all([
-      prisma.profile.count(),
+      prisma.profile.count({
+        where,
+      }),
       prisma.profile.findMany({
-        where: {
-          name: { contains: params.name },
-          createdAt: {
-            gte: params.createdAtStart,
-            lte: params.createdAtEnd,
-          },
-          updatedAt: {
-            gte: params.updatedAtStart,
-            lte: params.updatedAtEnd,
-          },
-        },
+        where,
         skip: (page - 1) * limit,
         take: limit,
         include: this.includeFields,

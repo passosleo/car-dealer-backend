@@ -3,6 +3,7 @@ import { prisma } from '../../../shared/db';
 import { Brand } from '../../../../domain/admin/entities/brand-entity';
 import { BrandMapperPrisma } from '../mappers/brand-mapper-prisma';
 import { IBrandRepository, ListBrandsParams } from '../../../../domain/admin/repositories/brand-repository';
+import { Prisma } from '@prisma/client';
 
 export class BrandRepositoryPrisma implements IBrandRepository {
   public async create(data: Brand): Promise<Brand> {
@@ -33,21 +34,25 @@ export class BrandRepositoryPrisma implements IBrandRepository {
   }
 
   public async list({ page = 1, limit = 10, ...params }: ListBrandsParams): Promise<Paginated<Brand>> {
+    const where: Prisma.BrandWhereInput = {
+      name: { contains: params.name },
+      active: params.active,
+      createdAt: {
+        gte: params.createdAtStart,
+        lte: params.createdAtEnd,
+      },
+      updatedAt: {
+        gte: params.updatedAtStart,
+        lte: params.updatedAtEnd,
+      },
+    };
+
     const [total, data] = await Promise.all([
-      prisma.brand.count(),
+      prisma.brand.count({
+        where,
+      }),
       prisma.brand.findMany({
-        where: {
-          name: { contains: params.name },
-          active: params.active,
-          createdAt: {
-            gte: params.createdAtStart,
-            lte: params.createdAtEnd,
-          },
-          updatedAt: {
-            gte: params.updatedAtStart,
-            lte: params.updatedAtEnd,
-          },
-        },
+        where,
         skip: (page - 1) * limit,
         take: limit,
       }),

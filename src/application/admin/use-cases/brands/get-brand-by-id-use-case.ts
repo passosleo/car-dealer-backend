@@ -3,7 +3,7 @@ import { BrandResponseDTO } from '../../../../infra/admin/http/dtos/brands/brand
 import { HttpException } from '../../../../infra/shared/http/response/http-exception';
 import { HttpStatus } from '../../../../infra/shared/http/response/http-status';
 
-export class FindBrandByIdUseCase {
+export class GetBrandByIdUseCase {
   constructor(private readonly brandRepository: IBrandRepository) {}
 
   public async execute(brandId: string): Promise<BrandResponseDTO> {
