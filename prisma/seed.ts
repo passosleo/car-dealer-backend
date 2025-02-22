@@ -48,33 +48,69 @@ async function main() {
         description: 'Allow user to manage sellers',
       },
     ],
+    skipDuplicates: true,
   });
 
-  const profile = await prisma.profile.create({
-    data: {
+  const profileExists = await prisma.profile.findFirst({
+    where: {
       name: 'Admin',
     },
   });
 
-  const roles = await prisma.role.findMany();
-  const profileRoles = roles.map((role) => ({
-    roleId: role.roleId,
-    profileId: profile.profileId,
-  }));
+  if (!profileExists) {
+    const profile = await prisma.profile.create({
+      data: {
+        name: 'Admin',
+      },
+    });
 
-  await prisma.profileRoles.createMany({
-    data: profileRoles,
-  });
+    const roles = await prisma.role.findMany();
+    const profileRoles = roles.map((role) => ({
+      roleId: role.roleId,
+      profileId: profile.profileId,
+    }));
 
-  const hashedPassword = await hashService.hash('password');
-  await prisma.user.createMany({
+    await prisma.profileRoles.createMany({
+      data: profileRoles,
+      skipDuplicates: true,
+    });
+
+    const hashedPassword = await hashService.hash('password');
+    await prisma.user.createMany({
+      data: [
+        {
+          firstName: 'User',
+          lastName: 'Example',
+          email: 'user@example.com',
+          password: hashedPassword,
+          profileId: profile.profileId,
+        },
+      ],
+      skipDuplicates: true,
+    });
+  }
+
+  await prisma.brand.createMany({
     data: [
       {
-        firstName: 'User',
-        lastName: 'Example',
-        email: 'user@example.com',
-        password: hashedPassword,
-        profileId: profile.profileId,
+        name: 'Honda',
+        imageUrl: 'https://www.svgrepo.com/show/446876/honda.svg',
+      },
+      {
+        name: 'Toyota',
+        imageUrl: 'https://www.svgrepo.com/show/306868/toyota.svg',
+      },
+      {
+        name: 'Chevrolet',
+        imageUrl: 'https://www.svgrepo.com/show/446947/chevrolet.svg',
+      },
+      {
+        name: 'Volkswagen',
+        imageUrl: 'https://www.svgrepo.com/show/446932/volkswagen.svg',
+      },
+      {
+        name: 'Ford',
+        imageUrl: 'https://www.svgrepo.com/show/446869/ford.svg',
       },
     ],
     skipDuplicates: true,

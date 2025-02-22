@@ -77,3 +77,14 @@ model ProfileRoles {
 
   @@map("tb_profiles_roles")
 }
+
+model Brand {
+  brandId   String   @id @default(uuid()) @map("brand_id")
+  name      String   @unique
+  imageUrl  String   @map("image_url")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt DateTime @updatedAt() @map("updated_at") @db.Timestamp(0)
+
+  @@map("tb_brands")
+}
