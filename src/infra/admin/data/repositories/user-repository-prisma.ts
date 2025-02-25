@@ -54,10 +54,18 @@ export class UserRepositoryPrisma implements IUserRepository {
     return user ? UserMapperPrisma.toDomain(user) : null;
   }
 
-  public async list({ page = 1, limit = 10 }: ListUsersParams): Promise<Paginated<User>> {
+  public async list({ page = 1, limit = 10, orderBy = 'asc', ...params }: ListUsersParams): Promise<Paginated<User>> {
     const [total, data] = await Promise.all([
       prisma.user.count(),
       prisma.user.findMany({
+        where: {
+          OR: [
+            { firstName: { contains: params.search } },
+            { lastName: { contains: params.search } },
+            { email: { contains: params.search } },
+          ],
+        },
+        orderBy: { firstName: orderBy },
         skip: (page - 1) * limit,
         take: limit,
         include: this.includeFields,

@@ -2,7 +2,8 @@ export class ListBrandsRequestDTO {
   constructor(
     public readonly page?: number,
     public readonly limit?: number,
-    public readonly name?: string,
+    public readonly orderBy?: 'asc' | 'desc',
+    public readonly search?: string,
     public readonly active?: boolean,
     public readonly createdAtStart?: Date,
     public readonly createdAtEnd?: Date,
@@ -14,7 +15,8 @@ export class ListBrandsRequestDTO {
     return new ListBrandsRequestDTO(
       data.page,
       data.limit,
-      data.name,
+      data.orderBy,
+      data.search,
       data.active,
       data.createdAtStart,
       data.createdAtEnd,

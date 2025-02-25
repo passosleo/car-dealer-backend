@@ -31,7 +31,8 @@ export async function brandRoutes(app: FastifyTypedInstance) {
             .optional()
             .default('10')
             .transform((v) => Number(v)),
-          name: z.string().optional(),
+          orderBy: z.string().toLowerCase().optional().default('asc'),
+          search: z.string().optional(),
           active: z
             .string()
             .optional()

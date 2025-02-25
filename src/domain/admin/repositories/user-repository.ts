@@ -4,6 +4,8 @@ import { User } from '../entities/user-entity';
 export type ListUsersParams = {
   page?: number;
   limit?: number;
+  orderBy?: 'asc' | 'desc';
+  search?: string;
 };
 
 export interface IUserRepository {

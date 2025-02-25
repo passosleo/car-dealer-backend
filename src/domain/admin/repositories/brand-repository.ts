@@ -4,7 +4,8 @@ import { Brand } from '../entities/brand-entity';
 export type ListBrandsParams = {
   page?: number;
   limit?: number;
-  name?: string;
+  orderBy?: 'asc' | 'desc';
+  search?: string;
   active?: boolean;
   createdAtStart?: Date;
   createdAtEnd?: Date;

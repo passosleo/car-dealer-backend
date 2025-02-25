@@ -73,9 +73,14 @@ export class ProfileRepositoryPrisma implements IProfileRepository {
     return profile.map(ProfileMapperPrisma.toDomain);
   }
 
-  public async list({ page = 1, limit = 10, ...params }: ListProfilesParams): Promise<Paginated<Profile>> {
+  public async list({
+    page = 1,
+    limit = 10,
+    orderBy = 'asc',
+    ...params
+  }: ListProfilesParams): Promise<Paginated<Profile>> {
     const where: Prisma.ProfileWhereInput = {
-      name: { contains: params.name },
+      name: { contains: params.search },
       createdAt: {
         gte: params.createdAtStart,
         lte: params.createdAtEnd,
@@ -92,6 +97,7 @@ export class ProfileRepositoryPrisma implements IProfileRepository {
       }),
       prisma.profile.findMany({
         where,
+        orderBy: { name: orderBy },
         skip: (page - 1) * limit,
         take: limit,
         include: this.includeFields,

@@ -4,7 +4,8 @@ import { Profile } from '../entities/profile-entity';
 export type ListProfilesParams = {
   page?: number;
   limit?: number;
-  name?: string;
+  orderBy?: 'asc' | 'desc';
+  search?: string;
   createdAtStart?: Date;
   createdAtEnd?: Date;
   updatedAtStart?: Date;

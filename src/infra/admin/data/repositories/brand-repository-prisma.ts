@@ -33,9 +33,9 @@ export class BrandRepositoryPrisma implements IBrandRepository {
     return brand ? BrandMapperPrisma.toDomain(brand) : null;
   }
 
-  public async list({ page = 1, limit = 10, ...params }: ListBrandsParams): Promise<Paginated<Brand>> {
+  public async list({ page = 1, limit = 10, orderBy = 'asc', ...params }: ListBrandsParams): Promise<Paginated<Brand>> {
     const where: Prisma.BrandWhereInput = {
-      name: { contains: params.name },
+      name: { contains: params.search },
       active: params.active,
       createdAt: {
         gte: params.createdAtStart,
@@ -50,6 +50,7 @@ export class BrandRepositoryPrisma implements IBrandRepository {
     const [total, data] = await Promise.all([
       prisma.brand.count({
         where,
+        orderBy: { name: orderBy },
       }),
       prisma.brand.findMany({
         where,
