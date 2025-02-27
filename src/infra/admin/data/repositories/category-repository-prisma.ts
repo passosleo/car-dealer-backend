@@ -1,0 +1,74 @@
+import { Paginated } from './../../../shared/types/generic.d';
+import { prisma } from '../../../shared/db';
+import { Category } from '../../../../domain/admin/entities/category-entity';
+import { CategoryMapperPrisma } from '../mappers/category-mapper-prisma';
+import { ICategoryRepository, ListCategoriesParams } from '../../../../domain/admin/repositories/category-repository';
+import { Prisma } from '@prisma/client';
+
+export class CategoryRepositoryPrisma implements ICategoryRepository {
+  public async create(data: Category): Promise<Category> {
+    const createdCategory = await prisma.category.create({ data: CategoryMapperPrisma.toPrisma(data) });
+    return CategoryMapperPrisma.toDomain(createdCategory);
+  }
+
+  public async update(id: string, data: Partial<Category>): Promise<Category> {
+    const updatedCategory = await prisma.category.update({
+      where: { categoryId: id },
+      data: CategoryMapperPrisma.toPartialPrisma(data),
+    });
+    return CategoryMapperPrisma.toDomain(updatedCategory);
+  }
+
+  public async delete(id: string): Promise<void> {
+    await prisma.category.delete({ where: { categoryId: id } });
+  }
+
+  public async findById(id: string): Promise<Category | null> {
+    const brand = await prisma.category.findUnique({ where: { categoryId: id } });
+    return brand ? CategoryMapperPrisma.toDomain(brand) : null;
+  }
+
+  public async findByName(name: string): Promise<Category | null> {
+    const brand = await prisma.category.findUnique({ where: { name } });
+    return brand ? CategoryMapperPrisma.toDomain(brand) : null;
+  }
+
+  public async list({
+    page = 1,
+    limit = 10,
+    orderBy = 'asc',
+    ...params
+  }: ListCategoriesParams): Promise<Paginated<Category>> {
+    const where: Prisma.CategoryWhereInput = {
+      name: { contains: params.search },
+      active: params.active,
+      createdAt: {
+        gte: params.createdAtStart,
+        lte: params.createdAtEnd,
+      },
+      updatedAt: {
+        gte: params.updatedAtStart,
+        lte: params.updatedAtEnd,
+      },
+    };
+
+    const [total, data] = await Promise.all([
+      prisma.category.count({
+        where,
+        orderBy: { name: orderBy },
+      }),
+      prisma.category.findMany({
+        where,
+        skip: (page - 1) * limit,
+        take: limit,
+      }),
+    ]);
+
+    return {
+      total,
+      page,
+      limit,
+      items: data.map(CategoryMapperPrisma.toDomain),
+    };
+  }
+}

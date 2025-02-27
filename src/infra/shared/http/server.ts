@@ -9,6 +9,7 @@ import { authRoutes } from '../../admin/http/routes/auth-routes';
 import { roleRoutes } from '../../admin/http/routes/role-routes';
 import { profileRoutes } from '../../admin/http/routes/profile-routes';
 import { brandRoutes } from '../../admin/http/routes/brand-routes';
+import { categoryRoutes } from '../../admin/http/routes/category-routes';
 
 export function createServer() {
   const app = fastify().withTypeProvider<ZodTypeProvider>();
@@ -28,6 +29,7 @@ export function createServer() {
   app.register(roleRoutes);
   app.register(profileRoutes);
   app.register(brandRoutes);
+  app.register(categoryRoutes);
 
   return app;
 }
