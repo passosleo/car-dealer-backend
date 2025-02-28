@@ -15,14 +15,16 @@ export function setupSecurity(app: FastifyInstance) {
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     credentials: true,
   });
-
   app.addHook('onRequest', (req, _, done) => {
     const origin = req.headers.origin;
-    if (!origin || (origin && !allowedOrigins.includes(origin) && CONFIG.app.env === 'production')) {
-      throw new HttpException(HttpStatus.FORBIDDEN, 'You are not allowed to access this resource.');
-    } else {
-      done();
+    const isProd = CONFIG.app.env === 'production';
+    const isDocsUrl = req.url.includes('/docs');
+
+    if (!isProd || (origin && allowedOrigins.includes(origin)) || (isDocsUrl && !origin)) {
+      return done();
     }
+
+    throw new HttpException(HttpStatus.FORBIDDEN, 'You are not allowed to access this resource.');
   });
 
   app.register(fastifyRateLimit, {
