@@ -27,7 +27,7 @@ export function setupSwagger(app: FastifyInstance) {
     routePrefix: '/docs',
     uiConfig: {
       requestInterceptor: (req) => {
-        req.headers['Origin'] = 'https://car-dealer-backend-lake.vercel.app';
+        req.headers['Origin'] = 'https://car-dealer-frontend-eosin.vercel.app';
         return req;
       },
     },
