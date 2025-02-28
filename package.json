@@ -7,7 +7,7 @@
     "dev": "tsx watch src/main.ts",
     "start": "node ./dist/main.js",
     "start:prod": "npx prisma migrate deploy && npm run start",
-    "build": "tsup src --out-dir dist",
+    "build": "tsup src --out-dir dist && npx prisma generate",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "test": "jest --passWithNoTests --coverage",
     "ts:check": "npx tsc --noEmit",
