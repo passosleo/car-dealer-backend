@@ -7,26 +7,6 @@ import { HttpStatus } from '../response/http-status';
 import { CONFIG } from '../../config';
 
 export function setupSecurity(app: FastifyInstance) {
-  const allowedOrigins = ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'];
-
-  app.register(fastifyCors, {
-    origin: allowedOrigins,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-    credentials: true,
-  });
-  app.addHook('onRequest', (req, _, done) => {
-    const origin = req.headers.origin;
-    const isProd = CONFIG.app.env === 'production';
-    const isDocsUrl = req.url.includes('/docs');
-
-    if (!isProd || (origin && allowedOrigins.includes(origin)) || (isDocsUrl && !origin)) {
-      return done();
-    }
-
-    throw new HttpException(HttpStatus.FORBIDDEN, 'You are not allowed to access this resource.');
-  });
-
   app.register(fastifyRateLimit, {
     max: 50,
     timeWindow: '1 minute',
@@ -37,6 +17,27 @@ export function setupSecurity(app: FastifyInstance) {
         HttpStatus.TOO_MANY_REQUESTS,
         `You have exceeded the limit of ${context.max} requests. Please try again in ${context.after}.`,
       ),
+  });
+
+  const allowedOrigins = ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'];
+
+  app.register(fastifyCors, {
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true,
+  });
+
+  app.addHook('onRequest', (req, _, done) => {
+    const origin = req.headers.origin;
+    const isProd = CONFIG.app.env === 'production';
+    const isDocsUrl = req.url.includes('/docs');
+
+    if (!isProd || (origin && allowedOrigins.includes(origin)) || (isDocsUrl && !origin)) {
+      return done();
+    }
+
+    throw new HttpException(HttpStatus.FORBIDDEN, 'You are not allowed to access this resource.');
   });
 
   app.register(fastifyHelmet, {
