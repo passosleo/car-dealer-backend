@@ -23,7 +23,15 @@ export function setupSwagger(app: FastifyInstance) {
     transform: jsonSchemaTransform,
   });
 
-  app.register(fastifySwaggerUI, { routePrefix: '/docs' });
+  app.register(fastifySwaggerUI, {
+    routePrefix: '/docs',
+    uiConfig: {
+      requestInterceptor: (req) => {
+        req.headers['Origin'] = 'https://car-dealer-backend-lake.vercel.app';
+        return req;
+      },
+    },
+  });
 
   app.get('/', async (_, res) => {
     res.redirect('/docs');
