@@ -27,7 +27,7 @@ export function authorize(allowedRoles: string[] = []) {
 
     const userAccount = UserAccountDTO.create(user);
 
-    if (!userAccount.profile.roles.some((role) => allowedRoles.includes(role.name))) {
+    if (allowedRoles.length > 0 && !userAccount.profile.roles.some((role) => allowedRoles.includes(role.name))) {
       throw new HttpException(HttpStatus.FORBIDDEN, 'User does not have permission to access this resource');
     }
 

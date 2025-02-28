@@ -300,7 +300,7 @@ export async function authRoutes(app: FastifyTypedInstance) {
   app.get(
     '/api/v1/admin/auth/user-info',
     {
-      preHandler: authorize(['admin']),
+      preHandler: authorize(),
       schema: {
         tags: ['Authentication'],
         summary: 'Get user info',

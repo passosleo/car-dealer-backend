@@ -1,12 +1,13 @@
 import { z } from 'zod';
 import { FastifyTypedInstance } from '../../../shared/types/fastify';
 import { ListRolesController } from '../controllers/roles/list-roles-controller';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
 
 export async function roleRoutes(app: FastifyTypedInstance) {
   app.get(
     '/api/v1/admin/role',
     {
-      // preHandler: authorize(['admin']),
+      preHandler: authorize(),
       schema: {
         tags: ['Roles'],
         summary: 'List all roles',
