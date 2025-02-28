@@ -4,13 +4,25 @@ import fastifyHelmet from '@fastify/helmet';
 import fastifyRateLimit from '@fastify/rate-limit';
 import { HttpException } from '../response/http-exception';
 import { HttpStatus } from '../response/http-status';
+import { CONFIG } from '../../config';
 
 export function setupSecurity(app: FastifyInstance) {
+  const allowedOrigins = ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'];
+
   app.register(fastifyCors, {
-    origin: ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'],
+    origin: allowedOrigins,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     credentials: true,
+  });
+
+  app.addHook('onRequest', (req, _, done) => {
+    const origin = req.headers.origin;
+    if (origin && !allowedOrigins.includes(origin) && CONFIG.app.env === 'production') {
+      throw new HttpException(HttpStatus.FORBIDDEN, 'You are not allowed to access this resource.');
+    } else {
+      done();
+    }
   });
 
   app.register(fastifyRateLimit, {

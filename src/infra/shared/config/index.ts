@@ -1,5 +1,6 @@
 export const CONFIG = {
   app: {
+    env: process.env.NODE_ENV || 'development',
     port: process.env.PORT,
     baseUrl: process.env.APP_BASE_URL || 'http://localhost:3000',
   },
