@@ -18,7 +18,7 @@ export function setupSecurity(app: FastifyInstance) {
 
   app.addHook('onRequest', (req, _, done) => {
     const origin = req.headers.origin;
-    if (origin && !allowedOrigins.includes(origin) && CONFIG.app.env === 'production') {
+    if (!origin || (origin && !allowedOrigins.includes(origin) && CONFIG.app.env === 'production')) {
       throw new HttpException(HttpStatus.FORBIDDEN, 'You are not allowed to access this resource.');
     } else {
       done();
