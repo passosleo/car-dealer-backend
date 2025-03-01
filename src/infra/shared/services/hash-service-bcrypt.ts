@@ -2,10 +2,9 @@ import { IHashService } from '../../../application/shared/services/hash-service'
 import bcrypt from 'bcrypt';
 
 export class HashServiceBcrypt implements IHashService {
-  private readonly saltRounds = 16;
-
   public async hash(data: string): Promise<string> {
-    return bcrypt.hash(data, this.saltRounds);
+    const salt = await bcrypt.genSalt(10);
+    return bcrypt.hash(data, salt);
   }
 
   public async compare(data: string, encrypted: string): Promise<boolean> {

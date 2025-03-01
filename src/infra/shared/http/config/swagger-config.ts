@@ -25,12 +25,6 @@ export function setupSwagger(app: FastifyInstance) {
 
   app.register(fastifySwaggerUI, {
     routePrefix: '/docs',
-    uiConfig: {
-      requestInterceptor: (req) => {
-        req.headers['Origin'] = 'https://car-dealer-frontend-eosin.vercel.app';
-        return req;
-      },
-    },
   });
 
   app.get('/', async (_, res) => {
