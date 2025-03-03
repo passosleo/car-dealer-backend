@@ -5,13 +5,13 @@ import { setupErrorHandler } from './middlewares/error-handler';
 import { setupSwagger } from './config/swagger-config';
 import { setupSecurity } from './config/security-config';
 import { serializerCompiler, validatorCompiler, ZodTypeProvider } from 'fastify-type-provider-zod';
-import { authRoutes } from '../../admin/http/routes/auth-routes';
-import { roleRoutes } from '../../admin/http/routes/role-routes';
-import { profileRoutes } from '../../admin/http/routes/profile-routes';
-import { brandRoutes } from '../../admin/http/routes/brand-routes';
-import { categoryRoutes } from '../../admin/http/routes/category-routes';
-import { bannerRoutes } from '../../admin/http/routes/banner-routes';
-import { sellerRoutes } from '../../admin/http/routes/seller-routes';
+import { authRoutes } from '../../admin/auth/http/routes/auth-routes';
+import { categoryRoutes } from '../../admin/categories/http/routes/category-routes';
+import { sellerRoutes } from '../../admin/sellers/http/routes/seller-routes';
+import { bannerRoutes } from '../../admin/banners/http/routes/banner-routes';
+import { brandRoutes } from '../../admin/brands/http/routes/brand-routes';
+import { profileRoutes } from '../../admin/profiles/http/routes/profile-routes';
+import { roleRoutes } from '../../admin/roles/http/routes/role-routes';
 
 export function createServer() {
   const app = fastify().withTypeProvider<ZodTypeProvider>();

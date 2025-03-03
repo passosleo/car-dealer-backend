@@ -2,8 +2,8 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import { TokenServiceJWT } from '../../services/token-service-jwt';
 import { HttpException } from '../response/http-exception';
 import { HttpStatus } from '../response/http-status';
-import { UserRepositoryPrisma } from '../../../admin/data/repositories/user-repository-prisma';
-import { UserAccountDTO } from '../../../../domain/admin/dtos/user-account-dto';
+import { UserRepositoryPrisma } from '../../../admin/users/data/repositories/user-repository-prisma';
+import { UserAccountDTO } from '../../../../domain/admin/users/dtos/user-account-dto';
 
 const tokenService = new TokenServiceJWT();
 const userRepository = new UserRepositoryPrisma();
