@@ -44,7 +44,7 @@ export class CategoryRepositoryPrisma implements ICategoryRepository {
     ...params
   }: ListCategoriesParams): Promise<Paginated<Category>> {
     const where: Prisma.CategoryWhereInput = {
-      name: { contains: params.search },
+      name: { contains: params.search, mode: 'insensitive' },
       active: params.active,
       createdAt: {
         gte: params.createdAtStart,

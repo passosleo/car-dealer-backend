@@ -83,7 +83,7 @@ export class ProfileRepositoryPrisma implements IProfileRepository {
     ...params
   }: ListProfilesParams): Promise<Paginated<Profile>> {
     const where: Prisma.ProfileWhereInput = {
-      name: { contains: params.search },
+      name: { contains: params.search, mode: 'insensitive' },
       createdAt: {
         gte: params.createdAtStart,
         lte: params.createdAtEnd,

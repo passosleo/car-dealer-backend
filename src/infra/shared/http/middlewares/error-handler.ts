@@ -5,6 +5,10 @@ import { HttpStatus } from '../response/http-status';
 
 export function setupErrorHandler(app: FastifyInstance) {
   app.setErrorHandler((err, req, res) => {
+    if (err instanceof HttpException) {
+      return res.sendResponse(err.statusCode, { error: err.message });
+    }
+
     if (hasZodFastifySchemaValidationErrors(err)) {
       return res.code(400).send({
         statusCode: 400,
@@ -27,10 +31,6 @@ export function setupErrorHandler(app: FastifyInstance) {
         message: 'Internal Server Error',
         data: { error: err.validation },
       });
-    }
-
-    if (err instanceof HttpException) {
-      return res.sendResponse(err.statusCode, { error: err.message });
     }
 
     return res.sendResponse(HttpStatus.INTERNAL_SERVER_ERROR);
