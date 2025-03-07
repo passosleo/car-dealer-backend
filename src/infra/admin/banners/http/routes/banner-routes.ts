@@ -21,20 +21,12 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
           },
         ],
         querystring: z.object({
-          page: z
-            .string()
-            .optional()
-            .default('1')
-            .transform((v) => Number(v)),
-          limit: z
-            .string()
-            .optional()
-            .default('10')
-            .transform((v) => Number(v)),
-          orderBy: z.string().toLowerCase().optional().default('asc'),
+          page: z.coerce.number().optional().default(1),
+          limit: z.coerce.number().optional().default(10),
+          orderBy: z.enum(['asc', 'desc']).optional().default('asc'),
           search: z.string().optional(),
           active: z
-            .string()
+            .enum(['true', 'false'])
             .optional()
             .transform((v) => (v === 'true' ? true : v === 'false' ? false : undefined)),
           startAtStart: z.string().optional(),
@@ -188,10 +180,10 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
         ],
         body: z.object({
           title: z.string(),
-          imageDesktopUrl: z.string(),
-          imageMobileUrl: z.string(),
-          startAt: z.date().nullable(),
-          endAt: z.date().nullable(),
+          imageDesktopBase64: z.string(),
+          imageMobileBase64: z.string(),
+          startAt: z.coerce.date().nullable(),
+          endAt: z.coerce.date().nullable(),
           active: z.boolean(),
         }),
         response: {
@@ -264,10 +256,10 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
         }),
         body: z.object({
           title: z.string(),
-          imageDesktopUrl: z.string(),
-          imageMobileUrl: z.string(),
-          startAt: z.date().nullable(),
-          endAt: z.date().nullable(),
+          imageDesktopBase64: z.string(),
+          imageMobileBase64: z.string(),
+          startAt: z.coerce.date().nullable(),
+          endAt: z.coerce.date().nullable(),
           active: z.boolean(),
         }),
         response: {

@@ -14,7 +14,9 @@ import { profileRoutes } from '../../admin/profiles/http/routes/profile-routes';
 import { roleRoutes } from '../../admin/roles/http/routes/role-routes';
 
 export function createServer() {
-  const app = fastify().withTypeProvider<ZodTypeProvider>();
+  const app = fastify({
+    bodyLimit: 50 * 1024 * 1024, // 50MB
+  }).withTypeProvider<ZodTypeProvider>();
 
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);
