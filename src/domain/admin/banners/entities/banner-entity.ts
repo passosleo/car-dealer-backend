@@ -26,8 +26,8 @@ export class Banner {
     this.title = data.title;
     this.imageDesktopUrl = data.imageDesktopUrl;
     this.imageMobileUrl = data.imageMobileUrl;
-    this.startAt = data.createdAt ?? null;
-    this.endAt = data.updatedAt ?? null;
+    this.startAt = data.startAt ?? null;
+    this.endAt = data.endAt ?? null;
     this.active = data.active ?? true;
     this.createdAt = data.createdAt ?? new Date();
     this.updatedAt = data.updatedAt ?? new Date();

@@ -180,8 +180,8 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
         ],
         body: z.object({
           title: z.string(),
-          imageDesktopBase64: z.string(),
-          imageMobileBase64: z.string(),
+          imageDesktop: z.string(),
+          imageMobile: z.string(),
           startAt: z.coerce.date().nullable(),
           endAt: z.coerce.date().nullable(),
           active: z.boolean(),
@@ -256,8 +256,8 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
         }),
         body: z.object({
           title: z.string(),
-          imageDesktopBase64: z.string(),
-          imageMobileBase64: z.string(),
+          imageDesktop: z.string(),
+          imageMobile: z.string(),
           startAt: z.coerce.date().nullable(),
           endAt: z.coerce.date().nullable(),
           active: z.boolean(),
