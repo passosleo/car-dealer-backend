@@ -56,12 +56,10 @@ export class SellerRepositoryPrisma implements ISellerRepository {
     };
 
     const [total, data] = await Promise.all([
-      prisma.seller.count({
-        where,
-        orderBy: { firstName: orderBy },
-      }),
+      prisma.seller.count({ where }),
       prisma.seller.findMany({
         where,
+        orderBy: { firstName: orderBy },
         skip: (page - 1) * limit,
         take: limit,
       }),

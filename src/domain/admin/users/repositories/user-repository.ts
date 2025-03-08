@@ -6,6 +6,11 @@ export type ListUsersParams = {
   limit?: number;
   orderBy?: 'asc' | 'desc';
   search?: string;
+  active?: boolean;
+  createdAtStart?: Date;
+  createdAtEnd?: Date;
+  updatedAtStart?: Date;
+  updatedAtEnd?: Date;
 };
 
 export interface IUserRepository {

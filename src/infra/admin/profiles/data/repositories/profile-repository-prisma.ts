@@ -95,9 +95,7 @@ export class ProfileRepositoryPrisma implements IProfileRepository {
     };
 
     const [total, data] = await Promise.all([
-      prisma.profile.count({
-        where,
-      }),
+      prisma.profile.count({ where }),
       prisma.profile.findMany({
         where,
         orderBy: { name: orderBy },

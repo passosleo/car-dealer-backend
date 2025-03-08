@@ -48,12 +48,10 @@ export class BrandRepositoryPrisma implements IBrandRepository {
     };
 
     const [total, data] = await Promise.all([
-      prisma.brand.count({
-        where,
-        orderBy: { name: orderBy },
-      }),
+      prisma.brand.count({ where }),
       prisma.brand.findMany({
         where,
+        orderBy: { name: orderBy },
         skip: (page - 1) * limit,
         take: limit,
       }),

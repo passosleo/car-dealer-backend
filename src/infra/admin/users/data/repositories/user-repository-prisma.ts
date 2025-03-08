@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { User } from '../../../../../domain/admin/users/entities/user-entity';
 import { IUserRepository, ListUsersParams } from '../../../../../domain/admin/users/repositories/user-repository';
 import { prisma } from '../../../../shared/db';
@@ -55,16 +56,27 @@ export class UserRepositoryPrisma implements IUserRepository {
   }
 
   public async list({ page = 1, limit = 10, orderBy = 'asc', ...params }: ListUsersParams): Promise<Paginated<User>> {
+    const where: Prisma.UserWhereInput = {
+      OR: [
+        { firstName: { contains: params.search, mode: 'insensitive' } },
+        { lastName: { contains: params.search, mode: 'insensitive' } },
+        { email: { contains: params.search, mode: 'insensitive' } },
+      ],
+      active: params.active,
+      createdAt: {
+        gte: params.createdAtStart,
+        lte: params.createdAtEnd,
+      },
+      updatedAt: {
+        gte: params.updatedAtStart,
+        lte: params.updatedAtEnd,
+      },
+    };
+
     const [total, data] = await Promise.all([
-      prisma.user.count(),
+      prisma.user.count({ where }),
       prisma.user.findMany({
-        where: {
-          OR: [
-            { firstName: { contains: params.search, mode: 'insensitive' } },
-            { lastName: { contains: params.search, mode: 'insensitive' } },
-            { email: { contains: params.search, mode: 'insensitive' } },
-          ],
-        },
+        where,
         orderBy: { firstName: orderBy },
         skip: (page - 1) * limit,
         take: limit,

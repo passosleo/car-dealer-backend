@@ -60,9 +60,7 @@ export class BannerRepositoryPrisma implements IBannerRepository {
     };
 
     const [total, data] = await Promise.all([
-      prisma.banner.count({
-        where,
-      }),
+      prisma.banner.count({ where }),
       prisma.banner.findMany({
         where,
         orderBy: { title: orderBy },

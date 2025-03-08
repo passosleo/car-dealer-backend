@@ -57,12 +57,10 @@ export class CategoryRepositoryPrisma implements ICategoryRepository {
     };
 
     const [total, data] = await Promise.all([
-      prisma.category.count({
-        where,
-        orderBy: { name: orderBy },
-      }),
+      prisma.category.count({ where }),
       prisma.category.findMany({
         where,
+        orderBy: { name: orderBy },
         skip: (page - 1) * limit,
         take: limit,
       }),
