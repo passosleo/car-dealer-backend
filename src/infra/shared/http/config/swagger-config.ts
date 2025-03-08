@@ -25,28 +25,6 @@ export function setupSwagger(app: FastifyInstance) {
 
   app.register(fastifySwaggerUI, {
     routePrefix: '/docs',
-    uiConfig: {
-      requestInterceptor: async (req) => {
-        const baseUrl = new URL(req.url).origin;
-        const fetchToken = await fetch(`${baseUrl}/api/v1/admin/auth/token`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: 'user@example.com',
-            password: 'password',
-          }),
-        });
-        const { data } = (await fetchToken.json()) as { data: { token: string } };
-
-        req.headers = {
-          ...req.headers,
-          Authorization: `Bearer ${data.token}`,
-        };
-        return req;
-      },
-    },
   });
 
   app.get('/', async (_, res) => {

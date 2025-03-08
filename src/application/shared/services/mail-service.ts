@@ -9,7 +9,7 @@ export interface SendMailData<T extends MailTemplate> {
 export type MailTemplate = 'welcome' | 'recover-password';
 
 export type MailTemplateData = {
-  welcome: { email: string };
+  welcome: { firstName: string; email: string; password: string };
   'recover-password': { firstName: string; resetLink: string };
 };
 
