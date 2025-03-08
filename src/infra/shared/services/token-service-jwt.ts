@@ -2,7 +2,7 @@ import { ITokenService } from '../../../application/shared/services/token-servic
 import jwt from 'jsonwebtoken';
 import { HttpException } from '../http/response/http-exception';
 import { HttpStatus } from '../http/response/http-status';
-import { CONFIG } from '../config';
+import { CONFIG } from '../constants/config';
 
 export class TokenServiceJWT implements ITokenService {
   private readonly config = CONFIG.auth;

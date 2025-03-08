@@ -4,7 +4,7 @@ import { IHashService } from '../../../shared/services/hash-service';
 import { ITokenService } from '../../../shared/services/token-service';
 import { HttpException } from '../../../../infra/shared/http/response/http-exception';
 import { HttpStatus } from '../../../../infra/shared/http/response/http-status';
-import { CONFIG } from '../../../../infra/shared/config';
+import { CONFIG } from '../../../../infra/shared/constants/config';
 import { IUserRepository } from '../../../../domain/admin/users/repositories/user-repository';
 
 export class CreateSessionUseCase {

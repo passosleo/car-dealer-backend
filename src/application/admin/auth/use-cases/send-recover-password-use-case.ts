@@ -6,7 +6,7 @@ import { DateHelper } from '../../../../infra/shared/helpers/date-helper';
 import { User } from '../../../../domain/admin/users/entities/user-entity';
 import { IMailService } from '../../../shared/services/mail-service';
 import { IEncryptionService } from '../../../shared/services/encryption-service';
-import { CONFIG } from '../../../../infra/shared/config';
+import { CONFIG } from '../../../../infra/shared/constants/config';
 import { IUserRepository } from '../../../../domain/admin/users/repositories/user-repository';
 import { IUserPasswordRecoverAttemptRepository } from '../../../../domain/admin/users/repositories/user-password-recover-attempt-repository';
 

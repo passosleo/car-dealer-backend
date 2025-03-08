@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js';
 import { IEncryptionService } from '../../../application/shared/services/encryption-service';
 import { HttpException } from '../http/response/http-exception';
 import { HttpStatus } from '../http/response/http-status';
-import { CONFIG } from '../config';
+import { CONFIG } from '../constants/config';
 
 export class EncryptionServiceCryptoJS implements IEncryptionService {
   private readonly secret: string;

@@ -57,11 +57,6 @@ export class UserRepositoryPrisma implements IUserRepository {
 
   public async list({ page = 1, limit = 10, orderBy = 'asc', ...params }: ListUsersParams): Promise<Paginated<User>> {
     const where: Prisma.UserWhereInput = {
-      OR: [
-        { firstName: { contains: params.search, mode: 'insensitive' } },
-        { lastName: { contains: params.search, mode: 'insensitive' } },
-        { email: { contains: params.search, mode: 'insensitive' } },
-      ],
       active: params.active,
       createdAt: {
         gte: params.createdAtStart,
@@ -71,6 +66,15 @@ export class UserRepositoryPrisma implements IUserRepository {
         gte: params.updatedAtStart,
         lte: params.updatedAtEnd,
       },
+      ...(params.search
+        ? {
+            OR: [
+              { firstName: { contains: params.search, mode: 'insensitive' } },
+              { lastName: { contains: params.search, mode: 'insensitive' } },
+              { email: { contains: params.search, mode: 'insensitive' } },
+            ],
+          }
+        : {}),
     };
 
     const [total, data] = await Promise.all([

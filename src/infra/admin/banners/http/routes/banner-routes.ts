@@ -143,6 +143,13 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
               error: z.string(),
             }),
           }),
+          404: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
           422: z.object({
             statusCode: z.number(),
             message: z.string(),
@@ -210,6 +217,13 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
             }),
           }),
           401: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          409: z.object({
             statusCode: z.number(),
             message: z.string(),
             data: z.object({
@@ -340,6 +354,13 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
             }),
           }),
           401: z.object({
+            statusCode: z.number(),
+            message: z.string(),
+            data: z.object({
+              error: z.string(),
+            }),
+          }),
+          404: z.object({
             statusCode: z.number(),
             message: z.string(),
             data: z.object({

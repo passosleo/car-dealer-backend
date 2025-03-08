@@ -3,7 +3,7 @@ import { ITokenService } from '../../../shared/services/token-service';
 import { RefreshSessionRequestDTO } from '../../../../infra/admin/auth/http/dtos/refresh-session-request-dto';
 import { HttpStatus } from '../../../../infra/shared/http/response/http-status';
 import { HttpException } from '../../../../infra/shared/http/response/http-exception';
-import { CONFIG } from '../../../../infra/shared/config';
+import { CONFIG } from '../../../../infra/shared/constants/config';
 import { IUserRepository } from '../../../../domain/admin/users/repositories/user-repository';
 
 export class RefreshSessionUseCase {
