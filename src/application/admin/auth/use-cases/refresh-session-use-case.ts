@@ -16,13 +16,14 @@ export class RefreshSessionUseCase {
     const refreshTokenPayload = this.tokenService.verifyRefreshToken<{ id: string }>(data.refreshToken);
     const userExists = await this.userRepository.findById(refreshTokenPayload.id);
     if (!userExists) throw new HttpException(HttpStatus.NOT_FOUND, 'User not found');
-    const token = this.tokenService.generateToken({ id: userExists.userId });
+    const accessToken = this.tokenService.generateAccessToken({ id: userExists.userId });
     const refreshToken = this.tokenService.generateRefreshToken({ id: userExists.userId });
     return SessionResponseDTO.create({
       type: 'Bearer',
-      token,
+      accessToken: accessToken,
+      accessTokenExpiresIn: CONFIG.auth.accessTokenExpiresIn,
       refreshToken,
-      expiresIn: CONFIG.auth.expiresIn,
+      refreshTokenExpiresIn: CONFIG.auth.refreshTokenExpiresIn,
     });
   }
 }

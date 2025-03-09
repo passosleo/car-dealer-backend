@@ -19,13 +19,14 @@ export class CreateSessionUseCase {
     if (!usersExists) throw new HttpException(HttpStatus.NOT_FOUND, 'User not found');
     const passwordMatch = await this.hashService.compare(data.password, usersExists.password);
     if (!passwordMatch) throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid password');
-    const token = this.tokenService.generateToken({ id: usersExists.userId });
+    const accessToken = this.tokenService.generateAccessToken({ id: usersExists.userId });
     const refreshToken = this.tokenService.generateRefreshToken({ id: usersExists.userId });
     return SessionResponseDTO.create({
       type: 'Bearer',
-      token,
+      accessToken,
+      accessTokenExpiresIn: CONFIG.auth.accessTokenExpiresIn,
       refreshToken,
-      expiresIn: CONFIG.auth.expiresIn,
+      refreshTokenExpiresIn: CONFIG.auth.refreshTokenExpiresIn,
     });
   }
 }

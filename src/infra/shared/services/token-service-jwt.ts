@@ -7,20 +7,20 @@ import { CONFIG } from '../constants/config';
 export class TokenServiceJWT implements ITokenService {
   private readonly config = CONFIG.auth;
 
-  public generateToken<T extends object>(payload: T): string {
-    return jwt.sign(payload, this.config.secret, { expiresIn: this.config.expiresIn });
+  public generateAccessToken<T extends object>(payload: T): string {
+    return jwt.sign(payload, this.config.accessSecret, { expiresIn: this.config.accessTokenExpiresIn });
   }
 
-  public verifyToken<T extends object>(token: string): T {
+  public verifyAccessToken<T extends object>(token: string): T {
     try {
-      return jwt.verify(token, this.config.secret) as T;
+      return jwt.verify(token, this.config.accessSecret) as T;
     } catch (error) {
       throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid token');
     }
   }
 
   public generateRefreshToken<T extends object>(payload: T): string {
-    return jwt.sign(payload, this.config.refreshSecret, { expiresIn: this.config.refreshExpiresIn });
+    return jwt.sign(payload, this.config.refreshSecret, { expiresIn: this.config.refreshTokenExpiresIn });
   }
 
   public verifyRefreshToken<T>(token: string): T {

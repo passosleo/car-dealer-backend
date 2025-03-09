@@ -25,9 +25,10 @@ export async function authRoutes(app: FastifyTypedInstance) {
             message: z.string(),
             data: z.object({
               type: z.string(),
-              token: z.string(),
+              accessToken: z.string(),
+              accessTokenExpiresIn: z.number(),
               refreshToken: z.string(),
-              expiresIn: z.number(),
+              refreshTokenExpiresIn: z.number(),
             }),
           }),
           400: z.object({
@@ -83,9 +84,10 @@ export async function authRoutes(app: FastifyTypedInstance) {
             message: z.string(),
             data: z.object({
               type: z.string(),
-              token: z.string(),
+              accessToken: z.string(),
+              accessTokenExpiresIn: z.number(),
               refreshToken: z.string(),
-              expiresIn: z.number(),
+              refreshTokenExpiresIn: z.number(),
             }),
           }),
           400: z.object({

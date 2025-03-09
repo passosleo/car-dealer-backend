@@ -17,7 +17,7 @@ export function authorize(allowedRoles: string[] = []) {
     }
 
     const token = authHeader.split(' ')[1];
-    const decoded = tokenService.verifyToken<{ id: string }>(token);
+    const decoded = tokenService.verifyAccessToken<{ id: string }>(token);
 
     const user = await userRepository.findById(decoded.id);
 

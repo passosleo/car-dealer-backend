@@ -5,10 +5,10 @@ export const CONFIG = {
     baseUrl: process.env.APP_BASE_URL || 'http://localhost:3000',
   },
   auth: {
-    secret: process.env.AUTH_SECRET || 'your_secret_key',
-    expiresIn: Number(process.env.AUTH_EXPIRES_IN_SECONDS || 900),
-    refreshSecret: process.env.AUTH_REFRESH_SECRET || 'your_refresh_secret_key',
-    refreshExpiresIn: Number(process.env.AUTH_REFRESH_EXPIRES_IN_SECONDS || 604800),
+    accessSecret: process.env.AUTH_ACCESS_TOKEN_SECRET || 'your_secret_key',
+    accessTokenExpiresIn: Number(process.env.AUTH_ACCESS_TOKEN_EXPIRES_IN_SECONDS || 900),
+    refreshSecret: process.env.AUTH_REFRESH_TOKEN_SECRET || 'your_refresh_secret_key',
+    refreshTokenExpiresIn: Number(process.env.AUTH_REFRESH_TOKEN_EXPIRES_IN_SECONDS || 604800),
   },
   mail: {
     host: process.env.MAIL_HOST,
