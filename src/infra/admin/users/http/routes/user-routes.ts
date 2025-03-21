@@ -6,6 +6,7 @@ import { ListUsersController } from '../controllers/list-users-controller';
 import { GetUserByIdController } from '../controllers/get-user-by-id-controller';
 import { DeleteUserController } from '../controllers/delete-user-controller';
 import { UpdateUserController } from '../controllers/update-user-controller';
+import { ZodHelper } from '../../../../shared/helpers/zod-helper';
 
 export async function userRoutes(app: FastifyTypedInstance) {
   app.get(
@@ -25,14 +26,11 @@ export async function userRoutes(app: FastifyTypedInstance) {
           limit: z.coerce.number().optional().default(10),
           orderBy: z.enum(['asc', 'desc']).optional().default('asc'),
           search: z.string().optional(),
-          active: z
-            .enum(['true', 'false'])
-            .optional()
-            .transform((v) => (v === 'true' ? true : v === 'false' ? false : undefined)),
-          createdAtStart: z.string().optional(),
-          createdAtEnd: z.string().optional(),
-          updatedAtStart: z.string().optional(),
-          updatedAtEnd: z.string().optional(),
+          active: z.enum(['all', 'active', 'inactive']).optional().default('all'),
+          createdAtStart: ZodHelper.dateField('createdAtStart').optional(),
+          createdAtEnd: ZodHelper.dateField('createdAtEnd').optional(),
+          updatedAtStart: ZodHelper.dateField('updatedAtStart').optional(),
+          updatedAtEnd: ZodHelper.dateField('updatedAtEnd').optional(),
         }),
         response: {
           200: z.object({

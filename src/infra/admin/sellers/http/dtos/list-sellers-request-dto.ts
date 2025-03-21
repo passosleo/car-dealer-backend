@@ -4,7 +4,7 @@ export class ListSellersRequestDTO {
     public readonly limit?: number,
     public readonly orderBy?: 'asc' | 'desc',
     public readonly search?: string,
-    public readonly active?: boolean,
+    public readonly active?: 'all' | 'active' | 'inactive',
     public readonly createdAtStart?: Date,
     public readonly createdAtEnd?: Date,
     public readonly updatedAtStart?: Date,

@@ -6,6 +6,7 @@ import { GetCategoryByIdController } from '../controllers/get-category-by-id-con
 import { CreateCategoryController } from '../controllers/create-category-controller';
 import { UpdateCategoryController } from '../controllers/update-category-controller';
 import { DeleteCategoryController } from '../controllers/delete-category-controller';
+import { ZodHelper } from '../../../../shared/helpers/zod-helper';
 
 export async function categoryRoutes(app: FastifyTypedInstance) {
   app.get(
@@ -21,26 +22,15 @@ export async function categoryRoutes(app: FastifyTypedInstance) {
           },
         ],
         querystring: z.object({
-          page: z
-            .string()
-            .optional()
-            .default('1')
-            .transform((v) => Number(v)),
-          limit: z
-            .string()
-            .optional()
-            .default('10')
-            .transform((v) => Number(v)),
-          orderBy: z.string().toLowerCase().optional().default('asc'),
+          page: z.coerce.number().optional().default(1),
+          limit: z.coerce.number().optional().default(10),
+          orderBy: z.enum(['asc', 'desc']).optional().default('asc'),
           search: z.string().optional(),
-          active: z
-            .string()
-            .optional()
-            .transform((v) => (v === 'true' ? true : v === 'false' ? false : undefined)),
-          createdAtStart: z.string().optional(),
-          createdAtEnd: z.string().optional(),
-          updatedAtStart: z.string().optional(),
-          updatedAtEnd: z.string().optional(),
+          active: z.enum(['all', 'active', 'inactive']).optional().default('all'),
+          createdAtStart: ZodHelper.dateField('createdAtStart').optional(),
+          createdAtEnd: ZodHelper.dateField('createdAtEnd').optional(),
+          updatedAtStart: ZodHelper.dateField('updatedAtStart').optional(),
+          updatedAtEnd: ZodHelper.dateField('updatedAtEnd').optional(),
         }),
         response: {
           200: z.object({

@@ -4,7 +4,7 @@ export class ListBannersRequestDTO {
     public readonly limit?: number,
     public readonly orderBy?: 'asc' | 'desc',
     public readonly search?: string,
-    public readonly active?: boolean,
+    public readonly active?: 'all' | 'active' | 'inactive',
     public readonly startAtStart?: Date,
     public readonly startAtEnd?: Date,
     public readonly endAtStart?: Date,

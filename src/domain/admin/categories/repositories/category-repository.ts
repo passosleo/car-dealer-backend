@@ -6,7 +6,7 @@ export type ListCategoriesParams = {
   limit?: number;
   orderBy?: 'asc' | 'desc';
   search?: string;
-  active?: boolean;
+  active?: 'all' | 'active' | 'inactive';
   createdAtStart?: Date;
   createdAtEnd?: Date;
   updatedAtStart?: Date;

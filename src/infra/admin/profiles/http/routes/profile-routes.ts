@@ -6,6 +6,7 @@ import { GetProfileByIdController } from '../controllers/get-profile-by-id-contr
 import { CreateProfileController } from '../controllers/create-profile-controller';
 import { UpdateProfileController } from '../controllers/update-profile-controller';
 import { DeleteProfileController } from '../controllers/delete-profile-controller';
+import { ZodHelper } from '../../../../shared/helpers/zod-helper';
 
 export async function profileRoutes(app: FastifyTypedInstance) {
   app.get(
@@ -21,22 +22,14 @@ export async function profileRoutes(app: FastifyTypedInstance) {
           },
         ],
         querystring: z.object({
-          page: z
-            .string()
-            .optional()
-            .default('1')
-            .transform((v) => Number(v)),
-          limit: z
-            .string()
-            .optional()
-            .default('10')
-            .transform((v) => Number(v)),
-          orderBy: z.string().toLowerCase().optional().default('asc'),
+          page: z.coerce.number().optional().default(1),
+          limit: z.coerce.number().optional().default(10),
+          orderBy: z.enum(['asc', 'desc']).optional().default('asc'),
           search: z.string().optional(),
-          createdAtStart: z.string().optional(),
-          createdAtEnd: z.string().optional(),
-          updatedAtStart: z.string().optional(),
-          updatedAtEnd: z.string().optional(),
+          createdAtStart: ZodHelper.dateField('createdAtStart').optional(),
+          createdAtEnd: ZodHelper.dateField('createdAtEnd').optional(),
+          updatedAtStart: ZodHelper.dateField('updatedAtStart').optional(),
+          updatedAtEnd: ZodHelper.dateField('updatedAtEnd').optional(),
         }),
         response: {
           200: z.object({

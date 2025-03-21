@@ -6,6 +6,7 @@ import { GetSellerByIdController } from '../controllers/get-seller-by-id-control
 import { CreateSellerController } from '../controllers/create-seller-controller';
 import { UpdateSellerController } from '../controllers/update-seller-controller';
 import { DeleteSellerController } from '../controllers/delete-seller-controller';
+import { ZodHelper } from '../../../../shared/helpers/zod-helper';
 
 export async function sellerRoutes(app: FastifyTypedInstance) {
   app.get(
@@ -25,38 +26,11 @@ export async function sellerRoutes(app: FastifyTypedInstance) {
           limit: z.coerce.number().optional().default(10),
           orderBy: z.enum(['asc', 'desc']).optional().default('asc'),
           search: z.string().optional(),
-          active: z
-            .enum(['true', 'false'])
-            .optional()
-            .transform((v) => (v === 'true' ? true : v === 'false' ? false : undefined)),
-          createdAtStart: z
-            .string()
-            .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value), {
-              message: 'createdAtStart must be in YYYY-MM-DD format',
-            })
-            .optional()
-            .transform((value) => (value ? new Date(value) : undefined)),
-          createdAtEnd: z
-            .string()
-            .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value), {
-              message: 'createdAtEnd must be in YYYY-MM-DD format',
-            })
-            .optional()
-            .transform((value) => (value ? new Date(value) : undefined)),
-          updatedAtStart: z
-            .string()
-            .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value), {
-              message: 'updatedAtStart must be in YYYY-MM-DD format',
-            })
-            .optional()
-            .transform((value) => (value ? new Date(value) : undefined)),
-          updatedAtEnd: z
-            .string()
-            .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value), {
-              message: 'updatedAtEnd must be in YYYY-MM-DD format',
-            })
-            .optional()
-            .transform((value) => (value ? new Date(value) : undefined)),
+          active: z.enum(['all', 'active', 'inactive']).optional().default('all'),
+          createdAtStart: ZodHelper.dateField('createdAtStart').optional(),
+          createdAtEnd: ZodHelper.dateField('createdAtEnd').optional(),
+          updatedAtStart: ZodHelper.dateField('updatedAtStart').optional(),
+          updatedAtEnd: ZodHelper.dateField('updatedAtEnd').optional(),
         }),
         response: {
           200: z.object({

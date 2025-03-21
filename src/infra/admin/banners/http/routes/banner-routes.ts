@@ -6,6 +6,7 @@ import { GetBannerByIdController } from '../controllers/get-banner-by-id-control
 import { CreateBannerController } from '../controllers/create-banner-controller';
 import { UpdateBannerController } from '../controllers/update-banner-controller';
 import { DeleteBannerController } from '../controllers/delete-banner-controller';
+import { ZodHelper } from '../../../../shared/helpers/zod-helper';
 
 export async function bannerRoutes(app: FastifyTypedInstance) {
   app.get(
@@ -25,18 +26,15 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
           limit: z.coerce.number().optional().default(10),
           orderBy: z.enum(['asc', 'desc']).optional().default('asc'),
           search: z.string().optional(),
-          active: z
-            .enum(['true', 'false'])
-            .optional()
-            .transform((v) => (v === 'true' ? true : v === 'false' ? false : undefined)),
-          startAtStart: z.string().optional(),
-          startAtEnd: z.string().optional(),
-          endAtStart: z.string().optional(),
-          endAtEnd: z.string().optional(),
-          createdAtStart: z.string().optional(),
-          createdAtEnd: z.string().optional(),
-          updatedAtStart: z.string().optional(),
-          updatedAtEnd: z.string().optional(),
+          active: z.enum(['all', 'active', 'inactive']).optional().default('all'),
+          startAtStart: ZodHelper.dateField('startAtStart').optional(),
+          startAtEnd: ZodHelper.dateField('startAtEnd').optional(),
+          endAtStart: ZodHelper.dateField('endAtStart').optional(),
+          endAtEnd: ZodHelper.dateField('endAtEnd').optional(),
+          createdAtStart: ZodHelper.dateField('createdAtStart').optional(),
+          createdAtEnd: ZodHelper.dateField('createdAtEnd').optional(),
+          updatedAtStart: ZodHelper.dateField('updatedAtStart').optional(),
+          updatedAtEnd: ZodHelper.dateField('updatedAtEnd').optional(),
         }),
         response: {
           200: z.object({
