@@ -38,12 +38,16 @@ export class SellerRepositoryPrisma implements ISellerRepository {
     ...params
   }: ListSellersParams): Promise<Paginated<Seller>> {
     const where: Prisma.SellerWhereInput = {
-      OR: [
-        { firstName: { contains: params.search, mode: 'insensitive' } },
-        { lastName: { contains: params.search, mode: 'insensitive' } },
-        { email: { contains: params.search, mode: 'insensitive' } },
-        { phone: { contains: params.search, mode: 'insensitive' } },
-      ],
+      ...(params.search
+        ? {
+            OR: [
+              { firstName: { contains: params.search, mode: 'insensitive' } },
+              { lastName: { contains: params.search, mode: 'insensitive' } },
+              { email: { contains: params.search, mode: 'insensitive' } },
+              { phone: { contains: params.search, mode: 'insensitive' } },
+            ],
+          }
+        : {}),
       active: params.active,
       createdAt: {
         gte: params.createdAtStart,

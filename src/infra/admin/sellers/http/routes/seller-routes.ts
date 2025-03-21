@@ -21,30 +21,42 @@ export async function sellerRoutes(app: FastifyTypedInstance) {
           },
         ],
         querystring: z.object({
-          page: z
-            .string()
-            .optional()
-            .default('1')
-            .transform((v) => Number(v)),
-          limit: z
-            .string()
-            .optional()
-            .default('10')
-            .transform((v) => Number(v)),
-          orderBy: z.string().toLowerCase().optional().default('asc'),
+          page: z.coerce.number().optional().default(1),
+          limit: z.coerce.number().optional().default(10),
+          orderBy: z.enum(['asc', 'desc']).optional().default('asc'),
           search: z.string().optional(),
           active: z
-            .string()
+            .enum(['true', 'false'])
             .optional()
             .transform((v) => (v === 'true' ? true : v === 'false' ? false : undefined)),
-          startAtStart: z.string().optional(),
-          startAtEnd: z.string().optional(),
-          endAtStart: z.string().optional(),
-          endAtEnd: z.string().optional(),
-          createdAtStart: z.string().optional(),
-          createdAtEnd: z.string().optional(),
-          updatedAtStart: z.string().optional(),
-          updatedAtEnd: z.string().optional(),
+          createdAtStart: z
+            .string()
+            .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value), {
+              message: 'createdAtStart must be in YYYY-MM-DD format',
+            })
+            .optional()
+            .transform((value) => (value ? new Date(value) : undefined)),
+          createdAtEnd: z
+            .string()
+            .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value), {
+              message: 'createdAtEnd must be in YYYY-MM-DD format',
+            })
+            .optional()
+            .transform((value) => (value ? new Date(value) : undefined)),
+          updatedAtStart: z
+            .string()
+            .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value), {
+              message: 'updatedAtStart must be in YYYY-MM-DD format',
+            })
+            .optional()
+            .transform((value) => (value ? new Date(value) : undefined)),
+          updatedAtEnd: z
+            .string()
+            .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value), {
+              message: 'updatedAtEnd must be in YYYY-MM-DD format',
+            })
+            .optional()
+            .transform((value) => (value ? new Date(value) : undefined)),
         }),
         response: {
           200: z.object({
