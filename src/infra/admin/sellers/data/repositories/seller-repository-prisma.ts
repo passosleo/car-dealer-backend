@@ -48,7 +48,7 @@ export class SellerRepositoryPrisma implements ISellerRepository {
             ],
           }
         : {}),
-      active: params.active === 'active' ? true : params.active === 'inactive' ? false : undefined,
+      active: params.status === 'active' ? true : params.status === 'inactive' ? false : undefined,
       createdAt: {
         gte: params.createdAtStart,
         lte: params.createdAtEnd,

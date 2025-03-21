@@ -57,7 +57,7 @@ export class UserRepositoryPrisma implements IUserRepository {
 
   public async list({ page = 1, limit = 10, orderBy = 'asc', ...params }: ListUsersParams): Promise<Paginated<User>> {
     const where: Prisma.UserWhereInput = {
-      active: params.active === 'active' ? true : params.active === 'inactive' ? false : undefined,
+      active: params.status === 'active' ? true : params.status === 'inactive' ? false : undefined,
       createdAt: {
         gte: params.createdAtStart,
         lte: params.createdAtEnd,

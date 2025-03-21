@@ -26,7 +26,7 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
           limit: z.coerce.number().optional().default(10),
           orderBy: z.enum(['asc', 'desc']).optional().default('asc'),
           search: z.string().optional(),
-          active: z.enum(['all', 'active', 'inactive']).optional().default('all'),
+          status: z.enum(['all', 'active', 'inactive']).optional().default('all'),
           startAtStart: ZodHelper.dateField('startAtStart').optional(),
           startAtEnd: ZodHelper.dateField('startAtEnd').optional(),
           endAtStart: ZodHelper.dateField('endAtStart').optional(),

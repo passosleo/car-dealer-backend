@@ -36,7 +36,7 @@ export class BrandRepositoryPrisma implements IBrandRepository {
   public async list({ page = 1, limit = 10, orderBy = 'asc', ...params }: ListBrandsParams): Promise<Paginated<Brand>> {
     const where: Prisma.BrandWhereInput = {
       name: { contains: params.search, mode: 'insensitive' },
-      active: params.active === 'active' ? true : params.active === 'inactive' ? false : undefined,
+      active: params.status === 'active' ? true : params.status === 'inactive' ? false : undefined,
       createdAt: {
         gte: params.createdAtStart,
         lte: params.createdAtEnd,

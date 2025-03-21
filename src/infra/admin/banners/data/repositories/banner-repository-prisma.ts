@@ -40,7 +40,7 @@ export class BannerRepositoryPrisma implements IBannerRepository {
   }: ListBannersParams): Promise<Paginated<Banner>> {
     const where: Prisma.BannerWhereInput = {
       title: { contains: params.search, mode: 'insensitive' },
-      active: params.active === 'active' ? true : params.active === 'inactive' ? false : undefined,
+      active: params.status === 'active' ? true : params.status === 'inactive' ? false : undefined,
       startAt: {
         gte: params.startAtStart,
         lte: params.startAtEnd,

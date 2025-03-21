@@ -6,7 +6,7 @@ export type ListBrandsParams = {
   limit?: number;
   orderBy?: 'asc' | 'desc';
   search?: string;
-  active?: 'all' | 'active' | 'inactive';
+  status?: 'all' | 'active' | 'inactive';
   createdAtStart?: Date;
   createdAtEnd?: Date;
   updatedAtStart?: Date;

@@ -6,7 +6,7 @@ export type ListBannersParams = {
   limit?: number;
   orderBy?: 'asc' | 'desc';
   search?: string;
-  active?: 'all' | 'active' | 'inactive';
+  status?: 'all' | 'active' | 'inactive';
   startAtStart?: Date;
   startAtEnd?: Date;
   endAtStart?: Date;

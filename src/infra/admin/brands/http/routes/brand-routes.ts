@@ -26,7 +26,7 @@ export async function brandRoutes(app: FastifyTypedInstance) {
           limit: z.coerce.number().optional().default(10),
           orderBy: z.enum(['asc', 'desc']).optional().default('asc'),
           search: z.string().optional(),
-          active: z.enum(['all', 'active', 'inactive']).optional().default('all'),
+          status: z.enum(['all', 'active', 'inactive']).optional().default('all'),
           createdAtStart: ZodHelper.dateField('createdAtStart').optional(),
           createdAtEnd: ZodHelper.dateField('createdAtEnd').optional(),
           updatedAtStart: ZodHelper.dateField('updatedAtStart').optional(),
