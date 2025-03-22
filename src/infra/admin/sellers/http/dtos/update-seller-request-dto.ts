@@ -4,7 +4,7 @@ export class UpdateSellerRequestDTO {
     public readonly lastName: string | null,
     public readonly email: string | null,
     public readonly phone: string | null,
-    public readonly imageUrl: string | null,
+    public readonly image: string | null,
     public readonly customMessage: string | null,
     public readonly active: boolean,
   ) {}
@@ -15,7 +15,7 @@ export class UpdateSellerRequestDTO {
       data.lastName,
       data.email,
       data.phone,
-      data.imageUrl,
+      data.image,
       data.customMessage,
       data.active,
     );
