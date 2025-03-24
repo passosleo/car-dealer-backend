@@ -20,22 +20,20 @@ export class UpdateSellerUseCase {
       throw new HttpException(HttpStatus.NOT_FOUND, 'Seller not found');
     }
 
+    const imageUrl = await this.getImageUpdatePromise(image, sellerExists.imageUrl);
+
     const updateSellerData: Partial<Seller> = {
       ...data,
+      imageUrl,
     };
-
-    if (image) {
-      const imageUrl = await this.getImageUpdatePromise(image, sellerExists.imageUrl);
-      updateSellerData.imageUrl = imageUrl;
-    }
 
     const seller = await this.sellerRepository.update(sellerId, updateSellerData);
 
     return SellerResponseDTO.create(seller);
   }
 
-  private async getImageUpdatePromise(newImage: string, currentImage: string | null) {
-    if (StringHelper.isBase64Image(newImage)) {
+  private async getImageUpdatePromise(newImage: string | null, currentImage: string | null) {
+    if (newImage && StringHelper.isBase64Image(newImage)) {
       if (!currentImage) {
         return this.imageStorage.uploadImageBase64(newImage);
       }
