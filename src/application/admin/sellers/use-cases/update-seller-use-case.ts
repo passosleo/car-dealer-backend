@@ -33,12 +33,16 @@ export class UpdateSellerUseCase {
   }
 
   private async getImageUpdatePromise(newImage: string | null, currentImage: string | null) {
-    if (newImage && StringHelper.isBase64Image(newImage)) {
-      if (!currentImage) {
-        return this.imageStorage.uploadImageBase64(newImage);
+    if (newImage) {
+      if (StringHelper.isBase64Image(newImage)) {
+        if (!currentImage) {
+          return this.imageStorage.uploadImageBase64(newImage);
+        }
+        return this.imageStorage.updateImageBase64(currentImage, newImage);
       }
-      return this.imageStorage.updateImageBase64(currentImage, newImage);
+      return Promise.resolve(currentImage);
+    } else {
+      return Promise.resolve(null);
     }
-    return Promise.resolve(currentImage);
   }
 }
