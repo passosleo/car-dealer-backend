@@ -26,9 +26,7 @@ export class UpdateSellerUseCase {
 
     if (image) {
       const imageUrl = await this.getImageUpdatePromise(image, sellerExists.imageUrl);
-      if (imageUrl) {
-        updateSellerData.imageUrl = imageUrl;
-      }
+      updateSellerData.imageUrl = imageUrl;
     }
 
     const seller = await this.sellerRepository.update(sellerId, updateSellerData);
@@ -43,6 +41,6 @@ export class UpdateSellerUseCase {
       }
       return this.imageStorage.updateImageBase64(currentImage, newImage);
     }
-    return Promise.resolve(null);
+    return Promise.resolve(currentImage);
   }
 }
