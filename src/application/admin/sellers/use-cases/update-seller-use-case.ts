@@ -26,7 +26,9 @@ export class UpdateSellerUseCase {
 
     if (image) {
       const imageUrl = await this.getImageUpdatePromise(image, sellerExists.imageUrl);
-      updateSellerData.imageUrl = imageUrl;
+      if (imageUrl) {
+        updateSellerData.imageUrl = imageUrl;
+      }
     }
 
     const seller = await this.sellerRepository.update(sellerId, updateSellerData);
