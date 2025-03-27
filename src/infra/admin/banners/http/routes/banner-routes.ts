@@ -44,6 +44,7 @@ export async function bannerRoutes(app: FastifyTypedInstance) {
               total: z.number(),
               page: z.number(),
               limit: z.number(),
+              totalPages: z.number(),
               items: z.array(
                 z.object({
                   bannerId: z.string().uuid(),

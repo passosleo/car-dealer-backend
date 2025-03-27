@@ -40,6 +40,7 @@ export async function categoryRoutes(app: FastifyTypedInstance) {
               total: z.number(),
               page: z.number(),
               limit: z.number(),
+              totalPages: z.number(),
               items: z.array(
                 z.object({
                   categoryId: z.string().uuid(),

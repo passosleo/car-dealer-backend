@@ -39,6 +39,7 @@ export async function profileRoutes(app: FastifyTypedInstance) {
               total: z.number(),
               page: z.number(),
               limit: z.number(),
+              totalPages: z.number(),
               items: z.array(
                 z.object({
                   profileId: z.string().uuid(),

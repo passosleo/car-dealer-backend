@@ -92,6 +92,7 @@ export class UserRepositoryPrisma implements IUserRepository {
       total,
       page,
       limit,
+      totalPages: Math.ceil(total / limit),
       items: data.map(UserMapperPrisma.toDomain),
     };
   }

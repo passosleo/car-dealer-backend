@@ -70,6 +70,7 @@ export class CategoryRepositoryPrisma implements ICategoryRepository {
       total,
       page,
       limit,
+      totalPages: Math.ceil(total / limit),
       items: data.map(CategoryMapperPrisma.toDomain),
     };
   }

@@ -73,6 +73,7 @@ export class BannerRepositoryPrisma implements IBannerRepository {
       total,
       page,
       limit,
+      totalPages: Math.ceil(total / limit),
       items: data.map(BannerMapperPrisma.toDomain),
     };
   }

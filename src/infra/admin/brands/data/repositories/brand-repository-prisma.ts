@@ -61,6 +61,7 @@ export class BrandRepositoryPrisma implements IBrandRepository {
       total,
       page,
       limit,
+      totalPages: Math.ceil(total / limit),
       items: data.map(BrandMapperPrisma.toDomain),
     };
   }

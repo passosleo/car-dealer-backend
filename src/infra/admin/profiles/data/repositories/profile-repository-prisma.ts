@@ -109,6 +109,7 @@ export class ProfileRepositoryPrisma implements IProfileRepository {
       total,
       page,
       limit,
+      totalPages: Math.ceil(total / limit),
       items: data.map(ProfileMapperPrisma.toDomain),
     };
   }

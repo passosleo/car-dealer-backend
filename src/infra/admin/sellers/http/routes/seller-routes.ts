@@ -40,6 +40,7 @@ export async function sellerRoutes(app: FastifyTypedInstance) {
               total: z.number(),
               page: z.number(),
               limit: z.number(),
+              totalPages: z.number(),
               items: z.array(
                 z.object({
                   sellerId: z.string().uuid(),

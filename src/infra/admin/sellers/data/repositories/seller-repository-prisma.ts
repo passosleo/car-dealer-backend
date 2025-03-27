@@ -73,6 +73,7 @@ export class SellerRepositoryPrisma implements ISellerRepository {
       total,
       page,
       limit,
+      totalPages: Math.ceil(total / limit),
       items: data.map(SellerMapperPrisma.toDomain),
     };
   }

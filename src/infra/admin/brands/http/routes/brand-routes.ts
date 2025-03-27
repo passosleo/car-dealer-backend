@@ -40,6 +40,7 @@ export async function brandRoutes(app: FastifyTypedInstance) {
               total: z.number(),
               page: z.number(),
               limit: z.number(),
+              totalPages: z.number(),
               items: z.array(
                 z.object({
                   brandId: z.string().uuid(),
