@@ -179,7 +179,7 @@ export async function brandRoutes(app: FastifyTypedInstance) {
             data: z.object({
               brandId: z.string().uuid(),
               name: z.string(),
-              imageUrl: z.string(),
+              image: z.string(),
               active: z.boolean(),
               createdAt: z.date(),
               updatedAt: z.date(),
@@ -239,7 +239,7 @@ export async function brandRoutes(app: FastifyTypedInstance) {
         }),
         body: z.object({
           name: z.string(),
-          imageUrl: z.string(),
+          image: z.string(),
           active: z.boolean(),
         }),
         response: {
