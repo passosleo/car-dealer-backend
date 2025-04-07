@@ -293,7 +293,7 @@ export async function userRoutes(app: FastifyTypedInstance) {
     CreateUserController.handle,
   );
   app.put(
-    '/api/v1/admin/user',
+    '/api/v1/admin/user/:userId',
     {
       preHandler: authorize(['MANAGE_USERS']),
       schema: {
@@ -304,6 +304,9 @@ export async function userRoutes(app: FastifyTypedInstance) {
             bearerAuth: [],
           },
         ],
+        params: z.object({
+          userId: z.string().uuid(),
+        }),
         body: z.object({
           firstName: z.string(),
           lastName: z.string(),
