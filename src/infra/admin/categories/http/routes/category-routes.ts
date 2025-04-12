@@ -169,7 +169,7 @@ export async function categoryRoutes(app: FastifyTypedInstance) {
         ],
         body: z.object({
           name: z.string(),
-          imageUrl: z.string(),
+          image: z.string(),
           active: z.boolean(),
         }),
         response: {
@@ -239,7 +239,7 @@ export async function categoryRoutes(app: FastifyTypedInstance) {
         }),
         body: z.object({
           name: z.string(),
-          imageUrl: z.string(),
+          image: z.string(),
           active: z.boolean(),
         }),
         response: {
