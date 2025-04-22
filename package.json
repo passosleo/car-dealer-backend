@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "dev": "tsx watch src/main.ts",
-    "start": "node ./dist/main.js",
+    "start": "TZ=America/Sao_Paulo node dist/main.js",
     "start:prod": "npx prisma migrate deploy && npm run start",
     "postinstall": "npx prisma generate && npx prisma migrate deploy && npx prisma db seed",
     "build": "tsup src --out-dir dist",
