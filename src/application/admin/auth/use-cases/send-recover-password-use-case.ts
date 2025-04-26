@@ -41,7 +41,6 @@ export class SendRecoverPasswordUseCase {
           attemptCount: 1,
           lastAttemptAt: new Date(),
           blockedUntil: null,
-          token: recoverPasswordToken,
         }),
       );
       return this.sendRecoveryEmail(recoverPasswordToken, user);
@@ -63,7 +62,6 @@ export class SendRecoverPasswordUseCase {
         attemptCount: 1,
         lastAttemptAt: new Date(),
         blockedUntil: null,
-        token: recoverPasswordToken,
       });
       return this.sendRecoveryEmail(recoverPasswordToken, user);
     }
@@ -101,7 +99,6 @@ export class SendRecoverPasswordUseCase {
       attemptCount: updatedAttemptCount,
       lastAttemptAt: new Date(),
       blockedUntil: null,
-      token: recoverPasswordToken,
     });
 
     return this.sendRecoveryEmail(recoverPasswordToken, user);

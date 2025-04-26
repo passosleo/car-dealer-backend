@@ -13,7 +13,6 @@ export class UserPasswordRecoverAttemptMapper {
       attemptCount: data.attemptCount,
       lastAttemptAt: data.lastAttemptAt,
       blockedUntil: data.blockedUntil,
-      token: data.token,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,
     };
@@ -26,7 +25,6 @@ export class UserPasswordRecoverAttemptMapper {
       attemptCount: data.attemptCount,
       lastAttemptAt: data.lastAttemptAt,
       blockedUntil: data.blockedUntil,
-      token: data.token,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,
     };

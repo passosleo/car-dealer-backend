@@ -28,7 +28,7 @@ export class RecoverPasswordUseCase {
     }
 
     const userPasswordRecoverAttempt = await this.userPasswordRecoverAttemptRepository.findByUserId(userId);
-    if (userPasswordRecoverAttempt && data.token === userPasswordRecoverAttempt.token) {
+    if (userPasswordRecoverAttempt) {
       const passwordHashed = await this.hashService.hash(data.newPassword);
       await Promise.all([
         this.userPasswordRecoverAttemptRepository.delete(userPasswordRecoverAttempt.attemptId),

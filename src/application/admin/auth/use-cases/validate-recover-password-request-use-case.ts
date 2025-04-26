@@ -27,7 +27,7 @@ export class ValidateRecoverPasswordRequestUseCase {
     }
 
     const userPasswordRecoverAttempt = await this.userPasswordRecoverAttemptRepository.findByUserId(userId);
-    if (!userPasswordRecoverAttempt || token !== userPasswordRecoverAttempt.token) {
+    if (!userPasswordRecoverAttempt) {
       throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid token');
     }
   }

@@ -37,7 +37,6 @@ model UserPasswordRecoverAttempt {
   attemptCount  Int       @default(1) @map("attempt_count")
   lastAttemptAt DateTime  @map("last_attempt_at") @db.Timestamptz()
   blockedUntil  DateTime? @map("blocked_until") @db.Timestamptz()
-  token         String    @unique
   createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz()
   updatedAt     DateTime  @updatedAt() @map("updated_at") @db.Timestamptz()
 
@@ -79,23 +78,25 @@ model ProfileRoles {
 }
 
 model Brand {
-  brandId   String   @id @default(uuid()) @map("brand_id")
-  name      String   @unique
-  imageUrl  String   @map("image_url")
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
-  updatedAt DateTime @updatedAt() @map("updated_at") @db.Timestamptz()
+  brandId   String    @id @default(uuid()) @map("brand_id")
+  name      String    @unique
+  imageUrl  String    @map("image_url")
+  active    Boolean   @default(true)
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt DateTime  @updatedAt() @map("updated_at") @db.Timestamptz()
+  vehicle   Vehicle[]
 
   @@map("tb_brands")
 }
 
 model Category {
-  categoryId String   @id @default(uuid()) @map("category_id")
-  name       String   @unique
-  imageUrl   String   @map("image_url")
-  active     Boolean  @default(true)
-  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz()
-  updatedAt  DateTime @updatedAt() @map("updated_at") @db.Timestamptz()
+  categoryId String    @id @default(uuid()) @map("category_id")
+  name       String    @unique
+  imageUrl   String    @map("image_url")
+  active     Boolean   @default(true)
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt  DateTime  @updatedAt() @map("updated_at") @db.Timestamptz()
+  vehicle    Vehicle[]
 
   @@map("tb_categories")
 }
@@ -127,4 +128,54 @@ model Banner {
   updatedAt       DateTime  @updatedAt() @map("updated_at") @db.Timestamptz()
 
   @@map("tb_banners")
+}
+
+model Vehicle {
+  vehicleId      String           @id @default(uuid()) @map("vehicle_id")
+  model          String
+  year           Int
+  description    String?
+  price          Decimal?         @db.Decimal(10, 2)
+  mileage        Int?
+  color          String?
+  transmission   String?
+  fuelType       String?          @map("fuel_type")
+  doors          Int?
+  seats          Int?
+  horsepower     Int?
+  torque         Int?
+  driveTrain     String?          @map("drive_train")
+  brandId        String           @map("brand_id")
+  brand          Brand            @relation(fields: [brandId], references: [brandId], onDelete: Cascade)
+  categoryId     String           @map("category_id")
+  category       Category         @relation(fields: [categoryId], references: [categoryId], onDelete: Cascade)
+  active         Boolean          @default(true)
+  createdAt      DateTime         @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt      DateTime         @updatedAt() @map("updated_at") @db.Timestamptz()
+  vehicleImage   VehicleImage[]
+  vehicleFeature VehicleFeature[]
+
+  @@map("tb_vehicles")
+}
+
+model VehicleImage {
+  vehicleImageId String   @id @default(uuid()) @map("vehicle_image_id")
+  vehicleId      String   @map("vehicle_id")
+  vehicle        Vehicle  @relation(fields: [vehicleId], references: [vehicleId], onDelete: Cascade)
+  imageUrl       String   @map("image_url")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@map("tb_vehicles_images")
+}
+
+model VehicleFeature {
+  vehicleFeatureId String   @id @default(uuid()) @map("vehicle_feature_id")
+  vehicleId        String   @map("vehicle_id")
+  vehicle          Vehicle  @relation(fields: [vehicleId], references: [vehicleId], onDelete: Cascade)
+  feature          String
+  active           Boolean  @default(true)
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt        DateTime @updatedAt() @map("updated_at") @db.Timestamptz()
+
+  @@map("tb_vehicles_features")
 }
