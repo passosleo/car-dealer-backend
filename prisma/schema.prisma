@@ -131,29 +131,29 @@ model Banner {
 }
 
 model Vehicle {
-  vehicleId      String           @id @default(uuid()) @map("vehicle_id")
-  model          String
-  year           Int
-  description    String?
-  price          Decimal?         @db.Decimal(10, 2)
-  mileage        Int?
-  color          String?
-  transmission   String?
-  fuelType       String?          @map("fuel_type")
-  doors          Int?
-  seats          Int?
-  horsepower     Int?
-  torque         Int?
-  driveTrain     String?          @map("drive_train")
-  brandId        String           @map("brand_id")
-  brand          Brand            @relation(fields: [brandId], references: [brandId], onDelete: Cascade)
-  categoryId     String           @map("category_id")
-  category       Category         @relation(fields: [categoryId], references: [categoryId], onDelete: Cascade)
-  active         Boolean          @default(true)
-  createdAt      DateTime         @default(now()) @map("created_at") @db.Timestamptz()
-  updatedAt      DateTime         @updatedAt() @map("updated_at") @db.Timestamptz()
-  vehicleImage   VehicleImage[]
-  vehicleFeature VehicleFeature[]
+  vehicleId       String           @id @default(uuid()) @map("vehicle_id")
+  model           String
+  year            Int
+  description     String?
+  price           Decimal?         @db.Decimal(10, 2)
+  mileage         Int?
+  color           String?
+  transmission    String?
+  fuelType        String?          @map("fuel_type")
+  doors           Int?
+  seats           Int?
+  horsepower      Int?
+  torque          Int?
+  driveTrain      String?          @map("drive_train")
+  brandId         String           @map("brand_id")
+  brand           Brand            @relation(fields: [brandId], references: [brandId], onDelete: Cascade)
+  categoryId      String           @map("category_id")
+  category        Category         @relation(fields: [categoryId], references: [categoryId], onDelete: Cascade)
+  active          Boolean          @default(true)
+  createdAt       DateTime         @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt       DateTime         @updatedAt() @map("updated_at") @db.Timestamptz()
+  vehicleImages   VehicleImage[]
+  vehicleFeatures VehicleFeature[]
 
   @@map("tb_vehicles")
 }
