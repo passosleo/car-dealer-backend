@@ -34,6 +34,7 @@ export class VehicleMapperPrisma {
       vehicleId: data.vehicleId,
       model: data.model,
       year: data.year,
+      plate: data.plate,
       description: data.description,
       price: data.price,
       mileage: data.mileage,

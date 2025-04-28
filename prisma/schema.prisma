@@ -134,6 +134,7 @@ model Vehicle {
   vehicleId       String           @id @default(uuid()) @map("vehicle_id")
   model           String
   year            Int
+  plate           String           @unique
   description     String?
   price           Decimal?         @db.Decimal(10, 2)
   mileage         Int?

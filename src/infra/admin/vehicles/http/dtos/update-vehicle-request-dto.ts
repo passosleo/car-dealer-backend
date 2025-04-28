@@ -2,6 +2,7 @@ export class UpdateVehicleRequestDTO {
   constructor(
     public readonly model: string,
     public readonly year: number,
+    public readonly plate: string,
     public readonly description: string | null,
     public readonly price: number | null,
     public readonly mileage: number | null,
@@ -24,6 +25,7 @@ export class UpdateVehicleRequestDTO {
     return new UpdateVehicleRequestDTO(
       data.model,
       data.year,
+      data.plate,
       data.description,
       data.price,
       data.mileage,

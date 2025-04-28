@@ -96,6 +96,14 @@ export class VehicleRepositoryPrisma implements IVehicleRepository {
     return vehicle ? VehicleMapperPrisma.toDomain(vehicle) : null;
   }
 
+  public async findByPlate(plate: string): Promise<Vehicle | null> {
+    const vehicle = await prisma.vehicle.findUnique({
+      where: { plate },
+      include: this.includeFields,
+    });
+    return vehicle ? VehicleMapperPrisma.toDomain(vehicle) : null;
+  }
+
   public async list({
     page = 1,
     limit = 10,

@@ -28,5 +28,6 @@ export interface IVehicleRepository {
   update(id: string, data: Partial<Vehicle>): Promise<Vehicle>;
   delete(id: string): Promise<void>;
   findById(id: string): Promise<Vehicle | null>;
+  findByPlate(plate: string): Promise<Vehicle | null>;
   list(data: ListVehiclesParams): Promise<Paginated<Vehicle>>;
 }

@@ -5,6 +5,7 @@ export interface CreateVehicleData {
   vehicleId?: string;
   model: string;
   year: number;
+  plate: string;
   description?: string | null;
   price?: number | null;
   mileage?: number | null;
@@ -29,6 +30,7 @@ export class Vehicle {
   public readonly vehicleId: string;
   public model: string;
   public year: number;
+  public plate: string;
   public description: string | null;
   public price: number | null;
   public mileage: number | null;
@@ -52,6 +54,7 @@ export class Vehicle {
     this.vehicleId = data.vehicleId!;
     this.model = data.model;
     this.year = data.year;
+    this.plate = data.plate;
     this.description = data.description ?? null;
     this.price = data.price ?? null;
     this.mileage = data.mileage ?? null;
