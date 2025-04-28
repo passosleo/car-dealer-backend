@@ -13,6 +13,7 @@ import { brandRoutes } from '../../admin/brands/http/routes/brand-routes';
 import { profileRoutes } from '../../admin/profiles/http/routes/profile-routes';
 import { roleRoutes } from '../../admin/roles/http/routes/role-routes';
 import { userRoutes } from '../../admin/users/http/routes/user-routes';
+import { vehicleRoutes } from '../../admin/vehicles/http/routes/vehicle-routes';
 
 export function createServer() {
   const app = fastify({
@@ -38,6 +39,7 @@ export function createServer() {
   app.register(bannerRoutes);
   app.register(sellerRoutes);
   app.register(userRoutes);
+  app.register(vehicleRoutes);
 
   return app;
 }
