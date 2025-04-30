@@ -105,7 +105,7 @@ export class SendRecoverPasswordUseCase {
   }
 
   private async sendRecoveryEmail(token: string, { email, firstName }: User) {
-    const resetLink = `${CONFIG.app.baseUrl}${CONFIG.redirects.recoverPassword}?token=${encodeURIComponent(token)}`;
+    const resetLink = `${CONFIG.app.frontendBaseUrl}${CONFIG.redirects.recoverPassword}?token=${encodeURIComponent(token)}`;
 
     await this.mailService.sendMail({
       to: email,
