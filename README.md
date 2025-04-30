@@ -18,39 +18,6 @@ cd car-dealer-backend
 
 ---
 
-## 🐳 Executando com Docker
-
-### ✅ Pré-requisitos
-
-- Docker instalado
-- Arquivo `.env` configurado na raiz do projeto
-
----
-
-### 🚀 Opção 1: Usar Imagem Oficial do Docker Hub
-
-```bash
-docker run -d -p 4000:4000 --env-file .env --name car-dealer-backend leopassos/car-dealer-backend:latest
-```
-
-> 💡 A porta da aplicação pode ser alterada se necessário no trecho: `-p <porta_externa>:4000`.
-
----
-
-### 🛠️ Opção 2: Buildar a Imagem Localmente
-
-```bash
-docker build -t car-dealer-backend .
-```
-
-Depois de buildar, execute:
-
-```bash
-docker run -d -p 4000:4000 --env-file .env --name car-dealer-backend car-dealer-backend
-```
-
----
-
 ## ⚙️ Variáveis de Ambiente
 
 A aplicação exige algumas variáveis de ambiente para funcionar corretamente. Você pode criar um arquivo `.env` na raiz do projeto com as seguintes variáveis:
@@ -98,6 +65,39 @@ ENCRYPTION_SECRET=fake_encryption_key
 CLOUDINARY_URL=cloudinary://my_key:my_secret@my_cloud_name
 
 REDIRECT_URL_RECOVER_PASSWORD=http://localhost:3000/recover-password
+```
+
+---
+
+## 🐳 Executando com Docker
+
+### ✅ Pré-requisitos
+
+- Docker instalado
+- Arquivo `.env` configurado na raiz do projeto
+
+---
+
+### 🚀 Opção 1: Usar Imagem Oficial do Docker Hub
+
+```bash
+docker run -d -p 4000:4000 --env-file .env --name car-dealer-backend leopassos/car-dealer-backend:latest
+```
+
+> 💡 A porta da aplicação pode ser alterada se necessário no trecho: `-p <porta_externa>:4000`.
+
+---
+
+### 🛠️ Opção 2: Buildar a Imagem Localmente
+
+```bash
+docker build -t car-dealer-backend .
+```
+
+Depois de buildar, execute:
+
+```bash
+docker run -d -p 4000:4000 --env-file .env --name car-dealer-backend car-dealer-backend
 ```
 
 ---
