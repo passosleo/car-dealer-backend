@@ -64,7 +64,7 @@ ENCRYPTION_SECRET=fake_encryption_key
 
 CLOUDINARY_URL=cloudinary://my_key:my_secret@my_cloud_name
 
-REDIRECT_URL_RECOVER_PASSWORD=http://localhost:3000/recover-password
+REDIRECT_URL_RECOVER_PASSWORD=/recover-password
 ```
 
 ---
