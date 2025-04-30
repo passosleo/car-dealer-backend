@@ -3,7 +3,7 @@
 Repositório responsável pela API do sistema **CMS Car Dealer**.
 
 - 🔗 **Diagram ER**: [DrawSQL](https://drawsql.app/teams/leo-57/diagrams/car-dealer)
-- 🔗 **Imagem Oficial Dockerhub**: [leopassos/car-dealer-backend](https://hub.docker.com/r/leopassos/car-dealer-backend)
+- 🔗 **Imagem Docker Oficial**: [leopassos/car-dealer-backend](https://hub.docker.com/r/leopassos/car-dealer-backend)
 - 🔗 **Frontend**: [passosleo/car-dealer-frontend](https://github.com/passosleo/car-dealer-frontend)
 - 🔗 **Infraestrutura (Docker Compose e DB)**: [passosleo/car-dealer-infra](https://github.com/passosleo/car-dealer-infra)
 
