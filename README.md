@@ -27,6 +27,7 @@ A aplicação exige algumas variáveis de ambiente para funcionar corretamente. 
 | `NODE_ENV`                              | Ambiente da aplicação (`development` ou `production`) | ❌ Não       |
 | `PORT`                                  | Porta em que a aplicação será exposta                 | ❌ Não       |
 | `DATABASE_URL`                          | URL de conexão com o banco PostgreSQL                 | ✅ Sim       |
+| `BASE_URL`                              | URL do servidor                                       | ❌ Não       |
 | `FRONTEND_BASE_URL`                     | URL do frontend para redirecionamentos                | ❌ Não       |
 | `AUTH_ACCESS_TOKEN_SECRET`              | Segredo usado para assinar o token JWT de acesso      | ❌ Não       |
 | `AUTH_ACCESS_TOKEN_EXPIRES_IN_SECONDS`  | Tempo de expiração do token de acesso (em segundos)   | ❌ Não       |
@@ -48,6 +49,7 @@ A aplicação exige algumas variáveis de ambiente para funcionar corretamente. 
 NODE_ENV=development
 PORT=4000
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/database
+BASE_URL=http://localhost:4000
 FRONTEND_BASE_URL=http://localhost:3000
 
 AUTH_ACCESS_TOKEN_SECRET=fake_access_secret

@@ -4,6 +4,7 @@ import fastifyHelmet from '@fastify/helmet';
 import fastifyRateLimit from '@fastify/rate-limit';
 import { HttpException } from '../response/http-exception';
 import { HttpStatus } from '../response/http-status';
+import { CONFIG } from '../../constants/config';
 
 export function setupSecurity(app: FastifyInstance) {
   app.register(fastifyRateLimit, {
@@ -19,7 +20,7 @@ export function setupSecurity(app: FastifyInstance) {
   });
 
   app.register(fastifyCors, {
-    origin: ['https://car-dealer-frontend-eosin.vercel.app', 'https://car-dealer-backend-lake.vercel.app'],
+    origin: [CONFIG.app.baseUrl, CONFIG.app.frontendBaseUrl],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     credentials: true,
