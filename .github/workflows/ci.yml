@@ -7,8 +7,8 @@ on:
 
 jobs:
 
-  # 1️⃣ Validações estáticas: TypeScript + Lint
-  static-checks:
+  # 1️⃣ Verificação de tipos (TypeScript)
+  type-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,13 +26,30 @@ jobs:
       - name: Type Check
         run: yarn ts:check
 
+  # 2️⃣ Linting (boas práticas e estilo)
+  lint:
+    runs-on: ubuntu-latest
+    needs: type-check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
       - name: Lint
         run: yarn lint
 
-  # 2️⃣ Build da aplicação
+  # 3️⃣ Build do projeto
   build:
     runs-on: ubuntu-latest
-    needs: static-checks
+    needs: lint
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -49,7 +66,7 @@ jobs:
       - name: Build
         run: yarn build
 
-  # 3️⃣ Testes unitários
+  # 4️⃣ Testes unitários
   unit-tests:
     runs-on: ubuntu-latest
     needs: build
@@ -66,10 +83,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Run Unit Tests
+      - name: Unit Tests
         run: yarn test
 
-  # 4️⃣ Scan de segredos com Gitleaks
+  # 5️⃣ Scan de segredos (Gitleaks)
   secrets-scan:
     runs-on: ubuntu-latest
     needs: unit-tests
@@ -80,7 +97,7 @@ jobs:
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
 
-  # 5️⃣ Auditoria de dependências com Yarn Audit
+  # 6️⃣ Auditoria de dependências (yarn audit)
   dependency-audit:
     runs-on: ubuntu-latest
     needs: unit-tests
@@ -100,7 +117,7 @@ jobs:
       - name: Run Yarn Audit
         run: yarn audit --groups dependencies --level high
 
-  # 6️⃣ Build e Push da imagem Docker (após todas as validações)
+  # 7️⃣ Build e Push da imagem Docker (após passar por todas as validações)
   docker-image:
     runs-on: ubuntu-latest
     needs: [secrets-scan, dependency-audit]
