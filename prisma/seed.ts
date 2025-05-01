@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import { HashServiceBcrypt } from '../src/infra/shared/services/hash-service-bcrypt';
+import { HashServiceBcryptJS } from '../src/infra/shared/services/hash-service-bcryptjs';
 
 const prisma = new PrismaClient();
-const hashService = new HashServiceBcrypt();
+const hashService = new HashServiceBcryptJS();
 
 async function main() {
   await prisma.role.createMany({

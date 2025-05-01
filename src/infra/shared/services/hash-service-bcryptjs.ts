@@ -1,13 +1,13 @@
 import { IHashService } from '../../../application/shared/services/hash-service';
-import bcrypt from 'bcryptjs';
+import bcryptjs from 'bcryptjs';
 
-export class HashServiceBcrypt implements IHashService {
+export class HashServiceBcryptJS implements IHashService {
   public async hash(data: string): Promise<string> {
-    const salt = await bcrypt.genSalt(10);
-    return bcrypt.hash(data, salt);
+    const salt = await bcryptjs.genSalt(10);
+    return bcryptjs.hash(data, salt);
   }
 
   public async compare(data: string, encrypted: string): Promise<boolean> {
-    return bcrypt.compare(data, encrypted);
+    return bcryptjs.compare(data, encrypted);
   }
 }
