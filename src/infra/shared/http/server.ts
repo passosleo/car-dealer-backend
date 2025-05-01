@@ -14,6 +14,8 @@ import { profileRoutes } from '../../admin/profiles/http/routes/profile-routes';
 import { roleRoutes } from '../../admin/roles/http/routes/role-routes';
 import { userRoutes } from '../../admin/users/http/routes/user-routes';
 import { vehicleRoutes } from '../../admin/vehicles/http/routes/vehicle-routes';
+import { brandPublicRoutes } from '../../public/brands/http/routes/brand-public-routes';
+import { categoryPublicRoutes } from '../../public/categories/http/routes/category-public-routes';
 
 export function createServer() {
   const app = fastify({
@@ -40,6 +42,8 @@ export function createServer() {
   app.register(sellerRoutes);
   app.register(userRoutes);
   app.register(vehicleRoutes);
+  app.register(brandPublicRoutes);
+  app.register(categoryPublicRoutes);
 
   return app;
 }
