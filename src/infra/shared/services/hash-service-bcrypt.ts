@@ -1,5 +1,5 @@
 import { IHashService } from '../../../application/shared/services/hash-service';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 export class HashServiceBcrypt implements IHashService {
   public async hash(data: string): Promise<string> {
