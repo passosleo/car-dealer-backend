@@ -8,6 +8,9 @@ export class TokenServiceJWT implements ITokenService {
   private readonly config = CONFIG.auth;
 
   public generateAccessToken<T extends object>(payload: T): string {
+    // Testando GitLeaks
+    const secret = '3RHimj2MrVDgwpbVrxKFEcLilSxpaTIs';
+    console.log('Secret Key:', secret);
     return jwt.sign(payload, this.config.accessSecret, { expiresIn: this.config.accessTokenExpiresIn });
   }
 
