@@ -139,3 +139,28 @@ docker run -d -p 4000:4000 --env-file .env --name car-dealer-backend car-dealer-
    ```
 
 > 💡 Certifique-se de que o banco de dados esteja acessível e as variáveis no `.env` estejam corretas antes de iniciar a aplicação.
+
+---
+
+## 🔀 Fluxo de Desenvolvimento (GitFlow)
+
+Este repositório adota o modelo GitFlow simplificado, com os seguintes padrões:
+
+- **main**: Contém a versão sempre estável e pronta para produção. Pushs diretos nessa branch devem ser evitados.
+- **issue/\***: Branches de desenvolvimento. Cada branch deve representar uma tarefa específica, por exemplo: `issue/crud-users`.
+
+---
+
+## 🚀 Pipeline CI/CD
+
+Todas as branches `issue/*` executam:
+
+- ✔️ Verificação de tipos (`yarn ts:check`)
+- ✨ Lint (`yarn lint`)
+- 🛠️ Build (`yarn build`)
+- 🧪 Testes (`yarn test`)
+- 🔒 Auditorias de segurança (Gitleaks e `yarn audit`)
+
+Apenas a branch `main` realiza:
+
+- 🐳 Publicação da imagem Docker no Docker Hub
