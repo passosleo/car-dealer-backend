@@ -1,4 +1,4 @@
-name: CI - Type Check, Build, and Docker Image Creation
+name: CI - Type Check, Lint, Build, and Docker Image Creation
 
 on:
   push:
@@ -23,6 +23,24 @@ jobs:
 
       - name: Type Check
         run: yarn ts:check
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install deps
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
 
   build:
     runs-on: ubuntu-latest

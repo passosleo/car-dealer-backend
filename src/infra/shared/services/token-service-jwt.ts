@@ -14,7 +14,7 @@ export class TokenServiceJWT implements ITokenService {
   public verifyAccessToken<T extends object>(token: string): T {
     try {
       return jwt.verify(token, this.config.accessSecret) as T;
-    } catch (error) {
+    } catch {
       throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid token');
     }
   }
@@ -26,7 +26,7 @@ export class TokenServiceJWT implements ITokenService {
   public verifyRefreshToken<T>(token: string): T {
     try {
       return jwt.verify(token, this.config.refreshSecret) as T;
-    } catch (error) {
+    } catch {
       throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid token');
     }
   }

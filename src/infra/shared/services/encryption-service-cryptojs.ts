@@ -20,7 +20,7 @@ export class EncryptionServiceCryptoJS implements IEncryptionService {
       const bytes = CryptoJS.AES.decrypt(value, this.secret);
       const decoded = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
       return decoded as T;
-    } catch (error) {
+    } catch {
       throw new HttpException(HttpStatus.UNAUTHORIZED, 'Invalid token');
     }
   }
