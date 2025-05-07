@@ -14,7 +14,8 @@ export class ImageStorageCloudinary implements IImageStorage {
     return resultUrl;
   }
 
-  public async deleteImage(imageUrl: string): Promise<void> {
+  public async deleteImage(imageUrl: string | null): Promise<void> {
+    if (!imageUrl) return;
     const publicId = imageUrl.split('/').pop()?.split('.')[0];
     if (!publicId) return;
     await cloudinary.uploader.destroy(publicId, { resource_type: 'image' });
