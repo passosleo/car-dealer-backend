@@ -76,6 +76,11 @@ export class ProfileRepositoryPrisma implements IProfileRepository {
     return profile.map(ProfileMapperPrisma.toDomain);
   }
 
+  public async findByName(name: string): Promise<Profile | null> {
+    const profile = await prisma.profile.findUnique({ where: { name }, include: this.includeFields });
+    return profile ? ProfileMapperPrisma.toDomain(profile) : null;
+  }
+
   public async list({
     page = 1,
     limit = 10,

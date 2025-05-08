@@ -16,17 +16,28 @@ export class CreateProfileUseCase {
     if (data.roles.length === 0) {
       throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'At least one role is required');
     }
+
+    const profileExists = await this.profileRepository.findByName(data.name);
+
+    if (profileExists) {
+      throw new HttpException(HttpStatus.CONFLICT, 'Profile already exists');
+    }
+
     const roles = await this.roleRepository.findByIds(data.roles.map((role) => role.roleId));
+
     const allRolesAreValid = roles.length === data.roles.length;
+
     if (!allRolesAreValid) {
       throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'Some roles are invalid');
     }
+
     const profile = await this.profileRepository.create(
       Profile.create({
         name: data.name,
         roles,
       }),
     );
+
     return ProfileResponseDTO.create(profile);
   }
 }

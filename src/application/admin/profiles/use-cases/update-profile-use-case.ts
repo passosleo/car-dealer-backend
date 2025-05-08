@@ -15,19 +15,32 @@ export class UpdateProfileUseCase {
     if (data.roles.length === 0) {
       throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'At least one role is required');
     }
+
+    const profileExists = await this.profileRepository.findByName(data.name);
+
+    if (profileExists) {
+      throw new HttpException(HttpStatus.CONFLICT, 'Profile already exists');
+    }
+
     const profile = await this.profileRepository.findById(profileId);
+
     if (!profile) {
       throw new HttpException(HttpStatus.NOT_FOUND, 'Profile not found');
     }
+
     const roles = await this.roleRepository.findByIds(data.roles.map((role) => role.roleId));
+
     const allRolesAreValid = roles.length === data.roles.length;
+
     if (!allRolesAreValid) {
       throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'Some roles are invalid');
     }
+
     const updatedProfile = await this.profileRepository.update(profileId, {
       name: data.name,
       roles,
     });
+
     return ProfileResponseDTO.create(updatedProfile);
   }
 }

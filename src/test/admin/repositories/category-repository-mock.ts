@@ -3,7 +3,7 @@ import {
   ICategoryRepository,
   ListCategoriesParams,
 } from '../../../domain/admin/categories/repositories/category-repository';
-import { Category } from '@prisma/client';
+import { Category } from '../../../domain/admin/categories/entities/category-entity';
 
 export const CategoryRepositoryMock: jest.Mocked<ICategoryRepository> = {
   create: jest.fn<Promise<Category>, [Category]>(),

@@ -1,6 +1,6 @@
 import { Paginated } from './../../../infra/shared/types/generic.d';
 import { IBrandRepository, ListBrandsParams } from '../../../domain/admin/brands/repositories/brand-repository';
-import { Brand } from '@prisma/client';
+import { Brand } from '../../../domain/admin/brands/entities/brand-entity';
 
 export const BrandRepositoryMock: jest.Mocked<IBrandRepository> = {
   create: jest.fn<Promise<Brand>, [Brand]>(),
