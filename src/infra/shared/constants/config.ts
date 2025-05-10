@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { z } from 'zod';
 
 const envSchema = z.object({
-  NODE_ENV: z.string().default('development'),
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.string().transform(Number).default('4000'),
   DATABASE_URL: z.string().url(),
   BASE_URL: z.string().url().default('http://localhost:4000'),
@@ -21,22 +21,21 @@ const envSchema = z.object({
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
+const isProduction = process.env.NODE_ENV === 'production';
 
 if (!parsedEnv.success) {
-  const formatedErrorMessages = parsedEnv.error.errors
-    .map((error) => {
-      return `Error in ${error.path.join('.')} - ${error.message}`;
-    })
-    .join('\n');
-  console.error('❌ Invalid environment variables:');
-  console.error(formatedErrorMessages);
-  console.error('Please check your .env file or environment variables.');
-  console.error('Tip: You can use the .env.sample file as a reference.');
+  const errors = parsedEnv.error.errors.map((e) => `Error in ${e.path.join('.')} - ${e.message}`).join('\n');
 
-  process.exit(1);
+  console.error('❌ Invalid environment variables:\n' + errors);
+
+  if (isProduction) {
+    process.exit(1);
+  } else {
+    console.warn('⚠️ Continuing in non-production mode with possibly invalid/missing env vars.');
+  }
 }
 
-const env = parsedEnv.data;
+const env = parsedEnv.success ? parsedEnv.data : ({} as z.infer<typeof envSchema>);
 
 export const CONFIG = {
   app: {
