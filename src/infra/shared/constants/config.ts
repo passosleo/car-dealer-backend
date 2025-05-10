@@ -21,21 +21,22 @@ const envSchema = z.object({
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
-const isProduction = process.env.NODE_ENV === 'production';
 
 if (!parsedEnv.success) {
-  const errors = parsedEnv.error.errors.map((e) => `Error in ${e.path.join('.')} - ${e.message}`).join('\n');
+  const formatedErrorMessages = parsedEnv.error.errors
+    .map((error) => {
+      return `Error in ${error.path.join('.')} - ${error.message}`;
+    })
+    .join('\n');
+  console.error('❌ Invalid environment variables:');
+  console.error(formatedErrorMessages);
+  console.error('Please check your .env file or environment variables.');
+  console.error('Tip: You can use the .env.sample file as a reference.');
 
-  console.error('❌ Invalid environment variables:\n' + errors);
-
-  if (isProduction) {
-    process.exit(1);
-  } else {
-    console.warn('⚠️ Continuing in non-production mode with possibly invalid/missing env vars.');
-  }
+  process.exit(1);
 }
 
-const env = parsedEnv.success ? parsedEnv.data : ({} as z.infer<typeof envSchema>);
+const env = parsedEnv.data;
 
 export const CONFIG = {
   app: {
