@@ -1,9 +1,6 @@
-import { Paginated } from './../../../infra/shared/types/generic.d';
-import {
-  ICategoryRepository,
-  ListCategoriesParams,
-} from '../../../domain/admin/categories/repositories/category-repository';
-import { Category } from '../../../domain/admin/categories/entities/category-entity';
+import { Category } from '../../domain/categories/entities/category-entity';
+import { ICategoryRepository, ListCategoriesParams } from '../../domain/categories/repositories/category-repository';
+import { Paginated } from '../../infra/shared/types/generic';
 
 export const CategoryRepositoryMock: jest.Mocked<ICategoryRepository> = {
   create: jest.fn<Promise<Category>, [Category]>(),

@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
-import { ListRolesUseCaseFactory } from '../../factories/list-roles-use-case-factory';
+import { ListRolesUseCaseFactory } from '../../factories/admin/list-roles-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class ListRolesController {
   public static async handle(req: FastifyRequest, res: FastifyReply) {

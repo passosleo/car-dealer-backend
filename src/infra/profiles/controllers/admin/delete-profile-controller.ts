@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
-import { DeleteProfileUseCaseFactory } from '../../factories/delete-profile-use-case-factory';
+import { DeleteProfileUseCaseFactory } from '../../factories/admin/delete-profile-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class DeleteProfileController {
   public static async handle(req: FastifyRequest<{ Params: { profileId: string } }>, res: FastifyReply) {

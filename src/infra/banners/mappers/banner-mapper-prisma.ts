@@ -1,5 +1,5 @@
-import { Banner } from '../../../../../domain/admin/banners/entities/banner-entity';
 import { Banner as BannerPrisma } from '@prisma/client';
+import { Banner } from '../../../domain/banners/entities/banner-entity';
 
 export class BannerMapperPrisma {
   public static toDomain(data: BannerPrisma): Banner {

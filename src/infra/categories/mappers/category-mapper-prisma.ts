@@ -1,5 +1,5 @@
 import { Category as CategoryPrisma } from '@prisma/client';
-import { Category } from '../../../../../domain/admin/categories/entities/category-entity';
+import { Category } from '../../../domain/categories/entities/category-entity';
 
 export class CategoryMapperPrisma {
   public static toDomain(data: CategoryPrisma): Category {

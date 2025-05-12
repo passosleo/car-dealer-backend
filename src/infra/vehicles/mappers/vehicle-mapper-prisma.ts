@@ -5,7 +5,7 @@ import {
   VehicleImage as VehicleImagePrisma,
   Vehicle as VehiclePrisma,
 } from '@prisma/client';
-import { Vehicle } from '../../../../../domain/admin/vehicles/entities/vehicle-entity';
+import { Vehicle } from '../../../domain/vehicles/entities/vehicle-entity';
 
 type VehicleFromPrisma = VehiclePrisma & {
   vehicleImages: VehicleImagePrisma[];

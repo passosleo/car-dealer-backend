@@ -1,5 +1,5 @@
-import { ListRolesUseCase } from '../../../../application/admin/roles/use-cases/list-roles-use-case';
-import { RoleRepositoryPrisma } from '../repositories/role-repository-prisma';
+import { ListRolesUseCase } from '../../../../application/roles/use-cases/admin/list-roles-use-case';
+import { RoleRepositoryPrisma } from '../../repositories/role-repository-prisma';
 
 export class ListRolesUseCaseFactory {
   public static create(): ListRolesUseCase {

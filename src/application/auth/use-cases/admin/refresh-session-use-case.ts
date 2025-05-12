@@ -2,9 +2,9 @@ import { ITokenService } from '../../../shared/services/token-service';
 import { HttpStatus } from '../../../../infra/shared/http/response/http-status';
 import { HttpException } from '../../../../infra/shared/http/response/http-exception';
 import { CONFIG } from '../../../../infra/shared/constants/config';
-import { RefreshSessionRequestDTO } from '../../../../infra/auth/admin/dtos/admin/refresh-session-request-dto';
-import { SessionResponseDTO } from '../../../../infra/auth/admin/dtos/admin/session-response-dto';
 import { IUserRepository } from '../../../../domain/users/repositories/user-repository';
+import { SessionResponseDTO } from '../../../../infra/auth/dtos/admin/session-response-dto';
+import { RefreshSessionRequestDTO } from '../../../../infra/auth/dtos/admin/refresh-session-request-dto';
 
 export class RefreshSessionUseCase {
   constructor(

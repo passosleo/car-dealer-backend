@@ -1,6 +1,6 @@
-import { Paginated } from './../../../infra/shared/types/generic.d';
-import { User } from '../../../domain/admin/users/entities/user-entity';
-import { IUserRepository, ListUsersParams } from '../../../domain/admin/users/repositories/user-repository';
+import { User } from '../../domain/users/entities/user-entity';
+import { IUserRepository, ListUsersParams } from '../../domain/users/repositories/user-repository';
+import { Paginated } from '../../infra/shared/types/generic';
 
 export const UserRepositoryMock: jest.Mocked<IUserRepository> = {
   list: jest.fn<Promise<Paginated<User>>, [ListUsersParams]>(),

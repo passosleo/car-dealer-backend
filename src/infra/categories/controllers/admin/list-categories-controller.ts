@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
+import { ListCategoriesRequestDTO } from '../../dtos/admin/list-categories-request-dto';
 import { ListCategoriesUseCaseFactory } from '../../factories/admin/list-categories-use-case-factory';
-import { ListCategoriesRequestDTO } from '../dtos/list-categories-request-dto';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class ListCategoriesController {
   public static async handle(req: FastifyRequest<{ Querystring: ListCategoriesRequestDTO }>, res: FastifyReply) {

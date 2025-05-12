@@ -1,6 +1,6 @@
-import { Paginated } from './../../../infra/shared/types/generic.d';
-import { IBrandRepository, ListBrandsParams } from '../../../domain/admin/brands/repositories/brand-repository';
-import { Brand } from '../../../domain/admin/brands/entities/brand-entity';
+import { Brand } from '../../domain/brands/entities/brand-entity';
+import { IBrandRepository, ListBrandsParams } from '../../domain/brands/repositories/brand-repository';
+import { Paginated } from '../../infra/shared/types/generic';
 
 export const BrandRepositoryMock: jest.Mocked<IBrandRepository> = {
   create: jest.fn<Promise<Brand>, [Brand]>(),

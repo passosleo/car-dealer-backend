@@ -1,9 +1,9 @@
 import { Paginated } from '../../shared/types/generic';
 import { prisma } from '../../shared/db';
-import { Brand } from '../../../../../domain/admin/brands/entities/brand-entity';
 import { BrandMapperPrisma } from '../mappers/brand-mapper-prisma';
 import { Prisma } from '@prisma/client';
-import { IBrandRepository, ListBrandsParams } from '../../../../../domain/admin/brands/repositories/brand-repository';
+import { IBrandRepository, ListBrandsParams } from '../../../domain/brands/repositories/brand-repository';
+import { Brand } from '../../../domain/brands/entities/brand-entity';
 
 export class BrandRepositoryPrisma implements IBrandRepository {
   public async create(data: Brand): Promise<Brand> {

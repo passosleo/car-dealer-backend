@@ -1,6 +1,6 @@
-import { CreateProfileUseCase } from '../../../../application/admin/profiles/use-cases/create-profile-use-case';
-import { ProfileRepositoryPrisma } from '../repositories/profile-repository-prisma';
-import { RoleRepositoryPrisma } from '../../roles/data/repositories/role-repository-prisma';
+import { CreateProfileUseCase } from '../../../../application/profiles/use-cases/admin/create-profile-use-case';
+import { RoleRepositoryPrisma } from '../../../roles/repositories/role-repository-prisma';
+import { ProfileRepositoryPrisma } from '../../repositories/profile-repository-prisma';
 
 export class CreateProfileUseCaseFactory {
   public static create(): CreateProfileUseCase {

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { Brand } from '../../../domain/admin/brands/entities/brand-entity';
-import { Paginated } from '../../../infra/shared/types/generic';
+import { Brand } from '../../domain/brands/entities/brand-entity';
+import { Paginated } from '../../infra/shared/types/generic';
 
 export class BrandMockFactory {
   public static createEntity(data: Partial<Brand> = {}): Brand {

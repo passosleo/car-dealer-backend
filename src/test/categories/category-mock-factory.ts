@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { Paginated } from '../../../infra/shared/types/generic';
-import { Category } from '../../../domain/admin/categories/entities/category-entity';
+import { Category } from '../../domain/categories/entities/category-entity';
+import { Paginated } from '../../infra/shared/types/generic';
 
 export class CategoryMockFactory {
   public static createEntity(data: Partial<Category> = {}): Category {

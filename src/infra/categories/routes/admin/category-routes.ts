@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { FastifyTypedInstance } from '../../../shared/types/fastify';
 import { authorize } from '../../../shared/http/middlewares/auth-middleware';
-import { ListCategoriesController } from '../controllers/list-categories-controller';
-import { GetCategoryByIdController } from '../controllers/get-category-by-id-controller';
-import { CreateCategoryController } from '../controllers/create-category-controller';
-import { UpdateCategoryController } from '../controllers/update-category-controller';
-import { DeleteCategoryController } from '../controllers/delete-category-controller';
 import { ZodHelper } from '../../../shared/helpers/zod-helper';
+import { ListCategoriesController } from '../../controllers/admin/list-categories-controller';
+import { GetCategoryByIdController } from '../../controllers/admin/get-category-by-id-controller';
+import { CreateCategoryController } from '../../controllers/admin/create-category-controller';
+import { UpdateCategoryController } from '../../controllers/admin/update-category-controller';
+import { DeleteCategoryController } from '../../controllers/admin/delete-category-controller';
 
 export async function categoryRoutes(app: FastifyTypedInstance) {
   app.get(

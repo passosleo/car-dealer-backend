@@ -1,4 +1,4 @@
-import { DeleteVehicleUseCase } from '../../../../application/admin/vehicles/use-cases/delete-vehicle-use-case';
+import { DeleteVehicleUseCase } from '../../../../application/vehicles/use-cases/admin/delete-vehicle-use-case';
 import { VehicleRepositoryPrisma } from '../../repositories/vehicle-repository-prisma';
 
 export class DeleteVehicleUseCaseFactory {

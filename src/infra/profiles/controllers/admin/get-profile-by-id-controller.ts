@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
-import { GetProfileByIdUseCaseFactory } from '../../factories/get-profile-by-id-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
+import { GetProfileByIdUseCaseFactory } from '../../factories/admin/get-profile-by-id-use-case-factory';
 
 export class GetProfileByIdController {
   public static async handle(

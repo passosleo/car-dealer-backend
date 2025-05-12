@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../shared/types/fastify';
-import { authorize } from '../../shared/http/middlewares/auth-middleware';
-import { ListBrandsController } from '../controllers/admin/list-brands-controller';
-import { GetBrandByIdController } from '../controllers/admin/get-brand-by-id-controller';
-import { CreateBrandController } from '../controllers/admin/create-brand-controller';
-import { UpdateBrandController } from '../controllers/admin/update-brand-controller';
-import { DeleteBrandController } from '../controllers/admin/delete-brand-controller';
-import { ZodHelper } from '../../shared/helpers/zod-helper';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
+import { ZodHelper } from '../../../shared/helpers/zod-helper';
+import { ListBrandsController } from '../../controllers/admin/list-brands-controller';
+import { GetBrandByIdController } from '../../controllers/admin/get-brand-by-id-controller';
+import { CreateBrandController } from '../../controllers/admin/create-brand-controller';
+import { UpdateBrandController } from '../../controllers/admin/update-brand-controller';
+import { DeleteBrandController } from '../../controllers/admin/delete-brand-controller';
 
 export async function brandRoutes(app: FastifyTypedInstance) {
   app.get(

@@ -1,12 +1,9 @@
 import { Prisma } from '@prisma/client';
-import { prisma } from '../../../../shared/db';
-import { Paginated } from '../../../../shared/types/generic';
-import {
-  IVehicleRepository,
-  ListVehiclesParams,
-} from '../../../../../domain/admin/vehicles/repositories/vehicle-repository';
-import { Vehicle } from '../../../../../domain/admin/vehicles/entities/vehicle-entity';
 import { VehicleMapperPrisma } from '../mappers/vehicle-mapper-prisma';
+import { IVehicleRepository, ListVehiclesParams } from '../../../domain/vehicles/repositories/vehicle-repository';
+import { Vehicle } from '../../../domain/vehicles/entities/vehicle-entity';
+import { prisma } from '../../shared/db';
+import { Paginated } from '../../shared/types/generic';
 
 export class VehicleRepositoryPrisma implements IVehicleRepository {
   private readonly includeFields = {

@@ -1,5 +1,5 @@
-import { ListActiveBrandsUseCase } from '../../../../application/public/brands/use-cases/list-active-brands-use-case';
-import { BrandRepositoryPrisma } from '../../../admin/brands/data/repositories/brand-repository-prisma';
+import { ListActiveBrandsUseCase } from '../../../../application/brands/use-cases/public/list-active-brands-use-case';
+import { BrandRepositoryPrisma } from '../../repositories/brand-repository-prisma';
 
 export class ListActiveBrandsUseCaseFactory {
   public static create(): ListActiveBrandsUseCase {

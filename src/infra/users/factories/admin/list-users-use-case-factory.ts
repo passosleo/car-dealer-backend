@@ -1,5 +1,5 @@
-import { ListUsersUseCase } from '../../../../application/admin/users/use-cases/list-users-use-case';
-import { UserRepositoryPrisma } from '../data/repositories/user-repository-prisma';
+import { ListUsersUseCase } from '../../../../application/users/use-cases/admin/list-users-use-case';
+import { UserRepositoryPrisma } from '../../repositories/user-repository-prisma';
 
 export class ListUsersUseCaseFactory {
   public static create(): ListUsersUseCase {

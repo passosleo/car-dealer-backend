@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../../../shared/types/fastify';
-import { authorize } from '../../../../shared/http/middlewares/auth-middleware';
-import { ListSellersController } from '../controllers/admin/list-sellers-controller';
-import { GetSellerByIdController } from '../controllers/admin/get-seller-by-id-controller';
-import { CreateSellerController } from '../controllers/admin/create-seller-controller';
-import { UpdateSellerController } from '../controllers/admin/update-seller-controller';
-import { DeleteSellerController } from '../controllers/admin/delete-seller-controller';
-import { ZodHelper } from '../../../../shared/helpers/zod-helper';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
+import { ZodHelper } from '../../../shared/helpers/zod-helper';
+import { ListSellersController } from '../../controllers/admin/list-sellers-controller';
+import { GetSellerByIdController } from '../../controllers/admin/get-seller-by-id-controller';
+import { CreateSellerController } from '../../controllers/admin/create-seller-controller';
+import { UpdateSellerController } from '../../controllers/admin/update-seller-controller';
+import { DeleteSellerController } from '../../controllers/admin/delete-seller-controller';
 
 export async function sellerRoutes(app: FastifyTypedInstance) {
   app.get(

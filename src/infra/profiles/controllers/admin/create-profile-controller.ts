@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
 import { CreateProfileRequestDTO } from '../../dtos/admin/create-profile-request-dto';
-import { CreateProfileUseCaseFactory } from '../../factories/create-profile-use-case-factory';
+import { CreateProfileUseCaseFactory } from '../../factories/admin/create-profile-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class CreateProfileController {
   public static async handle(req: FastifyRequest<{ Body: CreateProfileRequestDTO }>, res: FastifyReply) {

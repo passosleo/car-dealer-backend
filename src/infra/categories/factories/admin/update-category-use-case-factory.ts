@@ -1,6 +1,6 @@
-import { UpdateCategoryUseCase } from '../../../../application/admin/categories/use-cases/update-category-use-case';
+import { UpdateCategoryUseCase } from '../../../../application/categories/use-cases/admin/update-category-use-case';
 import { ImageStorageCloudinary } from '../../../shared/storages/image-storage-cloudinary';
-import { CategoryRepositoryPrisma } from '../data/repositories/category-repository-prisma';
+import { CategoryRepositoryPrisma } from '../../repositories/category-repository-prisma';
 
 export class UpdateCategoryUseCaseFactory {
   public static create(): UpdateCategoryUseCase {

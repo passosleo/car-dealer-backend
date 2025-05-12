@@ -1,4 +1,4 @@
-import { DeleteSellerUseCase } from '../../../../application/admin/sellers/use-cases/delete-seller-use-case';
+import { DeleteSellerUseCase } from '../../../../application/sellers/use-cases/admin/delete-seller-use-case';
 import { SellerRepositoryPrisma } from '../../repositories/seller-repository-prisma';
 
 export class DeleteSellerUseCaseFactory {

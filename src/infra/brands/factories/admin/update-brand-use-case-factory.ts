@@ -1,6 +1,6 @@
-import { UpdateBrandUseCase } from '../../../../application/admin/brands/use-cases/update-brand-use-case';
+import { UpdateBrandUseCase } from '../../../../application/brands/use-cases/admin/update-brand-use-case';
 import { ImageStorageCloudinary } from '../../../shared/storages/image-storage-cloudinary';
-import { BrandRepositoryPrisma } from '../../brands/data/repositories/brand-repository-prisma';
+import { BrandRepositoryPrisma } from '../../repositories/brand-repository-prisma';
 
 export class UpdateBrandUseCaseFactory {
   public static create(): UpdateBrandUseCase {

@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../../../shared/types/fastify';
-import { authorize } from '../../../../shared/http/middlewares/auth-middleware';
-import { ZodHelper } from '../../../../shared/helpers/zod-helper';
-import { GetVehicleByIdController } from '../controllers/admin/get-vehicle-by-id-controller';
-import { CreateVehicleController } from '../controllers/admin/create-vehicle-controller';
-import { UpdateVehicleController } from '../controllers/admin/update-vehicle-controller';
-import { DeleteVehicleController } from '../controllers/admin/delete-vehicle-controller';
-import { ListVehiclesController } from '../controllers/admin/list-vehicles-controller';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
+import { ZodHelper } from '../../../shared/helpers/zod-helper';
+import { ListVehiclesController } from '../../controllers/admin/list-vehicles-controller';
+import { GetVehicleByIdController } from '../../controllers/admin/get-vehicle-by-id-controller';
+import { CreateVehicleController } from '../../controllers/admin/create-vehicle-controller';
+import { UpdateVehicleController } from '../../controllers/admin/update-vehicle-controller';
+import { DeleteVehicleController } from '../../controllers/admin/delete-vehicle-controller';
 
 export async function vehicleRoutes(app: FastifyTypedInstance) {
   app.get(

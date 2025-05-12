@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
 import { UpdateVehicleRequestDTO } from '../../dtos/admin/update-vehicle-request-dto';
 import { UpdateVehicleUseCaseFactory } from '../../factories/admin/update-vehicle-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class UpdateVehicleController {
   public static async handle(

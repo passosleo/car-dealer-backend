@@ -1,7 +1,7 @@
-import { prisma } from '../../../../shared/db';
-import { Role } from '../../../../../domain/admin/roles/entities/role-entity';
+import { Role } from '../../../domain/roles/entities/role-entity';
+import { IRoleRepository } from '../../../domain/roles/repositories/role-repository';
+import { prisma } from '../../shared/db';
 import { RoleMapperPrisma } from '../mappers/role-mapper-prisma';
-import { IRoleRepository } from '../../../../../domain/admin/roles/repositories/role-repository';
 
 export class RoleRepositoryPrisma implements IRoleRepository {
   public async create(data: Role): Promise<Role> {

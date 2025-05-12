@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { DeleteBannerUseCaseFactory } from '../../factories/admin/delete-banner-use-case-factory';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class DeleteBannerController {
   public static async handle(req: FastifyRequest<{ Params: { bannerId: string } }>, res: FastifyReply) {

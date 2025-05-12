@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { UserPasswordRecoverAttempt } from '../../../domain/admin/users/entities/user-password-recover-attempt-entity';
+import { UserPasswordRecoverAttempt } from '../../domain/users/entities/user-password-recover-attempt-entity';
 
 export class UserPasswordRecoverAttemptMockFactory {
   public static createEntity(data: Partial<UserPasswordRecoverAttempt> = {}): UserPasswordRecoverAttempt {

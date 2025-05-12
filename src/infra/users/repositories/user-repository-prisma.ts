@@ -1,9 +1,9 @@
 import { Prisma } from '@prisma/client';
-import { User } from '../../../../../domain/admin/users/entities/user-entity';
-import { IUserRepository, ListUsersParams } from '../../../../../domain/admin/users/repositories/user-repository';
-import { prisma } from '../../../../shared/db';
-import { Paginated } from '../../../../shared/types/generic';
-import { UserMapperPrisma } from '../../mappers/user-mapper-prisma';
+import { User } from '../../../domain/users/entities/user-entity';
+import { IUserRepository, ListUsersParams } from '../../../domain/users/repositories/user-repository';
+import { prisma } from '../../shared/db';
+import { Paginated } from '../../shared/types/generic';
+import { UserMapperPrisma } from '../mappers/user-mapper-prisma';
 
 export class UserRepositoryPrisma implements IUserRepository {
   private readonly includeFields = {

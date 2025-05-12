@@ -1,5 +1,5 @@
 import { Brand as BrandPrisma } from '@prisma/client';
-import { Brand } from '../../../../../domain/admin/brands/entities/brand-entity';
+import { Brand } from '../../../domain/brands/entities/brand-entity';
 
 export class BrandMapperPrisma {
   public static toDomain(data: BrandPrisma): Brand {

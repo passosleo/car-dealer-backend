@@ -1,5 +1,5 @@
-import { ListActiveCategoriesUseCase } from '../../../../application/public/categories/use-cases/list-active-categories-use-case';
-import { CategoryRepositoryPrisma } from '../../../admin/categories/data/repositories/category-repository-prisma';
+import { ListActiveCategoriesUseCase } from '../../../../application/categories/use-cases/public/list-active-categories-use-case';
+import { CategoryRepositoryPrisma } from '../../repositories/category-repository-prisma';
 
 export class ListActiveCategoriesUseCaseFactory {
   public static create(): ListActiveCategoriesUseCase {

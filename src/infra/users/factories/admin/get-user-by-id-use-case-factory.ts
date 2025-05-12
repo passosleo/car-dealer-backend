@@ -1,5 +1,5 @@
-import { GetUserByIdUseCase } from '../../../../application/admin/users/use-cases/get-user-by-id-use-case';
-import { UserRepositoryPrisma } from '../data/repositories/user-repository-prisma';
+import { GetUserByIdUseCase } from '../../../../application/users/use-cases/admin/get-user-by-id-use-case';
+import { UserRepositoryPrisma } from '../../repositories/user-repository-prisma';
 
 export class GetUserByIdUseCaseFactory {
   public static create(): GetUserByIdUseCase {

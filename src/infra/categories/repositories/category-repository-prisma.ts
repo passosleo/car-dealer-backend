@@ -1,13 +1,9 @@
 import { Prisma } from '@prisma/client';
-import { Category } from '../../../../../domain/admin/categories/entities/category-entity';
-
-import { prisma } from '../../../../shared/db';
 import { CategoryMapperPrisma } from '../mappers/category-mapper-prisma';
-import { Paginated } from '../../../../shared/types/generic';
-import {
-  ICategoryRepository,
-  ListCategoriesParams,
-} from '../../../../../domain/admin/categories/repositories/category-repository';
+import { ICategoryRepository, ListCategoriesParams } from '../../../domain/categories/repositories/category-repository';
+import { Category } from '../../../domain/categories/entities/category-entity';
+import { prisma } from '../../shared/db';
+import { Paginated } from '../../shared/types/generic';
 
 export class CategoryRepositoryPrisma implements ICategoryRepository {
   public async create(data: Category): Promise<Category> {

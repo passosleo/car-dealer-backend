@@ -1,12 +1,9 @@
-import { prisma } from '../../../../shared/db';
-import { ProfileMapperPrisma } from '../mappers/profile-mapper-prisma';
-import {
-  IProfileRepository,
-  ListProfilesParams,
-} from '../../../../../domain/admin/profiles/repositories/profile-repository';
-import { Paginated } from '../../../../shared/types/generic';
 import { Prisma } from '@prisma/client';
-import { Profile } from '../../../../../domain/admin/profiles/entities/profile-entity';
+import { Profile } from '../../../domain/profiles/entities/profile-entity';
+import { IProfileRepository, ListProfilesParams } from '../../../domain/profiles/repositories/profile-repository';
+import { prisma } from '../../shared/db';
+import { Paginated } from '../../shared/types/generic';
+import { ProfileMapperPrisma } from '../mappers/profile-mapper-prisma';
 
 export class ProfileRepositoryPrisma implements IProfileRepository {
   private readonly includeFields = {

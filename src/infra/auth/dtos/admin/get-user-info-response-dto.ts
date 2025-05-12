@@ -1,4 +1,4 @@
-import { UserAccountDTO } from '../../../../../domain/users/dtos/user-account-dto';
+import { UserAccountDTO } from '../../../../domain/users/dtos/user-account-dto';
 
 export class GetUserInfoResponseDTO {
   constructor(

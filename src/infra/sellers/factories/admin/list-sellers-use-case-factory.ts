@@ -1,4 +1,4 @@
-import { ListSellersUseCase } from '../../../../application/admin/sellers/use-cases/list-sellers-use-case';
+import { ListSellersUseCase } from '../../../../application/sellers/use-cases/admin/list-sellers-use-case';
 import { SellerRepositoryPrisma } from '../../repositories/seller-repository-prisma';
 
 export class ListSellersUseCaseFactory {

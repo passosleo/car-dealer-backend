@@ -1,4 +1,4 @@
-import { GetUserInfoResponseDTO } from '../../../../infra/auth/admin/dtos/admin/get-user-info-response-dto';
+import { GetUserInfoResponseDTO } from '../../../../infra/auth/dtos/admin/get-user-info-response-dto';
 import { IAuthProvider } from '../../../shared/providers/auth-provider';
 
 export class GetUserInfoUseCase {

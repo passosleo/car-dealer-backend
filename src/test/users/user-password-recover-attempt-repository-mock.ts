@@ -1,5 +1,5 @@
-import { UserPasswordRecoverAttempt } from '../../../domain/admin/users/entities/user-password-recover-attempt-entity';
-import { IUserPasswordRecoverAttemptRepository } from '../../../domain/admin/users/repositories/user-password-recover-attempt-repository';
+import { UserPasswordRecoverAttempt } from '../../domain/users/entities/user-password-recover-attempt-entity';
+import { IUserPasswordRecoverAttemptRepository } from '../../domain/users/repositories/user-password-recover-attempt-repository';
 
 export const UserPasswordRecoverAttemptRepositoryMock: jest.Mocked<IUserPasswordRecoverAttemptRepository> = {
   list: jest.fn<Promise<UserPasswordRecoverAttempt[]>, []>(),

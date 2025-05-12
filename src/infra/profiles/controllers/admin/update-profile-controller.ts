@@ -1,8 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
 import { UpdateProfileRequestDTO } from '../../dtos/admin/update-profile-request-dto';
-import { UpdateProfileUseCaseFactory } from '../../factories/update-profile-use-case-factory';
-
+import { HttpStatus } from '../../../shared/http/response/http-status';
+import { UpdateProfileUseCaseFactory } from '../../factories/admin/update-profile-use-case-factory';
 export class UpdateProfileController {
   public static async handle(
     req: FastifyRequest<{

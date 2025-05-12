@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
-import { DeleteCategoryUseCaseFactory } from '../../../categories/factories/delete-category-use-case-factory';
+import { DeleteCategoryUseCaseFactory } from '../../factories/admin/delete-category-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class DeleteCategoryController {
   public static async handle(req: FastifyRequest<{ Params: { categoryId: string } }>, res: FastifyReply) {

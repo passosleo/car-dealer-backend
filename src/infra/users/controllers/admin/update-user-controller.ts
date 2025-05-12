@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
 import { UpdateUserRequestDTO } from '../../dtos/admin/update-user-request-dto';
 import { UpdateUserUseCaseFactory } from '../../factories/admin/update-user-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class UpdateUserController {
   public static async handle(

@@ -1,5 +1,5 @@
 import { Seller as SellerPrisma } from '@prisma/client';
-import { Seller } from '../../../../../domain/admin/sellers/entities/seller-entity';
+import { Seller } from '../../../domain/sellers/entities/seller-entity';
 
 export class SellerMapperPrisma {
   public static toDomain(data: SellerPrisma): Seller {

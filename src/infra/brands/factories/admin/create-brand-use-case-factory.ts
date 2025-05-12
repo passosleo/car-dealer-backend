@@ -1,6 +1,6 @@
-import { CreateBrandUseCase } from '../../../../application/admin/brands/use-cases/create-brand-use-case';
+import { CreateBrandUseCase } from '../../../../application/brands/use-cases/admin/create-brand-use-case';
 import { ImageStorageCloudinary } from '../../../shared/storages/image-storage-cloudinary';
-import { BrandRepositoryPrisma } from '../../brands/data/repositories/brand-repository-prisma';
+import { BrandRepositoryPrisma } from '../../repositories/brand-repository-prisma';
 
 export class CreateBrandUseCaseFactory {
   public static create(): CreateBrandUseCase {

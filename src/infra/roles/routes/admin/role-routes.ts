@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../../../shared/types/fastify';
-import { authorize } from '../../../../shared/http/middlewares/auth-middleware';
 import { ListRolesController } from '../../controllers/admin/list-roles-controller';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
 
 export async function roleRoutes(app: FastifyTypedInstance) {
   app.get(

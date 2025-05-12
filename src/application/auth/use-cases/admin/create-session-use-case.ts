@@ -4,8 +4,8 @@ import { HttpException } from '../../../../infra/shared/http/response/http-excep
 import { HttpStatus } from '../../../../infra/shared/http/response/http-status';
 import { CONFIG } from '../../../../infra/shared/constants/config';
 import { IUserRepository } from '../../../../domain/users/repositories/user-repository';
-import { CreateSessionRequestDTO } from '../../../../infra/auth/admin/dtos/admin/create-session-request-dto';
-import { SessionResponseDTO } from '../../../../infra/auth/admin/dtos/admin/session-response-dto';
+import { CreateSessionRequestDTO } from '../../../../infra/auth/dtos/admin/create-session-request-dto';
+import { SessionResponseDTO } from '../../../../infra/auth/dtos/admin/session-response-dto';
 
 export class CreateSessionUseCase {
   constructor(

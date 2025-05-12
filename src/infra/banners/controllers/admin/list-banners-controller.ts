@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { ListBannersRequestDTO } from '../../dtos/admin/list-banners-request-dto';
 import { ListBannersUseCaseFactory } from '../../factories/admin/list-banners-use-case-factory';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class ListBannersController {
   public static async handle(req: FastifyRequest<{ Querystring: ListBannersRequestDTO }>, res: FastifyReply) {

@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
-import { CreateCategoryUseCaseFactory } from '../../../categories/factories/create-category-use-case-factory';
-import { CreateCategoryRequestDTO } from '../dtos/create-category-request-dto';
+import { CreateCategoryRequestDTO } from '../../dtos/admin/create-category-request-dto';
+import { CreateCategoryUseCaseFactory } from '../../factories/admin/create-category-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class CreateCategoryController {
   public static async handle(req: FastifyRequest<{ Body: CreateCategoryRequestDTO }>, res: FastifyReply) {

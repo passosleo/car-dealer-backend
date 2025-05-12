@@ -1,5 +1,5 @@
-import { Role } from '../../../domain/admin/roles/entities/role-entity';
-import { IRoleRepository } from '../../../domain/admin/roles/repositories/role-repository';
+import { Role } from '../../domain/roles/entities/role-entity';
+import { IRoleRepository } from '../../domain/roles/repositories/role-repository';
 
 export const RoleRepositoryMock: jest.Mocked<IRoleRepository> = {
   create: jest.fn<Promise<Role>, [Role]>(),

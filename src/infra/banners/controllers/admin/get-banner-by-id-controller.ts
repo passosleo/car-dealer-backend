@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
 import { GetBannerByIdUseCaseFactory } from '../../factories/admin/get-banner-by-id-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class GetBannerByIdController {
   public static async handle(

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Role } from '../../../domain/admin/roles/entities/role-entity';
+import { Role } from '../../domain/roles/entities/role-entity';
 
 export class RoleMockFactory {
   public static createEntity(data: Partial<Role> = {}): Role {

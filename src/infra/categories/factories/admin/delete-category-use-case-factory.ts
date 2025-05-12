@@ -1,6 +1,6 @@
-import { DeleteCategoryUseCase } from '../../../../application/admin/categories/use-cases/delete-category-use-case';
+import { DeleteCategoryUseCase } from '../../../../application/categories/use-cases/admin/delete-category-use-case';
 import { ImageStorageCloudinary } from '../../../shared/storages/image-storage-cloudinary';
-import { CategoryRepositoryPrisma } from '../data/repositories/category-repository-prisma';
+import { CategoryRepositoryPrisma } from '../../repositories/category-repository-prisma';
 
 export class DeleteCategoryUseCaseFactory {
   public static create(): DeleteCategoryUseCase {

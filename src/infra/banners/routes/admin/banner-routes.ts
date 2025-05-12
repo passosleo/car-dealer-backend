@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../../../shared/types/fastify';
-import { authorize } from '../../../../shared/http/middlewares/auth-middleware';
 import { ListBannersController } from '../../controllers/admin/list-banners-controller';
 import { GetBannerByIdController } from '../../controllers/admin/get-banner-by-id-controller';
 import { CreateBannerController } from '../../controllers/admin/create-banner-controller';
 import { UpdateBannerController } from '../../controllers/admin/update-banner-controller';
 import { DeleteBannerController } from '../../controllers/admin/delete-banner-controller';
-import { ZodHelper } from '../../../../shared/helpers/zod-helper';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
+import { ZodHelper } from '../../../shared/helpers/zod-helper';
 
 export async function bannerRoutes(app: FastifyTypedInstance) {
   app.get(

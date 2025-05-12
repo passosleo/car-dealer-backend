@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
 import { GetVehicleByIdUseCaseFactory } from '../../factories/admin/get-vehicle-by-id-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class GetVehicleByIdController {
   public static async handle(

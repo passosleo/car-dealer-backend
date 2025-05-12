@@ -2,7 +2,7 @@ import { User as UserPrisma } from '@prisma/client';
 import { Profile as ProfilePrisma } from '@prisma/client';
 import { Role as RolePrisma } from '@prisma/client';
 import { ProfileRoles as ProfileRolesPrisma } from '@prisma/client';
-import { User } from '../../../../../domain/admin/users/entities/user-entity';
+import { User } from '../../../domain/users/entities/user-entity';
 
 type UserFromPrisma = UserPrisma & {
   profile: ProfilePrisma & {

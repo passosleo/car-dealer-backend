@@ -1,4 +1,4 @@
-import { CreateBannerUseCase } from '../../../../application/admin/banners/use-cases/create-banner-use-case';
+import { CreateBannerUseCase } from '../../../../application/banners/use-cases/admin/create-banner-use-case';
 import { ImageStorageCloudinary } from '../../../shared/storages/image-storage-cloudinary';
 import { BannerRepositoryPrisma } from '../../repositories/banner-repository-prisma';
 

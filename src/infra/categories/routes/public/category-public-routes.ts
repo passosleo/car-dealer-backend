@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../../../shared/types/fastify';
-import { ListActiveCategoriesController } from '../../../controllers/public/list-active-categories-controller';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
+import { ListActiveCategoriesController } from '../../controllers/public/list-active-categories-controller';
 
 export async function categoryPublicRoutes(app: FastifyTypedInstance) {
   app.get(

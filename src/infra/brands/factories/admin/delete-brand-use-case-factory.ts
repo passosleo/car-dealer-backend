@@ -1,6 +1,6 @@
-import { DeleteBrandUseCase } from '../../../../application/admin/brands/use-cases/delete-brand-use-case';
+import { DeleteBrandUseCase } from '../../../../application/brands/use-cases/admin/delete-brand-use-case';
 import { ImageStorageCloudinary } from '../../../shared/storages/image-storage-cloudinary';
-import { BrandRepositoryPrisma } from '../../brands/data/repositories/brand-repository-prisma';
+import { BrandRepositoryPrisma } from '../../repositories/brand-repository-prisma';
 
 export class DeleteBrandUseCaseFactory {
   public static create(): DeleteBrandUseCase {

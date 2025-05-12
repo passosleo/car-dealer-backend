@@ -1,5 +1,5 @@
-import { BrandResponseDTO } from '../../../brands/http/dtos/brand-response-dto';
-import { CategoryResponseDTO } from '../../../categories/http/dtos/category-response-dto';
+import { BrandResponseDTO } from '../../../brands/dtos/shared/brand-response-dto';
+import { CategoryResponseDTO } from '../../../categories/dtos/shared/category-response-dto';
 
 export class VehicleResponseDTO {
   constructor(

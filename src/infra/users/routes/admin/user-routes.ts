@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../../../shared/types/fastify';
-import { authorize } from '../../../../shared/http/middlewares/auth-middleware';
-import { CreateUserController } from '../controllers/admin/create-user-controller';
-import { ListUsersController } from '../controllers/admin/list-users-controller';
-import { GetUserByIdController } from '../controllers/admin/get-user-by-id-controller';
-import { DeleteUserController } from '../controllers/admin/delete-user-controller';
-import { UpdateUserController } from '../controllers/admin/update-user-controller';
-import { ZodHelper } from '../../../../shared/helpers/zod-helper';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
+import { ZodHelper } from '../../../shared/helpers/zod-helper';
+import { ListUsersController } from '../../controllers/admin/list-users-controller';
+import { GetUserByIdController } from '../../controllers/admin/get-user-by-id-controller';
+import { CreateUserController } from '../../controllers/admin/create-user-controller';
+import { UpdateUserController } from '../../controllers/admin/update-user-controller';
+import { DeleteUserController } from '../../controllers/admin/delete-user-controller';
 
 export async function userRoutes(app: FastifyTypedInstance) {
   app.get(

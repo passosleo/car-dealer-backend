@@ -1,7 +1,7 @@
 import { Profile as ProfilePrisma } from '@prisma/client';
 import { ProfileRoles as ProfileRolesPrisma } from '@prisma/client';
 import { Role as RolePrisma } from '@prisma/client';
-import { Profile } from '../../../../../domain/admin/profiles/entities/profile-entity';
+import { Profile } from '../../../domain/profiles/entities/profile-entity';
 
 type ProfileFromPrisma = ProfilePrisma & {
   profileRoles: (ProfileRolesPrisma & {

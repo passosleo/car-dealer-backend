@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../../../shared/types/fastify';
-import { ListActiveBrandsController } from '../../../controllers/public/list-active-brands-controller';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
+import { ListActiveBrandsController } from '../../controllers/public/list-active-brands-controller';
 
 export async function brandPublicRoutes(app: FastifyTypedInstance) {
   app.get(

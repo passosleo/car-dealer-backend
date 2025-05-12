@@ -1,13 +1,9 @@
-import { Paginated } from '../../../../shared/types/generic';
-import { prisma } from '../../../../shared/db';
-import { Banner } from '../../../../../domain/admin/banners/entities/banner-entity';
+import { Banner } from '../../../domain/banners/entities/banner-entity';
+import { IBannerRepository, ListBannersParams } from '../../../domain/banners/repositories/banner-repository';
+import { prisma } from '../../shared/db';
+import { Paginated } from '../../shared/types/generic';
 import { BannerMapperPrisma } from '../mappers/banner-mapper-prisma';
-
 import { Prisma } from '@prisma/client';
-import {
-  IBannerRepository,
-  ListBannersParams,
-} from '../../../../../domain/admin/banners/repositories/banner-repository';
 
 export class BannerRepositoryPrisma implements IBannerRepository {
   public async create(data: Banner): Promise<Banner> {

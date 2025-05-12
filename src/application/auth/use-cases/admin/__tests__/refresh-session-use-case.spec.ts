@@ -2,9 +2,9 @@ import { faker } from '@faker-js/faker';
 import { UserRepositoryMock } from '../../../../../test/users/user-repository-mock';
 import { RefreshSessionUseCase } from '../refresh-session-use-case';
 import { TokenServiceMock } from '../../../../../test/shared/services/token-service-mock';
-import { RefreshSessionRequestDTO } from '../../../../../infra/auth/admin/dtos/admin/refresh-session-request-dto';
 import { HttpException } from '../../../../../infra/shared/http/response/http-exception';
 import { UserMockFactory } from '../../../../../test/users/user-mock-factory';
+import { RefreshSessionRequestDTO } from '../../../../../infra/auth/dtos/admin/refresh-session-request-dto';
 
 describe('RefreshSessionUseCase', () => {
   let sut: RefreshSessionUseCase;

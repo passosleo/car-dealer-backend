@@ -1,4 +1,4 @@
-import { CreateSellerUseCase } from '../../../../application/admin/sellers/use-cases/create-seller-use-case';
+import { CreateSellerUseCase } from '../../../../application/sellers/use-cases/admin/create-seller-use-case';
 import { ImageStorageCloudinary } from '../../../shared/storages/image-storage-cloudinary';
 import { SellerRepositoryPrisma } from '../../repositories/seller-repository-prisma';
 

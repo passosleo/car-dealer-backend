@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { User } from '../../../domain/admin/users/entities/user-entity';
-import { Role } from '../../../domain/admin/roles/entities/role-entity';
-import { Profile } from '../../../domain/admin/profiles/entities/profile-entity';
+import { User } from '../../domain/users/entities/user-entity';
+import { Profile } from '../../domain/profiles/entities/profile-entity';
+import { Role } from '../../domain/roles/entities/role-entity';
 
 export class UserMockFactory {
   public static createEntity(data: Partial<User> = {}): User {

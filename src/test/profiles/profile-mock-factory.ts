@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { Paginated } from '../../../infra/shared/types/generic';
-import { Profile } from '../../../domain/admin/profiles/entities/profile-entity';
 import { RoleMockFactory } from '../roles/role-mock-factory';
+import { Profile } from '../../domain/profiles/entities/profile-entity';
+import { Paginated } from '../../infra/shared/types/generic';
 
 export class ProfileMockFactory {
   public static createEntity(data: Partial<Profile> = {}): Profile {

@@ -1,6 +1,6 @@
-import { Profile } from '../../../domain/admin/profiles/entities/profile-entity';
-import { IProfileRepository, ListProfilesParams } from '../../../domain/admin/profiles/repositories/profile-repository';
-import { Paginated } from './../../../infra/shared/types/generic.d';
+import { Profile } from '../../domain/profiles/entities/profile-entity';
+import { IProfileRepository, ListProfilesParams } from '../../domain/profiles/repositories/profile-repository';
+import { Paginated } from '../../infra/shared/types/generic';
 
 export const ProfileRepositoryMock: jest.Mocked<IProfileRepository> = {
   create: jest.fn<Promise<Profile>, [Profile]>(),

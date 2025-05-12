@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../../../shared/types/fastify';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
 import { CreateSessionController } from '../../controllers/admin/create-session-controller';
 import { RefreshSessionController } from '../../controllers/admin/refresh-session-controller';
 import { RecoverPasswordController } from '../../controllers/admin/recover-password-controller';
 import { SendRecoverPasswordController } from '../../controllers/admin/send-recover-password-controller';
 import { ValidateRecoverPasswordRequestController } from '../../controllers/admin/validate-recover-password-request-controller';
 import { GetUserInfoController } from '../../controllers/admin/get-user-info-controller';
-import { authorize } from '../../../../shared/http/middlewares/auth-middleware';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
 
 export async function authRoutes(app: FastifyTypedInstance) {
   app.post(

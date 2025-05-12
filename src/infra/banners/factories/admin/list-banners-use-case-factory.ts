@@ -1,4 +1,4 @@
-import { ListBannersUseCase } from '../../../../application/admin/banners/use-cases/list-banners-use-case';
+import { ListBannersUseCase } from '../../../../application/banners/use-cases/admin/list-banners-use-case';
 import { BannerRepositoryPrisma } from '../../repositories/banner-repository-prisma';
 
 export class ListBannersUseCaseFactory {

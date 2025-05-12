@@ -4,7 +4,7 @@ import { IHashService } from '../../../shared/services/hash-service';
 import { IEncryptionService } from '../../../shared/services/encryption-service';
 import { IUserRepository } from '../../../../domain/users/repositories/user-repository';
 import { IUserPasswordRecoverAttemptRepository } from '../../../../domain/users/repositories/user-password-recover-attempt-repository';
-import { RecoverPasswordRequestDTO } from '../../../../infra/auth/admin/dtos/admin/recover-password-request-dto';
+import { RecoverPasswordRequestDTO } from '../../../../infra/auth/dtos/admin/recover-password-request-dto';
 
 export class RecoverPasswordUseCase {
   constructor(

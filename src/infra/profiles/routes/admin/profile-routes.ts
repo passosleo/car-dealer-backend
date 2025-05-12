@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { FastifyTypedInstance } from '../../../../shared/types/fastify';
-import { authorize } from '../../../../shared/http/middlewares/auth-middleware';
-import { ListProfilesController } from '../controllers/admin/list-profiles-controller';
-import { GetProfileByIdController } from '../controllers/admin/get-profile-by-id-controller';
-import { CreateProfileController } from '../controllers/admin/create-profile-controller';
-import { UpdateProfileController } from '../controllers/admin/update-profile-controller';
-import { DeleteProfileController } from '../controllers/admin/delete-profile-controller';
-import { ZodHelper } from '../../../../shared/helpers/zod-helper';
+import { FastifyTypedInstance } from '../../../shared/types/fastify';
+import { authorize } from '../../../shared/http/middlewares/auth-middleware';
+import { ZodHelper } from '../../../shared/helpers/zod-helper';
+import { ListProfilesController } from '../../controllers/admin/list-profiles-controller';
+import { GetProfileByIdController } from '../../controllers/admin/get-profile-by-id-controller';
+import { CreateProfileController } from '../../controllers/admin/create-profile-controller';
+import { UpdateProfileController } from '../../controllers/admin/update-profile-controller';
+import { DeleteProfileController } from '../../controllers/admin/delete-profile-controller';
 
 export async function profileRoutes(app: FastifyTypedInstance) {
   app.get(

@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
 import { UpdateBannerUseCaseFactory } from '../../factories/admin/update-banner-use-case.factory';
 import { UpdateBannerRequestDTO } from '../../dtos/admin/update-banner-request-dto';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class UpdateBannerController {
   public static async handle(

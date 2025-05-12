@@ -4,10 +4,10 @@ import { UserRepositoryMock } from '../../../../../test/users/user-repository-mo
 import { UserPasswordRecoverAttemptRepositoryMock } from '../../../../../test/users/user-password-recover-attempt-repository-mock';
 import { EncrypionServiceMock } from '../../../../../test/shared/services/encryption-service-mock';
 import { HashServiceMock } from '../../../../../test/shared/services/hash-service-mock';
-import { RecoverPasswordRequestDTO } from '../../../../../infra/auth/admin/dtos/admin/recover-password-request-dto';
 import { HttpException } from '../../../../../infra/shared/http/response/http-exception';
 import { UserPasswordRecoverAttemptMockFactory } from '../../../../../test/users/user-password-recover-attempt-mock-factory';
 import { UserMockFactory } from '../../../../../test/users/user-mock-factory';
+import { RecoverPasswordRequestDTO } from '../../../../../infra/auth/dtos/admin/recover-password-request-dto';
 
 describe('RecoverPasswordUseCase', () => {
   let sut: RecoverPasswordUseCase;

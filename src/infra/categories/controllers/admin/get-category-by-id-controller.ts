@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { HttpStatus } from '../../../../shared/http/response/http-status';
-import { GetCategoryByIdUseCaseFactory } from '../../../categories/factories/get-category-by-id-use-case-factory';
+import { GetCategoryByIdUseCaseFactory } from '../../factories/admin/get-category-by-id-use-case-factory';
+import { HttpStatus } from '../../../shared/http/response/http-status';
 
 export class GetCategoryByIdController {
   public static async handle(

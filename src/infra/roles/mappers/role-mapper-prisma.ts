@@ -1,5 +1,5 @@
 import { Role as RolePrisma } from '@prisma/client';
-import { Role } from '../../../../../domain/admin/roles/entities/role-entity';
+import { Role } from '../../../domain/roles/entities/role-entity';
 
 export class RoleMapperPrisma {
   public static toDomain(data: RolePrisma): Role {

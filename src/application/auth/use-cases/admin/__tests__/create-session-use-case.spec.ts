@@ -4,8 +4,8 @@ import { HttpException } from '../../../../../infra/shared/http/response/http-ex
 import { UserRepositoryMock } from '../../../../../test/users/user-repository-mock';
 import { TokenServiceMock } from '../../../../../test/shared/services/token-service-mock';
 import { HashServiceMock } from '../../../../../test/shared/services/hash-service-mock';
-import { CreateSessionRequestDTO } from '../../../../../infra/auth/admin/dtos/admin/create-session-request-dto';
 import { UserMockFactory } from '../../../../../test/users/user-mock-factory';
+import { CreateSessionRequestDTO } from '../../../../../infra/auth/dtos/admin/create-session-request-dto';
 
 describe('CreateSessionUseCase', () => {
   let sut: CreateSessionUseCase;

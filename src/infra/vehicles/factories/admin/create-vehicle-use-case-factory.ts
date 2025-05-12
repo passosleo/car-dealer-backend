@@ -1,8 +1,8 @@
-import { CreateVehicleUseCase } from '../../../../application/admin/vehicles/use-cases/create-vehicle-use-case';
 import { ImageStorageCloudinary } from '../../../shared/storages/image-storage-cloudinary';
-import { BrandRepositoryPrisma } from '../../brands/data/repositories/brand-repository-prisma';
 import { CategoryRepositoryPrisma } from '../../../categories/repositories/category-repository-prisma';
 import { VehicleRepositoryPrisma } from '../../repositories/vehicle-repository-prisma';
+import { CreateVehicleUseCase } from '../../../../application/vehicles/use-cases/admin/create-vehicle-use-case';
+import { BrandRepositoryPrisma } from '../../../brands/repositories/brand-repository-prisma';
 
 export class CreateVehicleUseCaseFactory {
   public static create(): CreateVehicleUseCase {

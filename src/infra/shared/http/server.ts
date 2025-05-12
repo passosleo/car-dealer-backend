@@ -5,17 +5,17 @@ import { setupErrorHandler } from './middlewares/error-handler';
 import { setupSwagger } from './config/swagger-config';
 import { setupSecurity } from './config/security-config';
 import { serializerCompiler, validatorCompiler, ZodTypeProvider } from 'fastify-type-provider-zod';
-import { authRoutes } from '../../admin/auth/http/routes/auth-routes';
-import { categoryRoutes } from '../../admin/categories/http/routes/category-routes';
-import { sellerRoutes } from '../../admin/sellers/http/routes/seller-routes';
-import { bannerRoutes } from '../../admin/banners/http/routes/banner-routes';
-import { brandRoutes } from '../../admin/brands/http/routes/brand-routes';
-import { profileRoutes } from '../../admin/profiles/http/routes/profile-routes';
-import { roleRoutes } from '../../admin/roles/http/routes/role-routes';
-import { userRoutes } from '../../admin/users/http/routes/user-routes';
-import { vehicleRoutes } from '../../admin/vehicles/http/routes/vehicle-routes';
-import { brandPublicRoutes } from '../../public/brands/http/routes/brand-public-routes';
-import { categoryPublicRoutes } from '../../public/categories/http/routes/category-public-routes';
+import { authRoutes } from '../../auth/routes/admin/auth-routes';
+import { roleRoutes } from '../../roles/routes/admin/role-routes';
+import { profileRoutes } from '../../profiles/routes/admin/profile-routes';
+import { brandRoutes } from '../../brands/routes/admin/brand-routes';
+import { categoryRoutes } from '../../categories/routes/admin/category-routes';
+import { bannerRoutes } from '../../banners/routes/admin/banner-routes';
+import { sellerRoutes } from '../../sellers/routes/admin/seller-routes';
+import { userRoutes } from '../../users/routes/admin/user-routes';
+import { vehicleRoutes } from '../../vehicles/routes/admin/vehicle-routes';
+import { brandPublicRoutes } from '../../brands/routes/public/brand-public-routes';
+import { categoryPublicRoutes } from '../../categories/routes/public/category-public-routes';
 
 export function createServer() {
   const app = fastify({

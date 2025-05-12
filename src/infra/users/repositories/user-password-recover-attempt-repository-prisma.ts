@@ -1,7 +1,7 @@
-import { prisma } from '../../../../shared/db';
-import { UserPasswordRecoverAttempt } from '../../../../../domain/admin/users/entities/user-password-recover-attempt-entity';
-import { UserPasswordRecoverAttemptMapper } from '../../mappers/user-password-recover-attempt-mapper-prisma';
-import { IUserPasswordRecoverAttemptRepository } from '../../../../../domain/admin/users/repositories/user-password-recover-attempt-repository';
+import { UserPasswordRecoverAttempt } from '../../../domain/users/entities/user-password-recover-attempt-entity';
+import { IUserPasswordRecoverAttemptRepository } from '../../../domain/users/repositories/user-password-recover-attempt-repository';
+import { prisma } from '../../shared/db';
+import { UserPasswordRecoverAttemptMapper } from '../mappers/user-password-recover-attempt-mapper-prisma';
 
 export class UserPasswordRecoverAttemptRepositoryPrisma implements IUserPasswordRecoverAttemptRepository {
   public async create(data: UserPasswordRecoverAttempt): Promise<UserPasswordRecoverAttempt> {

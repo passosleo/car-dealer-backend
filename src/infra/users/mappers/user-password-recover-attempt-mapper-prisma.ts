@@ -1,5 +1,5 @@
 import { UserPasswordRecoverAttempt as UserPasswordRecoverAttemptEntity } from '@prisma/client';
-import { UserPasswordRecoverAttempt } from '../../../../../domain/admin/users/entities/user-password-recover-attempt-entity';
+import { UserPasswordRecoverAttempt } from '../../../domain/users/entities/user-password-recover-attempt-entity';
 
 export class UserPasswordRecoverAttemptMapper {
   public static toDomain(data: UserPasswordRecoverAttemptEntity): UserPasswordRecoverAttempt {

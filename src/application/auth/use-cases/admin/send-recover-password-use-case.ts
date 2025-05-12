@@ -6,9 +6,9 @@ import { IEncryptionService } from '../../../shared/services/encryption-service'
 import { CONFIG } from '../../../../infra/shared/constants/config';
 import { IUserRepository } from '../../../../domain/users/repositories/user-repository';
 import { IUserPasswordRecoverAttemptRepository } from '../../../../domain/users/repositories/user-password-recover-attempt-repository';
-import { SendRecoverPasswordRequestDTO } from '../../../../infra/auth/admin/dtos/admin/send-recover-password-request-dto';
 import { UserPasswordRecoverAttempt } from '../../../../domain/users/entities/user-password-recover-attempt-entity';
 import { User } from '../../../../domain/users/entities/user-entity';
+import { SendRecoverPasswordRequestDTO } from '../../../../infra/auth/dtos/admin/send-recover-password-request-dto';
 
 export class SendRecoverPasswordUseCase {
   constructor(

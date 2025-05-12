@@ -1,12 +1,9 @@
-import { Paginated } from '../../../../shared/types/generic';
-import { prisma } from '../../../../shared/db';
-import { Seller } from '../../../../../domain/admin/sellers/entities/seller-entity';
+import { Seller } from '../../../domain/sellers/entities/seller-entity';
+import { ISellerRepository, ListSellersParams } from '../../../domain/sellers/repositories/seller-repository';
+import { prisma } from '../../shared/db';
+import { Paginated } from '../../shared/types/generic';
 import { SellerMapperPrisma } from '../mappers/seller-mapper-prisma';
 import { Prisma } from '@prisma/client';
-import {
-  ISellerRepository,
-  ListSellersParams,
-} from '../../../../../domain/admin/sellers/repositories/seller-repository';
 
 export class SellerRepositoryPrisma implements ISellerRepository {
   public async create(data: Seller): Promise<Seller> {
