@@ -1,7 +1,7 @@
 import { FastifyBaseLogger, RawReplyDefaultExpression, RawRequestDefaultExpression, RawServerDefault } from 'fastify';
-import { HttpStatus } from '../http/response/http-status';
 import { ZodTypeProvider } from 'fastify-type-provider-zod';
-import { UserAccountDTO } from '../../../domain/admin/dtos/user-account-dto';
+import { UserAccountDTO } from '../../../domain/users/dtos/user-account-dto';
+import { HttpStatus } from '../http/response/http-status';
 
 declare module 'fastify' {
   interface FastifyRequest {

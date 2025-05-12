@@ -68,6 +68,8 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Load environment variables
+        run: cp .env.sample .env
       - name: Unit Tests
         run: yarn test
 
