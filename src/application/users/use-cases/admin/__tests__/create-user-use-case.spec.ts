@@ -20,8 +20,8 @@ describe('CreateUserUseCase', () => {
   it('should throw a unprocessable entity exception when profile does not exist', async () => {
     // Arrange
     const request = CreateUserRequestDTO.create({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
       email: faker.internet.email(),
       profileId: faker.string.uuid(),
       active: true,
@@ -44,8 +44,8 @@ describe('CreateUserUseCase', () => {
   it('should throw a conflict exception when another user with same email exists', async () => {
     // Arrange
     const request = CreateUserRequestDTO.create({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
       email: faker.internet.email(),
       profileId: faker.string.uuid(),
       active: true,
