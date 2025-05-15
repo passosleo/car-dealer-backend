@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { User } from '../../domain/users/entities/user-entity';
 import { Profile } from '../../domain/profiles/entities/profile-entity';
 import { Role } from '../../domain/roles/entities/role-entity';
+import { Paginated } from '../../infra/shared/types/generic';
 
 export class UserMockFactory {
   public static createEntity(data: Partial<User> = {}): User {
@@ -29,5 +30,16 @@ export class UserMockFactory {
 
   public static createEntities(amount = 10): User[] {
     return Array.from({ length: amount }, this.createEntity);
+  }
+
+  public static createPaginatedEntities(page: number, limit: number, total: number): Paginated<User> {
+    const items = this.createEntities(limit);
+    return {
+      items,
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 }
