@@ -14,6 +14,10 @@ export class CreateBannerUseCase {
   ) {}
 
   public async execute({ imageDesktop, imageMobile, ...data }: CreateBannerRequestDTO): Promise<BannerResponseDTO> {
+    if (data.startAt && data.endAt && data.startAt >= data.endAt) {
+      throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'The start date must be before the end date');
+    }
+
     const isAllImagesValid = StringHelper.isBase64Image(imageDesktop) && StringHelper.isBase64Image(imageMobile);
 
     if (!isAllImagesValid) {
