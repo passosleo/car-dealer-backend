@@ -7,7 +7,7 @@ export function setupSwagger(app: FastifyInstance) {
   app.register(fastifySwagger, {
     openapi: {
       info: {
-        title: 'Car Dealer API',
+        title: 'Car Dealer API - Documentation',
         version: '1.0.0',
       },
       components: {
