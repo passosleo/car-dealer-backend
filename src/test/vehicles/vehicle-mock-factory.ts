@@ -12,7 +12,7 @@ export class VehicleMockFactory {
       year: faker.date.past().getFullYear(),
       plate: faker.vehicle.vrm(),
       description: faker.lorem.paragraph(),
-      price: faker.number.int({ min: 1000, max: 100000 }),
+      price: faker.number.float({ min: 1000, max: 100000 }),
       mileage: faker.number.int({ min: 0, max: 300000 }),
       color: faker.color.human(),
       transmission: faker.helpers.arrayElement(['manual', 'automatic']),

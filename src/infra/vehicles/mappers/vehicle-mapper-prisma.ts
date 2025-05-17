@@ -6,6 +6,7 @@ import {
   Vehicle as VehiclePrisma,
 } from '@prisma/client';
 import { Vehicle } from '../../../domain/vehicles/entities/vehicle-entity';
+import { Decimal } from '@prisma/client/runtime/library';
 
 type VehicleFromPrisma = VehiclePrisma & {
   vehicleImages: VehicleImagePrisma[];
@@ -36,7 +37,7 @@ export class VehicleMapperPrisma {
       year: data.year,
       plate: data.plate,
       description: data.description,
-      price: data.price,
+      price: data.price as unknown as Decimal,
       mileage: data.mileage,
       color: data.color,
       transmission: data.transmission,
