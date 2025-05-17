@@ -18,6 +18,10 @@ export class CreateVehicleUseCase {
   ) {}
 
   public async execute({ vehicleImages, ...data }: CreateVehicleRequestDTO): Promise<VehicleResponseDTO> {
+    if (!vehicleImages || vehicleImages.length === 0) {
+      throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'Vehicle images are required');
+    }
+
     const [category, brand, vehicleWithSamePlateExists] = await Promise.all([
       this.categoryRepository.findById(data.categoryId),
       this.brandRepository.findById(data.brandId),

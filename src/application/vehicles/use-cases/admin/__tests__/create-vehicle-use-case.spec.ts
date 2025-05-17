@@ -26,29 +26,49 @@ describe('CreateVehicleUseCase', () => {
     jest.clearAllMocks();
   });
 
+  const defaultRequest = CreateVehicleRequestDTO.create({
+    model: faker.vehicle.model(),
+    year: faker.date.past().getFullYear(),
+    plate: faker.vehicle.vrm(),
+    description: faker.lorem.sentence(),
+    price: faker.number.int({ min: 10000, max: 50000 }),
+    mileage: faker.number.int({ min: 0, max: 200000 }),
+    color: faker.color.human(),
+    transmission: faker.helpers.arrayElement(['manual', 'automatic']),
+    fuelType: faker.helpers.arrayElement(['gasoline', 'diesel', 'electric']),
+    doors: faker.number.int({ min: 2, max: 5 }),
+    seats: faker.number.int({ min: 2, max: 7 }),
+    horsepower: faker.number.int({ min: 50, max: 500 }),
+    torque: faker.number.int({ min: 100, max: 500 }),
+    driveTrain: faker.helpers.arrayElement(['FWD', 'RWD', 'AWD']),
+    brandId: faker.string.uuid(),
+    categoryId: faker.string.uuid(),
+    vehicleImages: ['data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA'],
+    vehicleFeatures: [faker.lorem.word()],
+    active: true,
+  });
+
+  it('should throw a unprocessable entity exception when vehicle images are not provided', async () => {
+    // Arrange
+    const request = {
+      ...defaultRequest,
+      vehicleImages: [],
+    };
+
+    // Act & Assert
+    await expect(sut.execute(request)).rejects.toThrow(HttpException);
+
+    // Assert
+    expect(VehicleRepositoryMock.findByPlate).not.toHaveBeenCalled();
+    expect(CategoryRepositoryMock.findById).not.toHaveBeenCalled();
+    expect(BrandRepositoryMock.findById).not.toHaveBeenCalled();
+    expect(ImageStorageMock.uploadImageBase64).not.toHaveBeenCalled();
+    expect(VehicleRepositoryMock.create).not.toHaveBeenCalled();
+  });
+
   it('should throw a conflict exception when a vehicle with the same plate already exists', async () => {
     // Arrange
-    const request = CreateVehicleRequestDTO.create({
-      model: faker.vehicle.model(),
-      year: faker.date.past().getFullYear(),
-      plate: faker.vehicle.vrm(),
-      description: faker.lorem.sentence(),
-      price: faker.number.int({ min: 10000, max: 50000 }),
-      mileage: faker.number.int({ min: 0, max: 200000 }),
-      color: faker.color.human(),
-      transmission: faker.helpers.arrayElement(['manual', 'automatic']),
-      fuelType: faker.helpers.arrayElement(['gasoline', 'diesel', 'electric']),
-      doors: faker.number.int({ min: 2, max: 5 }),
-      seats: faker.number.int({ min: 2, max: 7 }),
-      horsepower: faker.number.int({ min: 50, max: 500 }),
-      torque: faker.number.int({ min: 100, max: 500 }),
-      driveTrain: faker.helpers.arrayElement(['FWD', 'RWD', 'AWD']),
-      brandId: faker.string.uuid(),
-      categoryId: faker.string.uuid(),
-      vehicleImages: [faker.image.url()],
-      vehicleFeatures: [faker.lorem.word()],
-      active: true,
-    });
+    const request = defaultRequest;
 
     const vehicleExists = VehicleMockFactory.createEntity({
       plate: request.plate,
@@ -71,27 +91,7 @@ describe('CreateVehicleUseCase', () => {
 
   it('should throw a unprocessable entity exception when category does not exists', async () => {
     // Arrange
-    const request = CreateVehicleRequestDTO.create({
-      model: faker.vehicle.model(),
-      year: faker.date.past().getFullYear(),
-      plate: faker.vehicle.vrm(),
-      description: faker.lorem.sentence(),
-      price: faker.number.int({ min: 10000, max: 50000 }),
-      mileage: faker.number.int({ min: 0, max: 200000 }),
-      color: faker.color.human(),
-      transmission: faker.helpers.arrayElement(['manual', 'automatic']),
-      fuelType: faker.helpers.arrayElement(['gasoline', 'diesel', 'electric']),
-      doors: faker.number.int({ min: 2, max: 5 }),
-      seats: faker.number.int({ min: 2, max: 7 }),
-      horsepower: faker.number.int({ min: 50, max: 500 }),
-      torque: faker.number.int({ min: 100, max: 500 }),
-      driveTrain: faker.helpers.arrayElement(['FWD', 'RWD', 'AWD']),
-      brandId: faker.string.uuid(),
-      categoryId: faker.string.uuid(),
-      vehicleImages: [faker.image.url()],
-      vehicleFeatures: [faker.lorem.word()],
-      active: true,
-    });
+    const request = defaultRequest;
 
     VehicleRepositoryMock.findByPlate.mockResolvedValueOnce(null);
     CategoryRepositoryMock.findById.mockResolvedValueOnce(null);
@@ -112,27 +112,7 @@ describe('CreateVehicleUseCase', () => {
 
   it('should throw a unprocessable entity exception when brand does not exists', async () => {
     // Arrange
-    const request = CreateVehicleRequestDTO.create({
-      model: faker.vehicle.model(),
-      year: faker.date.past().getFullYear(),
-      plate: faker.vehicle.vrm(),
-      description: faker.lorem.sentence(),
-      price: faker.number.int({ min: 10000, max: 50000 }),
-      mileage: faker.number.int({ min: 0, max: 200000 }),
-      color: faker.color.human(),
-      transmission: faker.helpers.arrayElement(['manual', 'automatic']),
-      fuelType: faker.helpers.arrayElement(['gasoline', 'diesel', 'electric']),
-      doors: faker.number.int({ min: 2, max: 5 }),
-      seats: faker.number.int({ min: 2, max: 7 }),
-      horsepower: faker.number.int({ min: 50, max: 500 }),
-      torque: faker.number.int({ min: 100, max: 500 }),
-      driveTrain: faker.helpers.arrayElement(['FWD', 'RWD', 'AWD']),
-      brandId: faker.string.uuid(),
-      categoryId: faker.string.uuid(),
-      vehicleImages: [faker.image.url()],
-      vehicleFeatures: [faker.lorem.word()],
-      active: true,
-    });
+    const request = defaultRequest;
 
     VehicleRepositoryMock.findByPlate.mockResolvedValueOnce(null);
     const categoryExists = CategoryMockFactory.createEntity({
@@ -157,27 +137,10 @@ describe('CreateVehicleUseCase', () => {
 
   it('should throw a unprocessable entity exception when some images are not valid base64', async () => {
     // Arrange
-    const request = CreateVehicleRequestDTO.create({
-      model: faker.vehicle.model(),
-      year: faker.date.past().getFullYear(),
-      plate: faker.vehicle.vrm(),
-      description: faker.lorem.sentence(),
-      price: faker.number.int({ min: 10000, max: 50000 }),
-      mileage: faker.number.int({ min: 0, max: 200000 }),
-      color: faker.color.human(),
-      transmission: faker.helpers.arrayElement(['manual', 'automatic']),
-      fuelType: faker.helpers.arrayElement(['gasoline', 'diesel', 'electric']),
-      doors: faker.number.int({ min: 2, max: 5 }),
-      seats: faker.number.int({ min: 2, max: 7 }),
-      horsepower: faker.number.int({ min: 50, max: 500 }),
-      torque: faker.number.int({ min: 100, max: 500 }),
-      driveTrain: faker.helpers.arrayElement(['FWD', 'RWD', 'AWD']),
-      brandId: faker.string.uuid(),
-      categoryId: faker.string.uuid(),
-      vehicleImages: [faker.image.url(), 'invalid-image'],
-      vehicleFeatures: [faker.lorem.word()],
-      active: true,
-    });
+    const request = {
+      ...defaultRequest,
+      vehicleImages: ['invalid-base64-image'],
+    };
 
     VehicleRepositoryMock.findByPlate.mockResolvedValueOnce(null);
     const categoryExists = CategoryMockFactory.createEntity({
@@ -205,27 +168,7 @@ describe('CreateVehicleUseCase', () => {
 
   it('should create a new vehicle successfully', async () => {
     // Arrange
-    const request = CreateVehicleRequestDTO.create({
-      model: faker.vehicle.model(),
-      year: faker.date.past().getFullYear(),
-      plate: faker.vehicle.vrm(),
-      description: faker.lorem.sentence(),
-      price: faker.number.int({ min: 10000, max: 50000 }),
-      mileage: faker.number.int({ min: 0, max: 200000 }),
-      color: faker.color.human(),
-      transmission: faker.helpers.arrayElement(['manual', 'automatic']),
-      fuelType: faker.helpers.arrayElement(['gasoline', 'diesel', 'electric']),
-      doors: faker.number.int({ min: 2, max: 5 }),
-      seats: faker.number.int({ min: 2, max: 7 }),
-      horsepower: faker.number.int({ min: 50, max: 500 }),
-      torque: faker.number.int({ min: 100, max: 500 }),
-      driveTrain: faker.helpers.arrayElement(['FWD', 'RWD', 'AWD']),
-      brandId: faker.string.uuid(),
-      categoryId: faker.string.uuid(),
-      vehicleImages: ['data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA'],
-      vehicleFeatures: [faker.lorem.word()],
-      active: true,
-    });
+    const request = defaultRequest;
 
     VehicleRepositoryMock.findByPlate.mockResolvedValueOnce(null);
     const categoryExists = CategoryMockFactory.createEntity({
