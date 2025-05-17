@@ -4,7 +4,7 @@ export class CreateVehicleRequestDTO {
     public readonly year: number,
     public readonly plate: string,
     public readonly description: string | null,
-    public readonly price: number | null,
+    public readonly price: number,
     public readonly mileage: number | null,
     public readonly color: string | null,
     public readonly transmission: string | null,

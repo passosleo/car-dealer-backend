@@ -7,7 +7,7 @@ export interface CreateVehicleData {
   year: number;
   plate: string;
   description?: string | null;
-  price?: number | null;
+  price: number;
   mileage?: number | null;
   color?: string | null;
   transmission?: string | null;
@@ -32,7 +32,7 @@ export class Vehicle {
   public year: number;
   public plate: string;
   public description: string | null;
-  public price: number | null;
+  public price: number;
   public mileage: number | null;
   public color: string | null;
   public transmission: string | null;
@@ -56,7 +56,7 @@ export class Vehicle {
     this.year = data.year;
     this.plate = data.plate;
     this.description = data.description ?? null;
-    this.price = data.price ?? null;
+    this.price = data.price;
     this.mileage = data.mileage ?? null;
     this.color = data.color ?? null;
     this.transmission = data.transmission ?? null;
