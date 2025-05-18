@@ -24,6 +24,6 @@ export const updateVehicleRequestSchema = z.object({
   brandId: z.string().uuid(),
   categoryId: z.string().uuid(),
   active: z.boolean().default(true),
-  vehicleImages: z.array(z.string().nonempty()),
+  vehicleImages: z.array(z.string().nonempty()).min(1).max(10),
   vehicleFeatures: z.array(z.string().nonempty()).optional().default([]),
 });
