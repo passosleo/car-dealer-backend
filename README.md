@@ -22,24 +22,24 @@ cd car-dealer-backend
 
 A aplicação exige algumas variáveis de ambiente para funcionar corretamente. Você pode criar um arquivo `.env` na raiz do projeto com as seguintes variáveis:
 
-| Variável                                | Descrição                                             | Obrigatório? |
-| --------------------------------------- | ----------------------------------------------------- | ------------ |
-| `NODE_ENV`                              | Ambiente da aplicação (`development` ou `production`) | ❌ Não       |
-| `PORT`                                  | Porta em que a aplicação será exposta                 | ❌ Não       |
-| `DATABASE_URL`                          | URL de conexão com o banco PostgreSQL                 | ✅ Sim       |
-| `BASE_URL`                              | URL do servidor                                       | ❌ Não       |
-| `FRONTEND_BASE_URL`                     | URL do frontend para redirecionamentos                | ❌ Não       |
-| `AUTH_ACCESS_TOKEN_SECRET`              | Segredo usado para assinar o token JWT de acesso      | ❌ Não       |
-| `AUTH_ACCESS_TOKEN_EXPIRES_IN_SECONDS`  | Tempo de expiração do token de acesso (em segundos)   | ❌ Não       |
-| `AUTH_REFRESH_TOKEN_SECRET`             | Segredo do refresh token                              | ❌ Não       |
-| `AUTH_REFRESH_TOKEN_EXPIRES_IN_SECONDS` | Tempo de expiração do refresh token (em segundos)     | ❌ Não       |
-| `MAIL_HOST`                             | Host SMTP para envio de emails                        | ✅ Sim       |
-| `MAIL_PORT`                             | Porta do serviço SMTP                                 | ✅ Sim       |
-| `MAIL_USER`                             | Usuário do SMTP                                       | ✅ Sim       |
-| `MAIL_PASSWORD`                         | Senha do SMTP                                         | ✅ Sim       |
-| `ENCRYPTION_SECRET`                     | Chave para criptografia de dados internos             | ❌ Não       |
-| `CLOUDINARY_URL`                        | URL de conexão com o Cloudinary                       | ✅ Sim       |
-| `REDIRECT_URL_RECOVER_PASSWORD`         | URL de redirecionamento para recuperação de senha     | ❌ Não       |
+| Variável                                | Descrição                                                     | Obrigatório? |
+| --------------------------------------- | ------------------------------------------------------------- | ------------ |
+| `NODE_ENV`                              | Ambiente da aplicação (`development`, `production` ou `test`) | ❌ Não       |
+| `PORT`                                  | Porta em que a aplicação será exposta                         | ❌ Não       |
+| `DATABASE_URL`                          | URL de conexão com o banco PostgreSQL                         | ✅ Sim       |
+| `BASE_URL`                              | URL do servidor                                               | ❌ Não       |
+| `FRONTEND_BASE_URL`                     | URL do frontend para redirecionamentos                        | ❌ Não       |
+| `AUTH_ACCESS_TOKEN_SECRET`              | Segredo usado para assinar o token JWT de acesso              | ❌ Não       |
+| `AUTH_ACCESS_TOKEN_EXPIRES_IN_SECONDS`  | Tempo de expiração do token de acesso (em segundos)           | ❌ Não       |
+| `AUTH_REFRESH_TOKEN_SECRET`             | Segredo do refresh token                                      | ❌ Não       |
+| `AUTH_REFRESH_TOKEN_EXPIRES_IN_SECONDS` | Tempo de expiração do refresh token (em segundos)             | ❌ Não       |
+| `MAIL_HOST`                             | Host SMTP para envio de emails                                | ✅ Sim       |
+| `MAIL_PORT`                             | Porta do serviço SMTP                                         | ✅ Sim       |
+| `MAIL_USER`                             | Usuário do SMTP                                               | ✅ Sim       |
+| `MAIL_PASSWORD`                         | Senha do SMTP                                                 | ✅ Sim       |
+| `ENCRYPTION_SECRET`                     | Chave para criptografia de dados internos                     | ❌ Não       |
+| `CLOUDINARY_URL`                        | URL de conexão com o Cloudinary                               | ✅ Sim       |
+| `REDIRECT_URL_RECOVER_PASSWORD`         | URL de redirecionamento para recuperação de senha             | ❌ Não       |
 
 ---
 
