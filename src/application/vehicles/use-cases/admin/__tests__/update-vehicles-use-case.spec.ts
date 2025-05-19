@@ -27,7 +27,7 @@ function makeUpdateVehicleRequestDTO(overrides = {}): UpdateVehicleRequestDTO {
     brandId: faker.string.uuid(),
     categoryId: faker.string.uuid(),
     active: true,
-    vehicleImages: [],
+    vehicleImages: [faker.image.url()],
     vehicleFeatures: [],
     ...overrides,
   });
