@@ -21,6 +21,10 @@ export class UpdateVehicleUseCase {
     vehicleId: string,
     { vehicleImages, ...data }: UpdateVehicleRequestDTO,
   ): Promise<VehicleResponseDTO> {
+    if (!vehicleImages || vehicleImages.length === 0) {
+      throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, 'Vehicle images are required');
+    }
+
     const vehicleExists = await this.vehicleRepository.findById(vehicleId);
 
     if (!vehicleExists) {
@@ -71,7 +75,7 @@ export class UpdateVehicleUseCase {
       if (StringHelper.isBase64Image(newImage)) {
         return this.imageStorage.updateImageBase64(currentImages[index], newImage);
       }
-      return Promise.resolve(null);
+      return Promise.resolve(newImage);
     });
     return Promise.all(imageUpdatePromises).then((urls) => urls.filter((url) => url !== null));
   }

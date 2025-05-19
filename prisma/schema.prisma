@@ -144,7 +144,7 @@ model Vehicle {
   doors           Int?
   seats           Int?
   horsepower      Int?
-  torque          Int?
+  torque          Decimal?         @db.Decimal(5, 2)
   driveTrain      String?          @map("drive_train")
   brandId         String           @map("brand_id")
   brand           Brand            @relation(fields: [brandId], references: [brandId], onDelete: Cascade)

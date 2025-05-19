@@ -21,10 +21,11 @@ type VehicleToPrisma = VehiclePrisma & {
 };
 
 export class VehicleMapperPrisma {
-  public static toDomain({ vehicleImages, vehicleFeatures, price, ...data }: VehicleFromPrisma): Vehicle {
+  public static toDomain({ vehicleImages, vehicleFeatures, price, torque, ...data }: VehicleFromPrisma): Vehicle {
     return Vehicle.create({
       ...data,
       price: Number(price),
+      torque: Number(torque),
       vehicleImages: vehicleImages.map((vehicleImage) => vehicleImage.imageUrl),
       vehicleFeatures: vehicleFeatures.map((vehicleFeature) => vehicleFeature.feature),
     });
