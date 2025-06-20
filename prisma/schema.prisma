@@ -180,3 +180,15 @@ model VehicleFeature {
 
   @@map("tb_vehicles_features")
 }
+
+model TopBarMessage {
+  topBarMessageId String   @id @default(uuid()) @map("top_bar_message_id")
+  message         String   @unique
+  active          Boolean  @default(true)
+  link            String?
+  position        Int      @default(0)
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt       DateTime @updatedAt() @map("updated_at") @db.Timestamptz()
+
+  @@map("tb_top_bar_messages")
+}

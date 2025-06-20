@@ -40,7 +40,7 @@ async function main() {
       {
         name: 'MANAGE_LAYOUT',
         label: 'Gerenciar Layout',
-        description: 'Permite ao usuário configurar o layout e aparência ddo site',
+        description: 'Permite ao usuário configurar o layout e aparência do site',
       },
       {
         name: 'MANAGE_SELLERS',

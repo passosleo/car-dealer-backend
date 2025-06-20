@@ -24,13 +24,13 @@ export class CategoryRepositoryPrisma implements ICategoryRepository {
   }
 
   public async findById(id: string): Promise<Category | null> {
-    const brand = await prisma.category.findUnique({ where: { categoryId: id } });
-    return brand ? CategoryMapperPrisma.toDomain(brand) : null;
+    const category = await prisma.category.findUnique({ where: { categoryId: id } });
+    return category ? CategoryMapperPrisma.toDomain(category) : null;
   }
 
   public async findByName(name: string): Promise<Category | null> {
-    const brand = await prisma.category.findUnique({ where: { name } });
-    return brand ? CategoryMapperPrisma.toDomain(brand) : null;
+    const category = await prisma.category.findUnique({ where: { name } });
+    return category ? CategoryMapperPrisma.toDomain(category) : null;
   }
 
   public async list({
