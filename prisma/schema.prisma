@@ -117,15 +117,16 @@ model Seller {
 }
 
 model Banner {
-  bannerId        String    @id @default(uuid()) @map("banner_id")
-  title           String
-  imageDesktopUrl String    @map("image_desktop_url")
-  imageMobileUrl  String    @map("image_mobile_url")
-  startAt         DateTime? @map("start_at") @db.Timestamptz()
-  endAt           DateTime? @map("end_at") @db.Timestamptz()
-  active          Boolean   @default(true)
-  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz()
-  updatedAt       DateTime  @updatedAt() @map("updated_at") @db.Timestamptz()
+  bannerId             String                 @id @default(uuid()) @map("banner_id")
+  title                String
+  imageDesktopUrl      String                 @map("image_desktop_url")
+  imageMobileUrl       String                 @map("image_mobile_url")
+  startAt              DateTime?              @map("start_at") @db.Timestamptz()
+  endAt                DateTime?              @map("end_at") @db.Timestamptz()
+  active               Boolean                @default(true)
+  createdAt            DateTime               @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt            DateTime               @updatedAt() @map("updated_at") @db.Timestamptz()
+  layoutBannerPosition LayoutBannerPosition[]
 
   @@map("tb_banners")
 }
@@ -181,14 +182,78 @@ model VehicleFeature {
   @@map("tb_vehicles_features")
 }
 
-model TopBarMessage {
-  topBarMessageId String   @id @default(uuid()) @map("top_bar_message_id")
-  message         String   @unique
-  active          Boolean  @default(true)
-  link            String?
-  position        Int      @default(0)
-  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz()
-  updatedAt       DateTime @updatedAt() @map("updated_at") @db.Timestamptz()
+model LayoutComponent {
+  layoutComponentId  String               @id @default(uuid()) @map("layout_component_id")
+  name               String               @unique
+  type               String?
+  position           Int                  @default(0)
+  active             Boolean              @default(true)
+  createdAt          DateTime             @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt          DateTime             @updatedAt() @map("updated_at") @db.Timestamptz()
+  layoutTopBarConfig LayoutTopBarConfig[]
+  layoutBannerConfig LayoutBannerConfig[]
 
-  @@map("tb_top_bar_messages")
+  @@map("tb_layout_components")
+}
+
+model LayoutTopBarConfig {
+  layoutTopBarConfigId String          @id @default(uuid()) @map("layout_top_bar_config_id")
+  layoutComponentId    String          @map("layout_component_id")
+  speed                Int             @default(0)
+  loop                 Boolean         @default(true)
+  delay                Int             @default(3000)
+  direction            String?         @default("ltr")
+  jump                 Boolean         @default(false)
+  hideOnMobile         Boolean         @default(false) @map("hide_on_mobile")
+  hideOnDesktop        Boolean         @default(false) @map("hide_on_desktop")
+  active               Boolean         @default(true)
+  createdAt            DateTime        @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt            DateTime        @updatedAt() @map("updated_at") @db.Timestamptz()
+  layoutComponent      LayoutComponent @relation(fields: [layoutComponentId], references: [layoutComponentId], onDelete: Cascade)
+
+  @@map("tb_layout_top_bar_configs")
+}
+
+model LayoutTopBarMessage {
+  layoutTopBarMessageId String   @id @default(uuid()) @map("layout_top_bar_message_id")
+  message               String   @unique
+  link                  String?
+  position              Int      @default(0)
+  active                Boolean  @default(true)
+  createdAt             DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt             DateTime @updatedAt() @map("updated_at") @db.Timestamptz()
+
+  @@map("tb_layout_top_bar_messages")
+}
+
+model LayoutBannerConfig {
+  layoutBannerConfigId String                 @id @default(uuid()) @map("layout_banner_config_id")
+  layoutComponentId    String                 @map("layout_component_id")
+  speed                Int                    @default(0)
+  loop                 Boolean                @default(true)
+  delay                Int                    @default(3000)
+  direction            String?                @default("ltr")
+  jump                 Boolean                @default(false)
+  hideOnMobile         Boolean                @default(false) @map("hide_on_mobile")
+  hideOnDesktop        Boolean                @default(false) @map("hide_on_desktop")
+  active               Boolean                @default(true)
+  createdAt            DateTime               @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt            DateTime               @updatedAt() @map("updated_at") @db.Timestamptz()
+  layoutComponent      LayoutComponent        @relation(fields: [layoutComponentId], references: [layoutComponentId], onDelete: Cascade)
+  layoutBannerPosition LayoutBannerPosition[]
+
+  @@map("tb_layout_banner_configs")
+}
+
+model LayoutBannerPosition {
+  layoutBannerPositionId String             @id @default(uuid()) @map("layout_banner_Position_id")
+  layoutBannerConfigId   String             @map("layout_banner_config_id")
+  bannerId               String             @map("banner_id")
+  position               Int                @default(0)
+  createdAt              DateTime           @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt              DateTime           @updatedAt() @map("updated_at") @db.Timestamptz()
+  layoutBannerConfig     LayoutBannerConfig @relation(fields: [layoutBannerConfigId], references: [layoutBannerConfigId], onDelete: Cascade)
+  banner                 Banner             @relation(fields: [bannerId], references: [bannerId], onDelete: Cascade)
+
+  @@map("tb_layout_banner_positions")
 }
