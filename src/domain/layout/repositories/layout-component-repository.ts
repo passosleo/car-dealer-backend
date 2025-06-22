@@ -19,7 +19,7 @@ export interface ILayoutComponentRepository {
   delete(id: string): Promise<void>;
   findById(id: string): Promise<LayoutComponent | null>;
   findByName(name: string): Promise<LayoutComponent | null>;
-  findByPage(page: string): Promise<LayoutComponent | null>;
+  findByPage(page: string): Promise<LayoutComponent[]>;
   findAll(): Promise<LayoutComponent[]>;
   findAllByPage(page: string): Promise<LayoutComponent[]>;
   list(data: ListLayoutComponentParams): Promise<Paginated<LayoutComponent>>;
