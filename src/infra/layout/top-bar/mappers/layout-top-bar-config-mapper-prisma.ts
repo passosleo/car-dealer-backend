@@ -4,8 +4,8 @@ import {
   LayoutTopBarMessage as LayoutTopBarMessagePrisma,
 } from '@prisma/client';
 import { LayoutTopBarConfig } from '../../../../domain/layout/top-bar/entities/layout-top-bar-config-entity';
-import { LayoutTopBarMessage } from '../../../../domain/layout/top-bar/entities/layout-top-bar-message-entity';
-import { LayoutComponent } from '../../../../domain/layout/entities/layout-component-entity';
+import { LayoutTopBarMessageMapperPrisma } from './layout-top-bar-message-mapper-prisma';
+import { LayoutComponentMapperPrisma } from '../../mappers/layout-component-mapper-prisma';
 
 type LayoutTopBarConfigFromPrisma = LayoutTopBarConfigPrisma & {
   layoutComponent: LayoutComponentPrisma;
@@ -13,7 +13,6 @@ type LayoutTopBarConfigFromPrisma = LayoutTopBarConfigPrisma & {
 };
 
 type LayoutTopBarConfigToPrisma = LayoutTopBarConfigPrisma & {
-  layoutComponent: LayoutComponentPrisma;
   layoutTopBarMessages: LayoutTopBarMessagePrisma[];
 };
 
@@ -25,8 +24,8 @@ export class LayoutTopBarConfigMapperPrisma {
   }: LayoutTopBarConfigFromPrisma): LayoutTopBarConfig {
     return LayoutTopBarConfig.create({
       ...data,
-      layoutComponent: LayoutComponent.create(layoutComponent),
-      layoutTopBarMessages: layoutTopBarMessages.map(LayoutTopBarMessage.create),
+      layoutComponent: LayoutComponentMapperPrisma.toDomain(layoutComponent),
+      layoutTopBarMessages: layoutTopBarMessages.map(LayoutTopBarMessageMapperPrisma.toDomain),
     });
   }
 
@@ -44,8 +43,7 @@ export class LayoutTopBarConfigMapperPrisma {
       active: data.active,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,
-      layoutComponent: data.layoutComponent,
-      layoutTopBarMessages: data.layoutTopBarMessages,
+      layoutTopBarMessages: data.layoutTopBarMessages.map(LayoutTopBarMessageMapperPrisma.toPrisma),
     };
   }
 

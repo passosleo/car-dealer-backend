@@ -11,19 +11,14 @@ import { Paginated } from '../../../shared/types/generic';
 export class LayoutTopBarConfigRepositoryPrisma implements ILayoutTopBarConfigRepository {
   private readonly includeFields = {
     layoutComponent: true,
-    layoutTopBarMessages: {
-      include: {
-        layoutTopBarConfig: true,
-      },
-    },
+    layoutTopBarMessages: true,
   };
 
   public async create(data: LayoutTopBarConfig): Promise<LayoutTopBarConfig> {
-    const { layoutComponent, layoutTopBarMessages, ...prismaData } = LayoutTopBarConfigMapperPrisma.toPrisma(data);
+    const { layoutTopBarMessages, ...prismaData } = LayoutTopBarConfigMapperPrisma.toPrisma(data);
     const createdLayoutTopBarConfig = await prisma.layoutTopBarConfig.create({
       data: {
         ...prismaData,
-        layoutComponentId: layoutComponent.layoutComponentId,
         layoutTopBarMessages: {
           create: layoutTopBarMessages,
         },
@@ -34,8 +29,7 @@ export class LayoutTopBarConfigRepositoryPrisma implements ILayoutTopBarConfigRe
   }
 
   public async update(id: string, data: Partial<LayoutTopBarConfig>): Promise<LayoutTopBarConfig> {
-    const { layoutComponent, layoutTopBarMessages, ...prismaData } =
-      LayoutTopBarConfigMapperPrisma.toPartialPrisma(data);
+    const { layoutTopBarMessages, ...prismaData } = LayoutTopBarConfigMapperPrisma.toPartialPrisma(data);
 
     const updatedLayoutTopBarConfig = await prisma.$transaction(async (tx) => {
       await tx.layoutTopBarMessage.deleteMany({
@@ -46,7 +40,6 @@ export class LayoutTopBarConfigRepositoryPrisma implements ILayoutTopBarConfigRe
         where: { layoutTopBarConfigId: id },
         data: {
           ...prismaData,
-          layoutComponentId: layoutComponent?.layoutComponentId,
           layoutTopBarMessages: layoutTopBarMessages ? { create: layoutTopBarMessages } : undefined,
         },
         include: this.includeFields,

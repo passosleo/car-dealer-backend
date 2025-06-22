@@ -5,7 +5,6 @@ export type ListLayoutBannerConfigParams = {
   page?: number;
   limit?: number;
   orderBy?: 'asc' | 'desc';
-  search?: string;
   status?: 'all' | 'active' | 'inactive';
   createdAtStart?: Date;
   createdAtEnd?: Date;
