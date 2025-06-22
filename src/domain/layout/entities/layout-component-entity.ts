@@ -1,5 +1,6 @@
 export interface CreateLayoutComponentData {
   layoutComponentId?: string;
+  label: string;
   name: string;
   page: string;
   description?: string | null;
@@ -11,6 +12,7 @@ export interface CreateLayoutComponentData {
 
 export class LayoutComponent {
   public readonly layoutComponentId: string;
+  public label: string;
   public name: string;
   public page: string;
   public description: string | null;
@@ -21,6 +23,7 @@ export class LayoutComponent {
 
   public constructor(data: CreateLayoutComponentData) {
     this.layoutComponentId = data.layoutComponentId!;
+    this.label = data.label;
     this.name = data.name;
     this.page = data.page;
     this.description = data.description ?? null;

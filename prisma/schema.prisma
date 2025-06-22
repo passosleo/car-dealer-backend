@@ -184,8 +184,9 @@ model VehicleFeature {
 
 model LayoutComponent {
   layoutComponentId   String               @id @default(uuid()) @map("layout_component_id")
+  label               String
   name                String               @unique
-  page                String               @unique
+  page                String
   description         String?
   position            Int                  @default(0)
   active              Boolean              @default(true)
@@ -250,7 +251,7 @@ model LayoutBannerConfig {
 }
 
 model LayoutBannerPosition {
-  layoutBannerPositionId String             @id @default(uuid()) @map("layout_banner_Position_id")
+  layoutBannerPositionId String             @id @default(uuid()) @map("layout_banner_position_id")
   layoutBannerConfigId   String             @map("layout_banner_config_id")
   bannerId               String             @map("banner_id")
   position               Int                @default(0)

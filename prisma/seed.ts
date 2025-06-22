@@ -116,6 +116,28 @@ async function main() {
     skipDuplicates: true,
   });
 
+  await prisma.layoutComponent.createMany({
+    data: [
+      {
+        label: 'Top Bar',
+        name: 'top-bar',
+        page: 'home',
+        description: 'Configure a barra de mensagens rotativas',
+        position: 0,
+        active: true,
+      },
+      {
+        label: 'Banners',
+        name: 'banners',
+        page: 'home',
+        description: 'Configure a barra de banners rotativos',
+        position: 1,
+        active: true,
+      },
+    ],
+    skipDuplicates: true,
+  });
+
   console.log('Seeding completed!');
 }
 
