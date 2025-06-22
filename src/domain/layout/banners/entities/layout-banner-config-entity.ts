@@ -1,4 +1,4 @@
-import { LayoutComponent } from '../../entities/layout-component-entity';
+import { LayoutComponent } from '../../components/entities/layout-component-entity';
 import { LayoutBannerPosition } from './layout-banner-position-entity';
 
 export interface CreateLayoutBannerConfigData {

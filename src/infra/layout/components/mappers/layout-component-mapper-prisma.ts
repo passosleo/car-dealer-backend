@@ -1,5 +1,5 @@
 import { LayoutComponent as LayoutComponentPrisma } from '@prisma/client';
-import { LayoutComponent } from '../../../domain/layout/entities/layout-component-entity';
+import { LayoutComponent } from '../../../../domain/layout/components/entities/layout-component-entity';
 
 export class LayoutComponentMapperPrisma {
   public static toDomain(data: LayoutComponentPrisma): LayoutComponent {

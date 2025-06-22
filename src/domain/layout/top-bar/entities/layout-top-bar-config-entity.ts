@@ -1,4 +1,4 @@
-import { LayoutComponent } from '../../entities/layout-component-entity';
+import { LayoutComponent } from '../../components/entities/layout-component-entity';
 import { LayoutTopBarMessage } from './layout-top-bar-message-entity';
 
 export interface CreateLayoutTopBarConfigData {

@@ -1,12 +1,12 @@
 import { Prisma } from '@prisma/client';
-import { prisma } from '../../shared/db';
-import { Paginated } from '../../shared/types/generic';
+import { prisma } from '../../../shared/db';
+import { Paginated } from '../../../shared/types/generic';
 import { LayoutComponentMapperPrisma } from '../mappers/layout-component-mapper-prisma';
+import { LayoutComponent } from '../../../../domain/layout/components/entities/layout-component-entity';
 import {
   ILayoutComponentRepository,
   ListLayoutComponentParams,
-} from '../../../domain/layout/repositories/layout-component-repository';
-import { LayoutComponent } from '../../../domain/layout/entities/layout-component-entity';
+} from '../../../../domain/layout/components/repositories/layout-component-repository';
 
 export class LayoutComponentRepositoryPrisma implements ILayoutComponentRepository {
   public async create(data: LayoutComponent): Promise<LayoutComponent> {

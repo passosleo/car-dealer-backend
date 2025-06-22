@@ -1,5 +1,5 @@
-import { Paginated } from '../../../infra/shared/types/generic';
-import { LayoutComponent } from '../entities/layout-component-entity';
+import { LayoutComponent } from '@prisma/client';
+import { Paginated } from '../../../../infra/shared/types/generic';
 
 export type ListLayoutComponentParams = {
   page?: number;

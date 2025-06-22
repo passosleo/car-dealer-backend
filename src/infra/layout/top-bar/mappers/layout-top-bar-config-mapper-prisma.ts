@@ -5,7 +5,7 @@ import {
 } from '@prisma/client';
 import { LayoutTopBarConfig } from '../../../../domain/layout/top-bar/entities/layout-top-bar-config-entity';
 import { LayoutTopBarMessageMapperPrisma } from './layout-top-bar-message-mapper-prisma';
-import { LayoutComponentMapperPrisma } from '../../mappers/layout-component-mapper-prisma';
+import { LayoutComponentMapperPrisma } from '../../components/mappers/layout-component-mapper-prisma';
 
 type LayoutTopBarConfigFromPrisma = LayoutTopBarConfigPrisma & {
   layoutComponent: LayoutComponentPrisma;

@@ -4,8 +4,8 @@ import {
   LayoutBannerPosition as LayoutBannerPositionPrisma,
 } from '@prisma/client';
 import { LayoutBannerConfig } from '../../../../domain/layout/banners/entities/layout-banner-config-entity';
-import { LayoutComponentMapperPrisma } from '../../mappers/layout-component-mapper-prisma';
 import { LayoutBannerPositionMapperPrisma } from './layout-banner-position-mapper-prisma';
+import { LayoutComponentMapperPrisma } from '../../components/mappers/layout-component-mapper-prisma';
 
 type LayoutBannerConfigFromPrisma = LayoutBannerConfigPrisma & {
   layoutComponent: LayoutComponentPrisma;
