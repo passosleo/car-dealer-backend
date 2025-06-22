@@ -36,15 +36,25 @@ export class LayoutTopBarConfigRepositoryPrisma implements ILayoutTopBarConfigRe
   public async update(id: string, data: Partial<LayoutTopBarConfig>): Promise<LayoutTopBarConfig> {
     const { layoutComponent, layoutTopBarMessages, ...prismaData } =
       LayoutTopBarConfigMapperPrisma.toPartialPrisma(data);
-    const updatedLayoutTopBarConfig = await prisma.layoutTopBarConfig.update({
-      where: { layoutTopBarConfigId: id },
-      data: {
-        ...prismaData,
-        layoutComponentId: layoutComponent?.layoutComponentId,
-        layoutTopBarMessages: layoutTopBarMessages ? { create: layoutTopBarMessages } : undefined,
-      },
-      include: this.includeFields,
+
+    const updatedLayoutTopBarConfig = await prisma.$transaction(async (tx) => {
+      await tx.layoutTopBarMessage.deleteMany({
+        where: { layoutTopBarConfigId: id },
+      });
+
+      const updated = await tx.layoutTopBarConfig.update({
+        where: { layoutTopBarConfigId: id },
+        data: {
+          ...prismaData,
+          layoutComponentId: layoutComponent?.layoutComponentId,
+          layoutTopBarMessages: layoutTopBarMessages ? { create: layoutTopBarMessages } : undefined,
+        },
+        include: this.includeFields,
+      });
+
+      return updated;
     });
+
     return LayoutTopBarConfigMapperPrisma.toDomain(updatedLayoutTopBarConfig);
   }
 
