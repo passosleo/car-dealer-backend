@@ -24,6 +24,19 @@ export class LayoutComponentRepositoryPrisma implements ILayoutComponentReposito
     return LayoutComponentMapperPrisma.toDomain(updatedLayoutComponent);
   }
 
+  public async updateMany(data: Map<string, Partial<LayoutComponent>>) {
+    const updates = Array.from(data.entries()).map(([id, partialData]) => ({
+      where: { layoutComponentId: id },
+      data: LayoutComponentMapperPrisma.toPartialPrisma(partialData),
+    }));
+
+    const updatedLayoutComponents = await prisma.$transaction(
+      updates.map((update) => prisma.layoutComponent.update(update)),
+    );
+
+    return updatedLayoutComponents.map(LayoutComponentMapperPrisma.toDomain);
+  }
+
   public async delete(id: string): Promise<void> {
     await prisma.layoutComponent.delete({ where: { layoutComponentId: id } });
   }
@@ -33,14 +46,14 @@ export class LayoutComponentRepositoryPrisma implements ILayoutComponentReposito
     return layoutComponent ? LayoutComponentMapperPrisma.toDomain(layoutComponent) : null;
   }
 
+  public async findByIds(ids: string[]): Promise<LayoutComponent[]> {
+    const layoutComponents = await prisma.layoutComponent.findMany({ where: { layoutComponentId: { in: ids } } });
+    return layoutComponents.map(LayoutComponentMapperPrisma.toDomain);
+  }
+
   public async findByName(name: string): Promise<LayoutComponent | null> {
     const layoutComponent = await prisma.layoutComponent.findUnique({ where: { name } });
     return layoutComponent ? LayoutComponentMapperPrisma.toDomain(layoutComponent) : null;
-  }
-
-  public async findByPage(page: string): Promise<LayoutComponent[]> {
-    const layoutComponents = await prisma.layoutComponent.findMany({ where: { page } });
-    return layoutComponents.map(LayoutComponentMapperPrisma.toDomain);
   }
 
   public async findAll(): Promise<LayoutComponent[]> {

@@ -57,16 +57,16 @@ export class LayoutBannerConfigRepositoryPrisma implements ILayoutBannerConfigRe
   }
 
   public async findById(id: string): Promise<LayoutBannerConfig | null> {
-    const layoutTopBarConfig = await prisma.layoutBannerConfig.findUnique({
+    const layoutBannerConfig = await prisma.layoutBannerConfig.findUnique({
       where: { layoutBannerConfigId: id },
       include: this.includeFields,
     });
-    return layoutTopBarConfig ? LayoutBannerConfigMapperPrisma.toDomain(layoutTopBarConfig) : null;
+    return layoutBannerConfig ? LayoutBannerConfigMapperPrisma.toDomain(layoutBannerConfig) : null;
   }
 
   public async findAll(): Promise<LayoutBannerConfig[]> {
-    const layoutTopBarConfigs = await prisma.layoutBannerConfig.findMany({ include: this.includeFields });
-    return layoutTopBarConfigs.map(LayoutBannerConfigMapperPrisma.toDomain);
+    const layoutBannerConfigs = await prisma.layoutBannerConfig.findMany({ include: this.includeFields });
+    return layoutBannerConfigs.map(LayoutBannerConfigMapperPrisma.toDomain);
   }
 
   public async list({

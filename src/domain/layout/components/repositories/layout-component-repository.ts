@@ -16,10 +16,11 @@ export type ListLayoutComponentParams = {
 export interface ILayoutComponentRepository {
   create(data: LayoutComponent): Promise<LayoutComponent>;
   update(id: string, data: Partial<LayoutComponent>): Promise<LayoutComponent>;
+  updateMany(data: Map<string, Partial<LayoutComponent>>): Promise<LayoutComponent[]>;
   delete(id: string): Promise<void>;
   findById(id: string): Promise<LayoutComponent | null>;
+  findByIds(ids: string[]): Promise<LayoutComponent[]>;
   findByName(name: string): Promise<LayoutComponent | null>;
-  findByPage(page: string): Promise<LayoutComponent[]>;
   findAll(): Promise<LayoutComponent[]>;
   findAllByPage(page: string): Promise<LayoutComponent[]>;
   list(data: ListLayoutComponentParams): Promise<Paginated<LayoutComponent>>;
