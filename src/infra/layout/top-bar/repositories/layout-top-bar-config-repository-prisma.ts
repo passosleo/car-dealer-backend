@@ -32,15 +32,19 @@ export class LayoutTopBarConfigRepositoryPrisma implements ILayoutTopBarConfigRe
     const { layoutTopBarMessages, ...prismaData } = LayoutTopBarConfigMapperPrisma.toPartialPrisma(data);
 
     const updatedLayoutTopBarConfig = await prisma.$transaction(async (tx) => {
-      await tx.layoutTopBarMessage.deleteMany({
-        where: { layoutTopBarConfigId: id },
-      });
+      if (Array.isArray(layoutTopBarMessages)) {
+        await tx.layoutTopBarMessage.deleteMany({
+          where: { layoutTopBarConfigId: id },
+        });
+      }
 
       const updated = await tx.layoutTopBarConfig.update({
         where: { layoutTopBarConfigId: id },
         data: {
           ...prismaData,
-          layoutTopBarMessages: layoutTopBarMessages ? { create: layoutTopBarMessages } : undefined,
+          layoutTopBarMessages: layoutTopBarMessages
+            ? { create: layoutTopBarMessages.map(({ layoutTopBarConfigId, ...msg }) => msg) }
+            : undefined,
         },
         include: this.includeFields,
       });
@@ -90,7 +94,7 @@ export class LayoutTopBarConfigRepositoryPrisma implements ILayoutTopBarConfigRe
       prisma.layoutTopBarConfig.count({ where }),
       prisma.layoutTopBarConfig.findMany({
         where,
-        orderBy: { active: orderBy },
+        orderBy: { updatedAt: orderBy },
         skip: (page - 1) * limit,
         take: limit,
         include: this.includeFields,

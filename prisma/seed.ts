@@ -202,6 +202,45 @@ async function main() {
     skipDuplicates: true,
   });
 
+  const topBarComponent = await prisma.layoutComponent.findFirst({
+    where: { name: 'top-bar' },
+  });
+
+  if (topBarComponent) {
+    await prisma.layoutTopBarConfig.create({
+      data: {
+        layoutComponentId: topBarComponent.layoutComponentId,
+        maxItems: 10,
+        loop: true,
+        delay: 3000,
+        direction: 'ltr',
+        jump: false,
+        hideOnMobile: false,
+        hideOnDesktop: false,
+        active: true,
+        layoutTopBarMessages: {
+          create: [
+            {
+              message: 'Bem-vindo ao nosso site!',
+              position: 1,
+              active: true,
+            },
+            {
+              message: 'Confira nossas promoções especiais!',
+              position: 2,
+              active: true,
+            },
+            {
+              message: 'Veículos novos chegando em breve!',
+              position: 3,
+              active: true,
+            },
+          ],
+        },
+      },
+    });
+  }
+
   console.log('Seeding completed!');
 }
 

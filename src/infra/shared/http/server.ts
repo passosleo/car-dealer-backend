@@ -19,6 +19,7 @@ import { categoryPublicRoutes } from '../../categories/routes/public/category-pu
 import { vehiclePublicRoutes } from '../../vehicles/routes/public/vehicle-public-routes';
 import { sellerPublicRoutes } from '../../sellers/routes/public/seller-public-routes';
 import { layoutComponentAdminRoutes } from '../../layout/components/routes/admin/layout-component-admin-routes';
+import { layoutTopBarAdminRoutes } from '../../layout/top-bar/routes/admin/layout-top-bar-admin-routes';
 
 export function createServer() {
   const app = fastify({
@@ -50,6 +51,7 @@ export function createServer() {
   app.register(vehiclePublicRoutes);
   app.register(sellerPublicRoutes);
   app.register(layoutComponentAdminRoutes);
+  app.register(layoutTopBarAdminRoutes);
 
   return app;
 }
