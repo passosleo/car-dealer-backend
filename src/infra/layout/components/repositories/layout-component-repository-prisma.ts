@@ -57,7 +57,9 @@ export class LayoutComponentRepositoryPrisma implements ILayoutComponentReposito
   }
 
   public async findAll(): Promise<LayoutComponent[]> {
-    const layoutComponents = await prisma.layoutComponent.findMany();
+    const layoutComponents = await prisma.layoutComponent.findMany({
+      orderBy: { position: 'asc' },
+    });
     return layoutComponents.map(LayoutComponentMapperPrisma.toDomain);
   }
 
