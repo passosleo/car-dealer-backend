@@ -89,7 +89,7 @@ export class LayoutComponentRepositoryPrisma implements ILayoutComponentReposito
       prisma.layoutComponent.count({ where }),
       prisma.layoutComponent.findMany({
         where,
-        orderBy: { name: orderBy },
+        orderBy: { position: orderBy },
         skip: (page - 1) * limit,
         take: limit,
       }),
