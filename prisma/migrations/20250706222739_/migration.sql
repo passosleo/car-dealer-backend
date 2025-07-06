@@ -192,3 +192,19 @@ VALUES
   ('d7bffbfd-771e-4d5e-bb68-fad47c7ad387', '87bde38d-28aa-46d5-9602-ea4e3a3cf763', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748718337/owohaupfzmrsh6hfe6ak.webp', '2025-07-06T22:28:57.173801'),
   ('ea6cd38a-0f65-41c6-9d3d-b02f4a11f715', '87bde38d-28aa-46d5-9602-ea4e3a3cf763', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748718337/ulqqghhos01p3ulnkg1d.webp', '2025-07-06T22:28:57.173801');
 
+INSERT INTO tb_sellers (
+  seller_id, first_name, last_name, email, phone, image_url, custom_message,
+  created_at, updated_at, active
+)
+VALUES (
+  'f1c54e88-3a63-4e37-8c69-7807f7b37f8a',
+  'João',
+  'Silva',
+  'joao.silva@revenda.com',
+  '(51) 99999-0000',
+  'https://res.cloudinary.com/decwcec0e/image/upload/v1748719180/tovcp0cmtad0trzeypuy.jpg',
+  'Fale comigo direto no WhatsApp para saber mais sobre os veículos!',
+  '2025-07-06T22:28:57.173801',
+  '2025-07-06T22:28:57.173801',
+  true
+);
