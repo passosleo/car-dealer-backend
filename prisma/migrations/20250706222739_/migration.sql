@@ -49,27 +49,27 @@ ON CONFLICT (email) DO NOTHING;
 
 
 INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
-VALUES ('b6d0f0eb-7fcd-4224-b75a-b7b2505fc387', 'Honda', 'https://www.svgrepo.com/show/446876/honda.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+VALUES ('b6d0f0eb-7fcd-4224-b75a-b7b2505fc387', 'Honda', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748718962/wakrpcfrhju5ddqn71rq.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
 ON CONFLICT (name) DO NOTHING;
 
 
 INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
-VALUES ('662d6618-cfc5-4bf4-83dd-4c8d13595fd3', 'Toyota', 'https://www.svgrepo.com/show/306868/toyota.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+VALUES ('662d6618-cfc5-4bf4-83dd-4c8d13595fd3', 'Toyota', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748718879/lobxpjkktxhfqmaozzha.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
 ON CONFLICT (name) DO NOTHING;
 
 
 INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
-VALUES ('7ef41002-8c30-49b5-8a15-aad91f3df675', 'Chevrolet', 'https://www.svgrepo.com/show/446947/chevrolet.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+VALUES ('7ef41002-8c30-49b5-8a15-aad91f3df675', 'Chevrolet', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748719071/bjqceen9ixjubnyjl5sb.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
 ON CONFLICT (name) DO NOTHING;
 
 
 INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
-VALUES ('9b6732cf-95f3-48ee-ac87-48d1e0f7172a', 'Volkswagen', 'https://www.svgrepo.com/show/446932/volkswagen.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+VALUES ('9b6732cf-95f3-48ee-ac87-48d1e0f7172a', 'Volkswagen', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748718947/ucnfoxxecztxlwzpsurr.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
 ON CONFLICT (name) DO NOTHING;
 
 
 INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
-VALUES ('299d8489-9539-44dd-aba1-a9959056053e', 'Ford', 'https://www.svgrepo.com/show/446869/ford.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+VALUES ('299d8489-9539-44dd-aba1-a9959056053e', 'Ford', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748719017/tsv59b5szy3gmgs9teyf.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
 ON CONFLICT (name) DO NOTHING;
 
 
