@@ -137,3 +137,15 @@ ON CONFLICT (name) DO NOTHING;
 INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
 VALUES ('2e4b209a-d75b-4880-bef3-bb72f0071500', 'Rodapé', 'footer', 'home', 'Configure o rodapé do site', 10, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
 ON CONFLICT (name) DO NOTHING;
+
+INSERT INTO tb_profiles_roles (profile_role_id, profile_id, role_id, created_at)
+VALUES 
+  ('f08d94f0-780f-47c6-9e42-0d9b1e03fcaa', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', 'e4b50697-4e5c-406d-85df-9a1a4a913838', '2025-07-06T22:28:57.173801'), -- MANAGE_USERS
+  ('9fef28d5-0188-40db-82d2-31d16fdf0e6d', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', '76aab760-8f34-4ad6-b931-d040b08c8f07', '2025-07-06T22:28:57.173801'), -- MANAGE_PROFILES
+  ('fd6efc8c-8ce2-4404-83ec-96f273bc356c', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', '8be5e717-6315-461f-9b34-87cfec26832a', '2025-07-06T22:28:57.173801'), -- MANAGE_CATEGORIES
+  ('db771be5-218e-4d42-b2a0-8d897fd62cfc', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', 'a1db845c-79c3-4211-9f28-7d6dd1d9e197', '2025-07-06T22:28:57.173801'), -- MANAGE_BRANDS
+  ('69e9b05d-8b65-4d25-b40c-6bc69354cc0e', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', '04bf8a60-1b42-49d1-ad8f-3731411f649a', '2025-07-06T22:28:57.173801'), -- MANAGE_VEHICLES
+  ('cb633e06-d2d7-4b7d-bc77-80ffb7bb2c0d', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', 'e72d7095-0108-4308-931a-5fd29844dc65', '2025-07-06T22:28:57.173801'), -- MANAGE_BANNERS
+  ('dbf13b2a-c292-4a78-b2f1-d3c62119c7dc', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', '33188533-75e1-4e5b-a606-64f03ce9b417', '2025-07-06T22:28:57.173801'), -- MANAGE_LAYOUT
+  ('d098d93b-cf33-4b83-9b94-7b5ef8a05df1', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', 'e61073ae-e5d2-44cd-b638-887fa3371d46', '2025-07-06T22:28:57.173801')  -- MANAGE_SELLERS
+ON CONFLICT DO NOTHING;
