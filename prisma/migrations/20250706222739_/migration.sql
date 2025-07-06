@@ -149,3 +149,46 @@ VALUES
   ('dbf13b2a-c292-4a78-b2f1-d3c62119c7dc', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', '33188533-75e1-4e5b-a606-64f03ce9b417', '2025-07-06T22:28:57.173801'), -- MANAGE_LAYOUT
   ('d098d93b-cf33-4b83-9b94-7b5ef8a05df1', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', 'e61073ae-e5d2-44cd-b638-887fa3371d46', '2025-07-06T22:28:57.173801')  -- MANAGE_SELLERS
 ON CONFLICT DO NOTHING;
+
+INSERT INTO tb_categories (category_id, name, image_url, created_at, updated_at, active)
+VALUES 
+  ('97c5c660-5f16-4c71-b417-a9de0a5a01f7', 'Sedan', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748720378/w8a0vfdb25linz2yoyjk.png', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true),
+  ('0c3253b3-8f16-45ef-b1e7-fb7ad2cf4e85', 'Hatch', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748720328/i3hjk0x89cf0ex99qmpe.png', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true),
+  ('203f80f2-0f21-4e2b-b9ee-e902c9a3722d', 'SUV', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748720278/ab6jajyo4vsfipelvk72.png', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true),
+  ('a3e91e9f-2482-4f3c-b527-6f33a62368f0', 'Pickup', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748720160/chdcpsm2jwwfowgyro5u.png', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+-- Inserção do veículo
+INSERT INTO tb_vehicles (
+  vehicle_id, model, year, plate, description, price, mileage, color,
+  transmission, fuel_type, doors, seats, horsepower, torque, drive_train,
+  brand_id, category_id, created_at, updated_at, active
+)
+VALUES (
+  '87bde38d-28aa-46d5-9602-ea4e3a3cf763', 
+  'Volkswagen Gol 2018 MSI Manual',
+  2018,
+  'ABC-1234',
+  'Volkswagen Gol 2018 em ótimo estado, completo, com baixa quilometragem.',
+  34990.00,
+  86000,
+  'Prata',
+  'MANUAL',
+  'FLEX',
+  4,
+  5,
+  84,
+  12.5,
+  'FWD',
+  '9b6732cf-95f3-48ee-ac87-48d1e0f7172a',
+  '0c3253b3-8f16-45ef-b1e7-fb7ad2cf4e85',
+  '2025-07-06T22:28:57.173801',
+  '2025-07-06T22:28:57.173801',
+  true
+);
+
+INSERT INTO tb_vehicles_images (vehicle_image_id, vehicle_id, image_url, created_at)
+VALUES 
+  ('d7bffbfd-771e-4d5e-bb68-fad47c7ad387', '87bde38d-28aa-46d5-9602-ea4e3a3cf763', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748718337/owohaupfzmrsh6hfe6ak.webp', '2025-07-06T22:28:57.173801'),
+  ('ea6cd38a-0f65-41c6-9d3d-b02f4a11f715', '87bde38d-28aa-46d5-9602-ea4e3a3cf763', 'https://res.cloudinary.com/decwcec0e/image/upload/v1748718337/ulqqghhos01p3ulnkg1d.webp', '2025-07-06T22:28:57.173801');
+
