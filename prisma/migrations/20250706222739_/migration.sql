@@ -1,0 +1,139 @@
+INSERT INTO tb_roles (role_id, name, label, description, created_at, updated_at)
+VALUES ('e4b50697-4e5c-406d-85df-9a1a4a913838', 'MANAGE_USERS', 'Gerenciar Usuários', 'Permite ao usuário gerenciar o cadastro e permissões de outros usuários', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801')
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_roles (role_id, name, label, description, created_at, updated_at)
+VALUES ('76aab760-8f34-4ad6-b931-d040b08c8f07', 'MANAGE_PROFILES', 'Gerenciar Perfis', 'Permite ao usuário criar e editar perfis de acesso', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801')
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_roles (role_id, name, label, description, created_at, updated_at)
+VALUES ('8be5e717-6315-461f-9b34-87cfec26832a', 'MANAGE_CATEGORIES', 'Gerenciar Categorias', 'Permite ao usuário administrar as categorias de veículos disponíveis no sistema', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801')
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_roles (role_id, name, label, description, created_at, updated_at)
+VALUES ('a1db845c-79c3-4211-9f28-7d6dd1d9e197', 'MANAGE_BRANDS', 'Gerenciar Marcas', 'Permite ao usuário cadastrar, editar e remover marcas de veículos', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801')
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_roles (role_id, name, label, description, created_at, updated_at)
+VALUES ('04bf8a60-1b42-49d1-ad8f-3731411f649a', 'MANAGE_VEHICLES', 'Gerenciar Veículos', 'Permite ao usuário gerenciar o cadastro e as informações dos veículos', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801')
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_roles (role_id, name, label, description, created_at, updated_at)
+VALUES ('e72d7095-0108-4308-931a-5fd29844dc65', 'MANAGE_BANNERS', 'Gerenciar Banners', 'Permite ao usuário criar e editar banners exibidos no site', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801')
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_roles (role_id, name, label, description, created_at, updated_at)
+VALUES ('33188533-75e1-4e5b-a606-64f03ce9b417', 'MANAGE_LAYOUT', 'Gerenciar Layout', 'Permite ao usuário configurar o layout e aparência do site', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801')
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_roles (role_id, name, label, description, created_at, updated_at)
+VALUES ('e61073ae-e5d2-44cd-b638-887fa3371d46', 'MANAGE_SELLERS', 'Gerenciar Vendedores', 'Permite ao usuário administrar o cadastro e informações dos vendedores', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801')
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_profiles (profile_id, name, created_at, updated_at)
+VALUES ('403328e6-fbb4-4bb3-85fe-f58a8bb1159f', 'Admin', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801')
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_users (user_id, first_name, last_name, email, password, profile_id, created_at, updated_at, active)
+VALUES ('c6feb69a-17f6-4137-8a4f-5266d8441f01', 'User', 'Example', 'user@example.com', '$2b$10$BLktZLeDKlbxmdsi14IOh.IP26o92fbuIs6Xbd7nlR4K1/0XwiJoS', '403328e6-fbb4-4bb3-85fe-f58a8bb1159f', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (email) DO NOTHING;
+
+
+INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
+VALUES ('b6d0f0eb-7fcd-4224-b75a-b7b2505fc387', 'Honda', 'https://www.svgrepo.com/show/446876/honda.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
+VALUES ('662d6618-cfc5-4bf4-83dd-4c8d13595fd3', 'Toyota', 'https://www.svgrepo.com/show/306868/toyota.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
+VALUES ('7ef41002-8c30-49b5-8a15-aad91f3df675', 'Chevrolet', 'https://www.svgrepo.com/show/446947/chevrolet.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
+VALUES ('9b6732cf-95f3-48ee-ac87-48d1e0f7172a', 'Volkswagen', 'https://www.svgrepo.com/show/446932/volkswagen.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_brands (brand_id, name, image_url, created_at, updated_at, active)
+VALUES ('299d8489-9539-44dd-aba1-a9959056053e', 'Ford', 'https://www.svgrepo.com/show/446869/ford.svg', '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('bf8b86b8-2980-467c-8f36-d08c517534af', 'Top-Bar', 'top-bar', 'home', 'Configure a barra de mensagens rotativas', 1, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_top_bar_configs (layout_top_bar_config_id, layout_component_id, max_items, loop, delay, direction, jump, hide_on_mobile, hide_on_desktop, active, created_at, updated_at)
+VALUES ('63f115f2-9216-42e7-bc03-57c58dc97bb1', 'bf8b86b8-2980-467c-8f36-d08c517534af', 10, true, 3000, 'ltr', false, false, false, true, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801');
+
+
+INSERT INTO tb_layout_top_bar_messages (layout_top_bar_message_id, layout_top_bar_config_id, message, link, position, active, created_at, updated_at)
+VALUES ('b47a9c0c-afc4-4307-bdca-0bc8dfaa3185', '63f115f2-9216-42e7-bc03-57c58dc97bb1', 'Bem-vindo ao nosso site!', NULL, 1, true, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801');
+
+
+INSERT INTO tb_layout_top_bar_messages (layout_top_bar_message_id, layout_top_bar_config_id, message, link, position, active, created_at, updated_at)
+VALUES ('d29cc688-5193-405f-bda9-c2704e4f7431', '63f115f2-9216-42e7-bc03-57c58dc97bb1', 'Confira nossas promoções especiais!', NULL, 2, true, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801');
+
+
+INSERT INTO tb_layout_top_bar_messages (layout_top_bar_message_id, layout_top_bar_config_id, message, link, position, active, created_at, updated_at)
+VALUES ('85151f79-d3ad-4213-b068-2058830763fc', '63f115f2-9216-42e7-bc03-57c58dc97bb1', 'Veículos novos chegando em breve!', NULL, 3, true, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801');
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('ca35e936-3aa6-45af-8254-87432b0b947f', 'Cabeçalho', 'header', 'home', 'Configure o cabeçalho do site', 2, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('6e9ba03d-b631-4473-b915-c928d5030049', 'Banners', 'banners', 'home', 'Configure a barra de banners rotativos', 3, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('5975aa07-bb71-4225-9a3b-151569315cd4', 'Info', 'info', 'home', 'Configure a seção de informações do site', 4, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('9731a53c-9147-4916-9170-55f032c3248b', 'Shelf', 'footer', 'home', 'Configure o rodapé do site', 5, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('78f9c923-7c0f-4457-8cdc-eac5cd13aeb6', 'Categorias', 'categories', 'home', 'Configure a seção de categorias de veículos', 6, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('ed56b9a6-bff4-46ee-b239-2e145b32262d', 'Marcas', 'brands', 'home', 'Configure a seção de marcas de veículos', 7, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('fd81ad2a-2eaa-40f8-85ca-cde1e798aed2', 'Vendedores', 'sellers', 'home', 'Configure a seção de vendedores', 8, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('c574617e-0b5d-40e9-b3fb-2d1d6f74a46c', 'Localização', 'location', 'home', 'Configure a seção de localização da empresa e filiais', 9, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
+
+
+INSERT INTO tb_layout_components (layout_component_id, label, name, page, description, position, created_at, updated_at, active)
+VALUES ('2e4b209a-d75b-4880-bef3-bb72f0071500', 'Rodapé', 'footer', 'home', 'Configure o rodapé do site', 10, '2025-07-06T22:28:57.173801', '2025-07-06T22:28:57.173801', true)
+ON CONFLICT (name) DO NOTHING;
