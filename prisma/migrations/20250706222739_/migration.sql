@@ -208,3 +208,42 @@ VALUES (
   '2025-07-06T22:28:57.173801',
   true
 );
+
+INSERT INTO tb_banners (
+  banner_id, title, image_desktop_url, image_mobile_url,
+  start_at, end_at, active, created_at, updated_at
+)
+VALUES
+  (
+    '18f649aa-c2d6-4fe4-a229-02e4d2030d10',
+    'Promoção de Janeiro',
+    'https://res.cloudinary.com/decwcec0e/image/upload/v1751846370/23122024_Janeiro_1920x1080_xullak.webp',
+    'https://res.cloudinary.com/decwcec0e/image/upload/v1751846370/23122024_Janeiro_1920x1080_xullak.webp',
+    '2025-07-01T00:00:00',
+    '2025-07-31T23:59:59',
+    true,
+    '2025-07-06T22:28:57.173801',
+    '2025-07-06T22:28:57.173801'
+  ),
+  (
+    'c4151b6b-e55a-4d88-91fa-52b8797b5482',
+    'Oferta Amarok',
+    'https://res.cloudinary.com/decwcec0e/image/upload/v1751846353/amarok_banner2_1920x1080_vqwrxt.webp',
+    'https://res.cloudinary.com/decwcec0e/image/upload/v1751846353/amarok_banner2_1920x1080_vqwrxt.webp',
+    '2025-07-01T00:00:00',
+    '2025-07-31T23:59:59',
+    true,
+    '2025-07-06T22:28:57.173801',
+    '2025-07-06T22:28:57.173801'
+  ),
+  (
+    '79a21be0-f0dc-476b-b1ad-cfb05cc19f92',
+    'Feirão de Ofertas',
+    'https://res.cloudinary.com/decwcec0e/image/upload/v1748717689/qhghoiudlidimzdtgaeg.webp',
+    'https://res.cloudinary.com/decwcec0e/image/upload/v1748717689/qhghoiudlidimzdtgaeg.webp',
+    '2025-07-01T00:00:00',
+    '2025-07-31T23:59:59',
+    true,
+    '2025-07-06T22:28:57.173801',
+    '2025-07-06T22:28:57.173801'
+  );
